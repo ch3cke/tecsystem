@@ -161,17 +161,19 @@ public class Db_tools {
             sql = con.prepareStatement(sqlStr);
             sql.setString(1,aid);
             res=sql.executeQuery();
-            result.put("Aid",res.getString("Aid"));
-            result.put("id",res.getString("id"));
-            result.put("Aplace",res.getString("Aplace"));
-            result.put("Atime",res.getString("Atime"));
-            result.put("Amoney",res.getString("Amoney"));
-            result.put("Dname",res.getString("Dname"));
-            result.put("index",res.getString("index"));
-            result.put("Areason1",res.getString("Areason1"));
-            result.put("Urgent",res.getString("Urgent"));
-            result.put("Areason2",res.getString("Areason2"));
-            result.put("Areason3",res.getString("Areason3"));
+            while (res.next()){
+                result.put("Aid",res.getString("Aid"));
+                result.put("id",res.getString("id"));
+                result.put("Aplace",res.getString("Aplace"));
+                result.put("Atime",res.getString("Atime"));
+                result.put("Amoney",res.getString("Amoney"));
+                result.put("Dname",res.getString("Dname"));
+                result.put("index",res.getString("index"));
+                result.put("Areason1",res.getString("Areason1"));
+                result.put("Urgent",res.getString("Urgent"));
+                result.put("Areason2",res.getString("Areason2"));
+                result.put("Areason3",res.getString("Areason3"));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -248,16 +250,18 @@ public class Db_tools {
             sql = con.prepareStatement(sqlStr);
             sql.setString(1,sid);
             res=sql.executeQuery();
-            result.put("Sid",res.getString("Sid"));
-            result.put("id",res.getString("id"));
-            result.put("Aplace",res.getString("Aplace"));
-            result.put("Atime",res.getString("Atime"));
-            result.put("Amoney",res.getString("Amoney"));
-            result.put("Dname",res.getString("Dname"));
-            result.put("Areason1",res.getString("Areason1"));
-            result.put("isgive",res.getString("isgive"));
-            result.put("Areason2",res.getString("Areason2"));
-            result.put("Areason3",res.getString("Areason3"));
+            while (res.next()){
+                result.put("Sid",res.getString("Sid"));
+                result.put("id",res.getString("id"));
+                result.put("Aplace",res.getString("Aplace"));
+                result.put("Atime",res.getString("Atime"));
+                result.put("Amoney",res.getString("Amoney"));
+                result.put("Dname",res.getString("Dname"));
+                result.put("Areason1",res.getString("Areason1"));
+                result.put("isgive",res.getString("isgive"));
+                result.put("Areason2",res.getString("Areason2"));
+                result.put("Areason3",res.getString("Areason3"));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

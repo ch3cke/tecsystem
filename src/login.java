@@ -10,18 +10,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Timer;
 
 @WebServlet(name = "login")
 public class login extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession res = request.getSession();
+        Map<String, String>userinfo = new HashMap<>();
         Object flag = res.getAttribute("islogin");
         String email = request.getParameter("email");
         String password = encrypt.encryptToMD5(request.getParameter("password"));
         Db_tools db = new Db_tools();
-        String password2 = db.GetUserInfo(email).get("password");
+        userinfo = db.GetUserInfo(email);
+        String password2 = userinfo.get("password");
         String code = request.getParameter("code");
         String sessionCode = request.getSession().getAttribute("code").toString();
         if(flag==null){
@@ -29,6 +33,7 @@ public class login extends HttpServlet {
                 if (password.equals(password2)){
                     res.setAttribute("islogin",true);
                     res.setAttribute("username",email);
+                    res.setAttribute("statues",userinfo.get("statues"));
                     response.sendRedirect("/index.html");
                 }else {
                     response.getWriter().write("<script type='text/javascript'>alert('username or password error');");
