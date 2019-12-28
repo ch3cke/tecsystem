@@ -207,7 +207,7 @@ public class Db_tools {
     /*
     插入申请记录
      */
-    public  void InsertApplicant(Map<String,String> applicant){
+    public  boolean InsertApplicant(Map<String,String> applicant){
         String sqlStr = "insert into applicant(Aid, id, Aplace, Atime, Amoney, Dname, indexs,Areason1, Urgent, Areason2, Areason3) values(?,?,?,?,?,?,?,?,?,?,?)";
         try {
             sql = con.prepareStatement(sqlStr);
@@ -225,7 +225,9 @@ public class Db_tools {
             sql.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
+        return true;
     }
 
     public List<Map<String,String>> GetAllSchedule(){

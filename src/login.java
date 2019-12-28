@@ -27,12 +27,13 @@ public class login extends HttpServlet {
         userinfo = db.GetUserInfo(email);
         String password2 = userinfo.get("password");
         String code = request.getParameter("code");
+        String id = userinfo.get("id");
         String sessionCode = request.getSession().getAttribute("code").toString();
         if(flag==null){
             if(code.equals(sessionCode)){
                 if (password.equals(password2)){
                     res.setAttribute("islogin",true);
-                    res.setAttribute("username",email);
+                    res.setAttribute("id",id);
                     res.setAttribute("statues",userinfo.get("statues"));
                     response.sendRedirect("/index.html");
                 }else {

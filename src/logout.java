@@ -17,7 +17,7 @@ public class logout extends HttpServlet {
             response.sendRedirect("/index.html");
         }else {
             request.getSession().removeAttribute("islogin");
-            request.getSession().removeAttribute("username");
+            request.getSession().removeAttribute("id");
             request.getSession().removeAttribute("statues");
         }
     }
