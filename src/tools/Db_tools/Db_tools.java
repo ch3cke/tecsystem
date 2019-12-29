@@ -26,31 +26,68 @@ public class Db_tools {
     /*
     * @param mail 邮箱
     * */
-    public Map<String, String> GetUserInfo(String mail){
-        Map<String, String> result = new HashMap<String, String>();
+    public Map<String, Object> GetUserInfo(String mail){
+        Map<String, Object> result = new HashMap<String, Object>();
         try{
             String sqlStr = "select * from userinfo where mail = ?";
             sql = con.prepareStatement(sqlStr);
             sql.setString(1,mail);
             res = sql.executeQuery();
-            while (res.next()){
-                result.put("id",res.getString("id"));
-                result.put("name",res.getString("username"));
-                result.put("sex",res.getString("sex"));
-                result.put("age",res.getString("age"));
-                result.put("password",res.getString("password"));
-                result.put("Did",res.getString("Did"));
-                result.put("Dname",res.getString("Dname"));
-                result.put("Mail",res.getString("Mail"));
-                result.put("Medals",res.getString("Medals"));
-                result.put("statues",res.getString("statues"));
-            }
+            setuser(result);
         }catch (Exception e){
             e.printStackTrace();
         }
         return result;
     }
 
+    /**
+     * @param name
+     * @return
+     */
+    public Map<String, Object> GetUserInfoByname(String name){
+        Map<String, Object> result = new HashMap<String, Object>();
+        try{
+            String sqlStr = "select * from userinfo where name = ?";
+            sql = con.prepareStatement(sqlStr);
+            sql.setString(1,name);
+            res = sql.executeQuery();
+            setuser(result);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    private void setuser(Map<String, Object> result) throws SQLException {
+        while (res.next()){
+            result.put("id",res.getString("id"));
+            result.put("name",res.getString("username"));
+            result.put("sex",res.getString("sex"));
+            result.put("age",res.getString("age"));
+            result.put("password",res.getString("password"));
+            result.put("Did",res.getString("Did"));
+            result.put("Dname",res.getString("Dname"));
+            result.put("Mail",res.getString("Mail"));
+            result.put("Medals",res.getInt("Medals"));
+            result.put("statues",res.getString("statues"));
+            result.put("mailck",res.getBoolean("mailck"));
+        }
+    }
+
+
+    public Boolean UpdateUserMail(String id){
+        String sqlStr = "update userinfo set mailck=? where id =?";
+        try {
+            sql =con.prepareStatement(sqlStr);
+            sql.setBoolean(1,true);
+            sql.setString(2,id);
+            sql.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
 
     //插入用户信息
     /*
@@ -68,7 +105,7 @@ public class Db_tools {
             sql.setString(6, userinfo.get("Did"));
             sql.setString(7, userinfo.get("Dname"));
             sql.setString(8, userinfo.get("email"));
-            sql.setString(9, userinfo.get("Medals"));
+            sql.setInt(9, Integer.parseInt(userinfo.get("Medals")));
             sql.setString(10, userinfo.get("statues"));
             sql.executeUpdate();
         }catch (Exception e){
@@ -122,7 +159,7 @@ public class Db_tools {
         }
     }
 
-    private void updateValue(String id, String medal, String sqlStr) {
+    private boolean updateValue(String id, String medal, String sqlStr) {
         try {
             sql =con.prepareStatement(sqlStr);
             sql.setString(1,medal);
@@ -130,7 +167,9 @@ public class Db_tools {
             sql.executeUpdate();
         }catch (SQLException e){
             e.printStackTrace();
+            return false;
         }
+        return true;
     }
 
     /*
@@ -224,7 +263,6 @@ public class Db_tools {
             sql.setString(11, applicant.get("Areason3"));
             sql.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
             return false;
         }
         return true;
@@ -302,7 +340,7 @@ public class Db_tools {
         return results;
     }
 
-    public void InsertSchedule(Map<String,String> schedule){
+    public boolean InsertSchedule(Map<String,String> schedule){
         String sqlStr = "insert into schedule(Sid, id, Aplace, Atime, Amoney, Dname, Areason1, Areason2, Areason3, isgive) values(?,?,?,?,?,?,?,?,?,?)";
         try {
             sql = con.prepareStatement(sqlStr);
@@ -319,7 +357,9 @@ public class Db_tools {
             sql.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
+        return true;
     }
 
     public Map<String,String> Getfinance(String Iid){
@@ -358,7 +398,7 @@ public class Db_tools {
         return results;
     }
 
-    public void InsertFinance(Map<String,String> finance){
+    public boolean InsertFinance(Map<String,String> finance){
         String sqlStr = "insert into finance(Lid,IsFinance) values(?,?)";
         try {
             sql = con.prepareStatement(sqlStr);
@@ -367,22 +407,22 @@ public class Db_tools {
             sql.executeUpdate();
         }catch (SQLException e){
             e.printStackTrace();
+            return false;
         }
+        return true;
     }
 
-    public void UpdateFinance(String Iid,String indexs){
+    public boolean UpdateFinance(String Iid,String indexs){
         String sqlStr = "update finance set IsFinance = ? where Iid = ?";
-        updateValue(Iid, indexs, sqlStr);
-
+        return updateValue(Iid, indexs, sqlStr);
     }
 
-    public void UpdateSchedule(String Sid,String indexs){
+    public boolean UpdateSchedule(String Sid,String indexs){
         String sqlStr = "update schedule set indexs = ? where Sid = ?";
-        updateValue(Sid, indexs, sqlStr);
-
+        return updateValue(Sid, indexs, sqlStr);
     }
 
-    public void DeleteUser(String id) {
+    public boolean DeleteUser(String id) {
         String sqlStr = "DELETE FROM userinfo WHERE id = ?";
         try {
             sql = con.prepareStatement(sqlStr);
@@ -390,23 +430,32 @@ public class Db_tools {
             sql.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
+        return true;
     }
 
-    public void UpdateUserpasswd(String id, String password){
-        String sqlStr = "update userinfo set password=? where id =?";
-        updateValue(id,password,sqlStr);
+    public boolean UpdateUserpasswd(String username, String password){
+        String sqlStr = "update userinfo set password=? where username =?";
+        return updateValue(username,password,sqlStr);
     }
 
-    public void UpdateUserMedal(String id , String medal){
+    public boolean UpdateUserMedal(String id  , int medal){
         String sqlStr = "update userinfo set Medals=? where id =?";
-        updateValue(id, medal, sqlStr);
+        try {
+            sql = con.prepareStatement(sqlStr);
+            sql.setInt(1,medal);
+            sql.setString(2,id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
-    public void UpdateApplicant(String aid,String indexs){
+    public boolean UpdateApplicant(String aid,String indexs){
         String sqlStr = "update applicant set indexs = ? where aid = ?";
-        updateValue(aid, indexs, sqlStr);
-
+        return updateValue(aid, indexs, sqlStr);
     }
 
 }

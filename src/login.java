@@ -19,15 +19,15 @@ import java.util.Timer;
 public class login extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession res = request.getSession();
-        Map<String, String>userinfo = new HashMap<>();
+        Map<String, Object>userinfo = new HashMap<>();
         Object flag = res.getAttribute("islogin");
         String email = request.getParameter("email");
         String password = encrypt.encryptToMD5(request.getParameter("password"));
         Db_tools db = new Db_tools();
         userinfo = db.GetUserInfo(email);
-        String password2 = userinfo.get("password");
+        String password2 = userinfo.get("password").toString();
         String code = request.getParameter("code");
-        String id = userinfo.get("id");
+        String id = userinfo.get("id").toString();
         String sessionCode = request.getSession().getAttribute("code").toString();
         if(flag==null){
             if(code.equals(sessionCode)){

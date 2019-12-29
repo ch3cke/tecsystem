@@ -1,5 +1,7 @@
+import net.sf.json.JSONObject;
 import tools.Db_tools.Db_tools;
 import tools.Db_tools.encrypt;
+import tools.Mail_tools.sendMail;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,10 +39,17 @@ public class register extends HttpServlet {
                 Date date = new Date();
                 info.put("log_time",date.toString());
                 Db_tools db = new Db_tools();
+                JSONObject result = new JSONObject();
                 if(db.InsertUserInfo(info)){
-                    response.getWriter().write("<script type='text/javascript'>alert('register success');function jumurl(){" +
-                            "window.location.href='http://localhost:8080/login';"+
-                            "}setTimeout(jumurl,3000);</script>");
+                    sendMail sender = new sendMail();
+                    try {
+                        sender.sendEmail(info.get("email"),info.get("id"));
+                        result.put("success",true);
+                        response.getWriter().write(result.toString());
+                    }catch (Exception e){
+                        result.put("success",false);
+                        response.getWriter().write(result.toString());
+                    }
                 }else {
                     response.getWriter().write("<script type='text/javascript'>alert('user exits');function jumurl(){" +
                             "window.location.href='http://localhost:8080/login';"+
