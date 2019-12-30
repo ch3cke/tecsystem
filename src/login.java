@@ -1,3 +1,4 @@
+import net.sf.json.JSONObject;
 import org.apache.tools.ant.taskdefs.Sleep;
 import tools.Db_tools.Db_tools;
 import tools.Db_tools.encrypt;
@@ -10,16 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Timer;
+
 
 @WebServlet(name = "login")
 public class login extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession res = request.getSession();
-        Map<String, Object>userinfo = new HashMap<>();
+        JSONObject userinfo = new JSONObject();
         Object flag = res.getAttribute("islogin");
         String email = request.getParameter("email");
         String password = encrypt.encryptToMD5(request.getParameter("password"));
@@ -29,25 +27,30 @@ public class login extends HttpServlet {
         String code = request.getParameter("code");
         String id = userinfo.get("id").toString();
         String sessionCode = request.getSession().getAttribute("code").toString();
+        JSONObject result = new JSONObject();
         if(flag==null){
             if(code.equals(sessionCode)){
                 if (password.equals(password2)){
+                    result.put("success",200);
+                    result.put("reason","登录成功");
                     res.setAttribute("islogin",true);
                     res.setAttribute("id",id);
                     res.setAttribute("statues",userinfo.get("statues"));
-                    response.sendRedirect("/index.html");
+                    response.getWriter().write(result.toString());
                 }else {
-                    response.getWriter().write("<script type='text/javascript'>alert('username or password error');");
+                    result.put("reason","用户名或密码错误");
+                    result.put("success",201);
+                    response.getWriter().write(result.toString());
                 }
-                response.getWriter().write("用户名或密码错误");
             }else {
-                response.getWriter().write("<script type='text/javascript'>alert('code error');function jumurl(){" +
-                        "window.location.href='http://localhost:8080/login';"+
-                        "}" +
-                        "setTimeout(jumurl,1000);</script>");
+                result.put("reason","验证码错误");
+                result.put("success",202);
+                response.getWriter().write(result.toString());
             }
         }else {
-            response.sendRedirect("/index.html");
+                result.put("reason","用户已经登录");
+                result.put("success",203);
+                response.getWriter().write(result.toString());
         }
 
     }

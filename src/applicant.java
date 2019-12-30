@@ -16,17 +16,16 @@ import java.util.Map;
 public class applicant extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Object flag = request.getSession().getAttribute("islogin");
-        flag = "ssss";
         if(flag==null){
             response.sendRedirect("/login");
         }else {
             JSONObject result = new JSONObject();
             Date time = new Date();
             Db_tools db = new Db_tools();
-            Map<String,String> appliant = new HashMap<>();
+            JSONObject appliant = new JSONObject();
             appliant.put("Aid",encrypt.encryptToMD5(time.toString()));
-            //appliant.put("id",request.getSession().getAttribute("id").toString());
-            appliant.put("id","2294458237@qq.com");
+            appliant.put("id",request.getSession().getAttribute("id").toString());
+            //appliant.put("id","2294458237@qq.com");
             appliant.put("Aplace",request.getParameter("Aplace"));
             appliant.put("Atime",request.getParameter("Atime"));
             appliant.put("Amoney",request.getParameter("Amoney"));
@@ -37,10 +36,10 @@ public class applicant extends HttpServlet {
             appliant.put("Areason2",request.getParameter("Areason2"));
             appliant.put("Areason3",request.getParameter("Areason3"));
             if(db.InsertApplicant(appliant)){
-                result.put("success","ture");
+                result.put("success",true);
                 response.getWriter().write(result.toString());
             }else {
-                result.put("success","false");
+                result.put("success",false);
                 response.getWriter().write(result.toString());
             }
 

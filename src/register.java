@@ -22,10 +22,11 @@ public class register extends HttpServlet {
         String password = encrypt.encryptToMD5(request.getParameter("password"));
         String repassword = encrypt.encryptToMD5(request.getParameter("repassword"));
         String code = request.getParameter("code");
+        JSONObject result = new JSONObject();
         String sessionCode = request.getSession().getAttribute("code").toString();
         if (code.equals(sessionCode)){
             if(repassword.equals(password)){
-                Map<String,String> info = new HashMap<>();
+                JSONObject info = new JSONObject();
                 info.put("username",username);
                 info.put("id",userId);
                 info.put("email",email);
@@ -39,32 +40,32 @@ public class register extends HttpServlet {
                 Date date = new Date();
                 info.put("log_time",date.toString());
                 Db_tools db = new Db_tools();
-                JSONObject result = new JSONObject();
                 if(db.InsertUserInfo(info)){
                     sendMail sender = new sendMail();
                     try {
-                        sender.sendEmail(info.get("email"),info.get("id"));
-                        result.put("success",true);
+                        sender.sendEmail(info.get("email").toString(),info.get("id").toString());
+                        result.put("reason","注册成功");
+                        result.put("success",200);
                         response.getWriter().write(result.toString());
                     }catch (Exception e){
-                        result.put("success",false);
+                        result.put("reason","邮件未发送");
+                        result.put("success",201);
                         response.getWriter().write(result.toString());
                     }
                 }else {
-                    response.getWriter().write("<script type='text/javascript'>alert('user exits');function jumurl(){" +
-                            "window.location.href='http://localhost:8080/login';"+
-                            "}setTimeout(jumurl,3000);</script>");
+                    result.put("reason","用户已存在");
+                    result.put("success",202);
+                    response.getWriter().write(result.toString());
                 }
             }else {
-                response.getWriter().write("<script type='text/javascript'>alert('user exits');function jumurl(){" +
-                        "window.location.href='http://localhost:8080/register';" +
-                        "}"+"setTimeout(jumurl,3000);</script>");
+                result.put("reason","验证码错误");
+                result.put("success",203);
+                response.getWriter().write(result.toString());
             }
         }else {
-            response.getWriter().write("<script type='text/javascript'>alert('code error');function jumurl(){" +
-                    "window.location.href='http://localhost:8080/register';"+
-                    "}" +
-                    "setTimeout(jumurl,3000);</script>");
+            result.put("reason","密码不匹配");
+            result.put("success",204);
+            response.getWriter().write(result.toString());
         }
     }
 

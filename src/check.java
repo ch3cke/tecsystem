@@ -19,13 +19,16 @@ public class check extends HttpServlet {
         if(recode.equals(recode2)){
             Db_tools db = new Db_tools();
             if(db.UpdateUserpasswd(username,password)){
-                result.put("Message","success");
+                result.put("success",200);
+                result.put("reason","修改成功");
             }
             else {
-                result.put("Message","fail");
+                result.put("success",201);
+                result.put("reason","修改失败");
             }
         }else {
-            result.put("Message","fail");
+            result.put("success",202);
+            result.put("reason","验证码错误");
         }
         response.getWriter().write(result.toString());
     }
