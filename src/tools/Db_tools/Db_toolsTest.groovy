@@ -14,7 +14,7 @@ class Db_toolsTest extends GroovyTestCase {
         String user = "root";
         String pass = "root";
         Map userinfo = new HashMap();
-        userinfo.put("username","check")
+        userinfo.put("username","GetInSys.check")
         userinfo.put("password","admin")
         userinfo.put("statu","admin")
         Date date = new Date();

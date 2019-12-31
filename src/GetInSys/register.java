@@ -1,3 +1,5 @@
+package GetInSys;
+
 import net.sf.json.JSONObject;
 import tools.Db_tools.Db_tools;
 import tools.Db_tools.encrypt;
@@ -10,10 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
-@WebServlet(name = "register")
+@WebServlet(name = "GetIn.register")
 public class register extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("userName");
@@ -43,7 +43,8 @@ public class register extends HttpServlet {
                 if(db.InsertUserInfo(info)){
                     sendMail sender = new sendMail();
                     try {
-                        sender.sendEmail(info.get("email").toString(),info.get("id").toString());
+                        sender.sendEmail(info.get("email").toString(),encrypt.encryptToMD5(info.get("id").toString()));
+                        request.getSession().setAttribute("id",info.get("id").toString());
                         result.put("reason","注册成功");
                         result.put("success",200);
                         response.getWriter().write(result.toString());
@@ -70,6 +71,6 @@ public class register extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/user/register.jsp").forward(request,response);
+        request.getRequestDispatcher("/user/GetIn.register.jsp").forward(request,response);
     }
 }

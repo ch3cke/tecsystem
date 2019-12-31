@@ -96,7 +96,7 @@ public class Db_tools {
 
     //插入用户信息
     /*
-    @param userinfo 用户信息
+    @param GetInfo.userinfo 用户信息
      */
     public boolean InsertUserInfo(JSONObject userinfo){
         try {
@@ -248,18 +248,31 @@ public class Db_tools {
         }
     }
 
-    public JSONObject GetApplicantById(String aid){
+    public JSONObject GetApplicantByAid(String aid){
         JSONObject result = new JSONObject();
-        String sqlStr = "select * from applicant where Aid = ?";
+        String sqlStr = "select * from GetApplicant.applicant where Aid = ?";
         getApplicant(aid, result, sqlStr);
         return result;
     }
 
+    public JSONObject GetUserInfoById(String id){
+        String sqlStr = "select * from userinfo where id = ?";
+        JSONObject result = new JSONObject();
+        try{
+            sql = con.prepareStatement(sqlStr);
+            sql.setString(1,id);
+            res = sql.executeQuery();
+            setuser(result);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return result;
+    }
     /*
     通过状态查找记录
      */
     public JSONArray GetApplicantByIndex(String indexs){
-        String sqlStr = "select * from applicant where indexs = ?";
+        String sqlStr = "select * from GetApplicant.applicant where indexs = ?";
         JSONObject result = new JSONObject();
         JSONArray results = new JSONArray();
         getResult(indexs, sqlStr, result, results);
@@ -270,7 +283,7 @@ public class Db_tools {
     通过姓名查找申请记录
      */
     public JSONArray GetApplicantByDName(String Dname){
-        String sqlStr = "select * from applicant where Dname = ?";
+        String sqlStr = "select * from GetApplicant.applicant where Dname = ?";
         JSONObject result = new JSONObject();
         JSONArray results = new JSONArray();
         getResult(Dname, sqlStr, result, results);
@@ -288,7 +301,7 @@ public class Db_tools {
             sql.setString(2, applicant.get("id").toString());
             sql.setString(3, applicant.get("Aplace").toString());
             sql.setString(4, applicant.get("Atime").toString());
-            sql.setString(5, applicant.get("Amoney").toString());
+            sql.setInt(5, Integer.parseInt(applicant.get("Amoney").toString()));
             sql.setString(6, applicant.get("Dname").toString());
             sql.setString(7, applicant.get("indexs").toString());
             sql.setString(8, applicant.get("Areason1").toString());
@@ -376,16 +389,16 @@ public class Db_tools {
         String sqlStr = "insert into schedule(Sid, id, Aplace, Atime, Amoney, Dname, Areason1, Areason2, Areason3, isgive) values(?,?,?,?,?,?,?,?,?,?)";
         try {
             sql = con.prepareStatement(sqlStr);
-            sql.setString(1, schedule.get("Sid").toString());
+            sql.setString(1, schedule.get("Aid").toString());
             sql.setString(2, schedule.get("id").toString());
             sql.setString(3, schedule.get("Aplace").toString());
             sql.setString(4, schedule.get("Atime").toString());
-            sql.setString(5, schedule.get("Amoney").toString());
+            sql.setInt(5, Integer.parseInt(schedule.get("Amoney").toString()));
             sql.setString(6, schedule.get("Dname").toString());
             sql.setString(7, schedule.get("Areason1").toString());
             sql.setString(8, schedule.get("Areason2").toString());
             sql.setString(9, schedule.get("Areason3").toString());
-            sql.setString(10, schedule.get("isgive").toString());
+            sql.setString(10, "n");
             sql.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -449,7 +462,7 @@ public class Db_tools {
     }
 
     public boolean UpdateSchedule(String Sid,String indexs){
-        String sqlStr = "update schedule set indexs = ? where Sid = ?";
+        String sqlStr = "update getSchedule set indexs = ? where Sid = ?";
         return updateValue(Sid, indexs, sqlStr);
     }
 
@@ -467,15 +480,16 @@ public class Db_tools {
     }
 
     public boolean UpdateUserpasswd(String username, String password){
-        String sqlStr = "update userinfo set password=? where username =?";
+        String sqlStr = "update GetInfo.userinfo set password=? where username =?";
         return updateValue(username,password,sqlStr);
     }
 
     public boolean UpdateUserMedal(String id  , int medal){
+        Integer m = Integer.parseInt(GetUserInfoById(id).getString("Medals"));
         String sqlStr = "update userinfo set Medals=? where id =?";
         try {
             sql = con.prepareStatement(sqlStr);
-            sql.setInt(1,medal);
+            sql.setInt(1,medal+m);
             sql.setString(2,id);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -503,8 +517,21 @@ public class Db_tools {
     }
 
     public boolean UpdateApplicant(String aid,String indexs){
-        String sqlStr = "update applicant set indexs = ? where aid = ?";
+        String sqlStr = "update GetApplicant.applicant set indexs = ? where aid = ?";
         return updateValue(aid, indexs, sqlStr);
     }
 
+    public boolean UpdateUserStatue(String id, String statues){
+        String Sqlstr = "Update userinfo set statues=? where id = ?";
+        try {
+            sql = con.prepareStatement(Sqlstr);
+            sql.setString(1,statues);
+            sql.setString(2,id);
+            sql.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

@@ -1,3 +1,5 @@
+package tools;
+
 import javax.imageio.ImageIO;
 import javax.servlet.Servlet;
 import javax.servlet.ServletException;
@@ -13,7 +15,7 @@ import java.util.Map;
 
 import tools.untils.verifycode;
 
-@WebServlet(name = "getcode")
+@WebServlet(name = "tools.getcode")
 public class getcode extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request,response);

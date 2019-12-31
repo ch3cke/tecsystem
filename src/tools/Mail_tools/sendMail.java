@@ -94,7 +94,7 @@ public class sendMail {
      */
     public void sendEmail(String to,String name) throws Exception{
         String subject = "验证邮箱";
-        String content = prettyRegisterLayout("2小时",MAIL_ORGANIZATION,VERIFY_LINK+"verify?id="+name);
+        String content = prettyRegisterLayout("2小时",MAIL_ORGANIZATION,VERIFY_LINK+"verify.do?id="+name);
         Properties props = new Properties();//key value:配置参数。真正发送邮件时再配置
         props.setProperty(MAIL_TRANSPORT_PROTOCOL, MAIL_TRANSPORT_PROTOCOL_VALUE);//指定邮件发送的协议，参数是规范规定的
         props.setProperty(MAIL_HOST, MAIL_HOST_VALUE);//指定发件服务器的地址，参数是规范规定的
@@ -216,10 +216,10 @@ public class sendMail {
                 "                <td colspan=\"2\" style=\"font-size:\n" +
                 "12px; line-height: 20px; padding-top: 14px;\n" +
                 "padding-bottom: 25px; color: #909090;\">\n" +
-                "                    <div>请登录系统：<a href=\""+MAIL_WEBSITE+"login"+"\" style=\"color: #03c5ff; text-decoration:\n" +
-                "underline;\" rel=\"noopener\" target=\"_blank\">"+MAIL_WEBSITE+"login"+"</a></div>\n" +
+                "                    <div>请登录系统：<a href=\""+MAIL_WEBSITE+"GetIn.login"+"\" style=\"color: #03c5ff; text-decoration:\n" +
+                "underline;\" rel=\"noopener\" target=\"_blank\">"+MAIL_WEBSITE+"GetIn.login"+"</a></div>\n" +
                 "                    <div style=\"padding-top:\n" +
-                "4px;\">(如果不能打开页面，请复制该地址到浏览器打开)</div>\n" +
+                "4px;\">(如果不能打开页面，请复制该地址到浏览器打开) 请及时填写回执信息</div>\n" +
                 "                </td>\n" +
                 "            </tr>\n";
     }

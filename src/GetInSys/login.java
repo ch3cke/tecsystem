@@ -1,9 +1,9 @@
+package GetInSys;
+
 import net.sf.json.JSONObject;
-import org.apache.tools.ant.taskdefs.Sleep;
 import tools.Db_tools.Db_tools;
 import tools.Db_tools.encrypt;
 
-import javax.jms.Session;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 
-@WebServlet(name = "login")
+@WebServlet(name = "GetIn.login")
 public class login extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession res = request.getSession();
@@ -58,7 +58,7 @@ public class login extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Object flag = request.getSession().getAttribute("islogin");
         if(flag==null){
-            request.getRequestDispatcher("/user/login.jsp").forward(request,response);
+            request.getRequestDispatcher("/user/GetIn.login.jsp").forward(request,response);
         }else {
             response.sendRedirect("/index.html");
         }

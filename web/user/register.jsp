@@ -83,7 +83,7 @@
         document.querySelector(".flex-items").onclick = function () {
             window.location.href = "./main.jsp";
         }
-        function check(){
+        function GetInSys.check(){
             var userName=document.getElementsByName("userName")[0].value;
             var userId=document.getElementsByName("userId")[0].value;
             

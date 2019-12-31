@@ -1,3 +1,5 @@
+package GetApplicant;
+
 import net.sf.json.JSONObject;
 import tools.Db_tools.Db_tools;
 import tools.Db_tools.encrypt;
@@ -12,12 +14,12 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet(name = "applicant")
+@WebServlet(name = "GetApplicant.applicant")
 public class applicant extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Object flag = request.getSession().getAttribute("islogin");
         if(flag==null){
-            response.sendRedirect("/login");
+            response.sendRedirect("/GetIn.login");
         }else {
             JSONObject result = new JSONObject();
             Date time = new Date();
@@ -49,9 +51,9 @@ public class applicant extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Object flag = request.getSession().getAttribute("islogin");
         if(flag==null){
-            response.sendRedirect("/login");
+            response.sendRedirect("/GetIn.login");
         }else {
-            request.getRequestDispatcher("/user/login.jsp").forward(request,response);
+            request.getRequestDispatcher("/user/GetIn.login.jsp").forward(request,response);
         }
     }
 }

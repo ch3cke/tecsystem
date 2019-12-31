@@ -30,7 +30,7 @@
         </div>
         <section class="card">
             <form action="/login" method="POST">
-                <%--@declare id="id"--%><%--@declare id="password"--%><%--@declare id="verify"--%>
+                <%--@declare id="id"--%><%--@declare id="password"--%><%--@declare id="GetInfo.verify"--%>
                     <label for="id">
                         <i class="fa fa-user"></i>
                         <input type="text" name="email" class="user" placeholder="请输入您的工号或邮箱" />

@@ -1,3 +1,5 @@
+package GetInSys;
+
 import net.sf.json.JSONObject;
 import tools.Db_tools.Db_tools;
 
@@ -8,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "check")
+@WebServlet(name = "GetInSys.check")
 public class check extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String recode = request.getParameter("recode");
