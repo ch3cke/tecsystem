@@ -142,4 +142,20 @@
         <servlet-name>static</servlet-name>
         <url-pattern>/static.do</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>stawork</servlet-name>
+        <servlet-class>StaticWorker</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>stawork</servlet-name>
+        <url-pattern>/stawork.do</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>GetTen</servlet-name>
+        <servlet-class>GetTen</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GetTen</servlet-name>
+        <url-pattern>/getten.do</url-pattern>
+    </servlet-mapping>
 </web-app>

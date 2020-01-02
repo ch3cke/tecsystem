@@ -993,13 +993,13 @@
     </key>
     <column id="242" parent="225" name="Sid">
       <Position>1</Position>
-      <DataType>varchar(8)|0s</DataType>
+      <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="243" parent="225" name="id">
       <Position>2</Position>
-      <DataType>varchar(8)|0s</DataType>
+      <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>

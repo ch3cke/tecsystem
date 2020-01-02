@@ -438,3 +438,75 @@ POST方式：
 | 名称 | method             |          | id                |
 | 备注 | add/delete/toadmin | 增加传入 | 修改权限/删去传入 |
 
+## 18. 统计所有信息
+
+链接: /static.do
+
+说明：获取用户的统计信息/或者所有部门信息
+
+方式：GET
+
+参数：
+
+| 意义 | 登录标志 | 身份    | 方式   |
+| ---- | -------- | ------- | ------ |
+| 名称 | islogin  | statues | method |
+| 备注 | session  | session | 参数   |
+
+返回值：
+
+method：person
+
+返回：
+
+```json
+{"fuck":{"Money":363,"Count":3},"ch3cke":{"Money":131,"Count":1}}
+```
+
+method：其他
+
+返回：
+
+```json
+{"121":{"Money":363,"Count":3},"12121":{"Money":131,"Count":1}}
+```
+
+失败：
+
+```json
+{"reason":"permission denied","success":201}
+```
+
+## 19.用户获取个人信息
+
+链接：/stawork.do
+
+方式：/GET
+
+参数：
+
+| 意义 | 登录标志    | 用户信息    |
+| ---- | ----------- | ----------- |
+| 名称 | islogin     | id          |
+| 备注 | session获取 | session获取 |
+
+返回：
+
+```json
+{"Money":363,"Count":3}
+```
+
+## 20.获取所有人的奖牌
+
+链接：/getten.do
+
+方式：/GET
+
+参数：无
+
+返回：
+
+```json
+{"fuck":0,"ch3cke":0}
+```
+

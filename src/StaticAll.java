@@ -16,17 +16,23 @@ public class StaticAll extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Object flag = request.getSession().getAttribute("islogin");
-        String statues = null;
+        String statues = "worker";
+//        String flag ="sss";
         if(flag!=null){
-            statues = request.getParameter("statues");
+            statues = request.getSession().getAttribute("statues").toString();
+            Db_tools db = new Db_tools();
             if(statues.equals("admin")){
-                Db_tools db = new Db_tools();
-                response.getWriter().write(db.StaticEveryOne().toString());
+                String method = request.getParameter("method");
+                if(method.equals("person")){
+                    response.getWriter().write(db.StaticEveryOne().toString());
+                }else {
+                    response.getWriter().write(db.StaticEveryPart().toString());
+                }
             }else {
-                JSONObject result = new JSONObject();
-                result.put("success",201);
-                result.put("reason","permission denied");
-                response.getWriter().write(result.toString());
+                JSONObject resu = new JSONObject();
+                resu.put("success",201);
+                resu.put("reason","permission denied");
+                response.getWriter().write(resu.toString());
             }
         }else {
             response.sendRedirect("/login.do");

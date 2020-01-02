@@ -532,7 +532,7 @@ public class Db_tools {
     }
 
     public JSONObject StatisticalSchdeuleById(String userId){
-        String sqlStr = "select SUM(Amoney) as 'money' from applicant union select count(*) as 'count' from schedule where id = ?";
+        String sqlStr = "select SUM(Amoney) as 'money', count(*) as 'count' from tecsystem.schedule where id = ?";
         JSONObject result = new JSONObject();
         try{
             sql = con.prepareStatement(sqlStr);
@@ -548,24 +548,23 @@ public class Db_tools {
         return result;
     }
 
-    public JSONObject StatisticalSchdeuleByDname(String Dname){
-        String sqlStr = "select SUM(Amoney) as 'money' from applicant union select count(*) as 'count' from schedule where id = ?";
+    public JSONObject GetTen(){
+        String sqlStr = "select username, Medals from userinfo";
         JSONObject result = new JSONObject();
         try {
             sql = con.prepareStatement(sqlStr);
-            sql.setString(1,Dname);
+            res = sql.executeQuery();
             while (res.next()){
-                result.put("Money",res.getInt("money"));
-                result.put("Count",res.getInt("count"));
+                result.put(res.getString("username"),res.getInt("Medals"));
             }
-        }catch (Exception e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return result;
     }
 
     public JSONObject StaticEveryOne(){
-        String sqlStr = "select userinfo.username, count(*) as 'count',SUM(Amoney) as 'money' from tecsystem.applicant, tecsystem.userinfo where userinfo.id = applicant.id group by userinfo.username";
+        String sqlStr = "select userinfo.username, count(*) as 'count',SUM(Amoney) as 'money' from tecsystem.schedule, tecsystem.userinfo where userinfo.id = schedule.id group by userinfo.username";
         JSONObject results = new JSONObject();
         try{
             sql = con.prepareStatement(sqlStr);
@@ -584,7 +583,7 @@ public class Db_tools {
     }
 
     public JSONObject StaticEveryPart(){
-        String sqlStr = "select DName , count(*) as 'count',SUM(Amoney) as 'money' from tecsystem.applicant group by DName";
+        String sqlStr = "select DName , count(*) as 'count',SUM(Amoney) as 'money' from tecsystem.schedule group by DName";
         JSONObject results = new JSONObject();
         try{
             sql = con.prepareStatement(sqlStr);
@@ -593,7 +592,7 @@ public class Db_tools {
                 JSONObject re = new JSONObject();
                 re.put("Count",res.getInt("count"));
                 re.put("Money",res.getInt("Money"));
-                results.put("Dname",re);
+                results.put(res.getString("Dname"),re);
             }
         }catch (Exception e){
             e.printStackTrace();
