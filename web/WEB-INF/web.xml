@@ -134,4 +134,12 @@
         <servlet-name>userOperate</servlet-name>
         <url-pattern>/user.do</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>static</servlet-name>
+        <servlet-class>StaticAll</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>static</servlet-name>
+        <url-pattern>/static.do</url-pattern>
+    </servlet-mapping>
 </web-app>

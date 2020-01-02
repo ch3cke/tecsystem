@@ -1,15 +1,11 @@
 package tools.Db_tools;
 
-import jdk.nashorn.internal.scripts.JS;
-import net.sf.json.JSON;
+import groovy.sql.Sql;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
 
 public class Db_tools {
     private String ConnetcStr = "jdbc:mysql://47.98.167.108:3306/tecsystem";
@@ -533,5 +529,75 @@ public class Db_tools {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public JSONObject StatisticalSchdeuleById(String userId){
+        String sqlStr = "select SUM(Amoney) as 'money' from applicant union select count(*) as 'count' from schedule where id = ?";
+        JSONObject result = new JSONObject();
+        try{
+            sql = con.prepareStatement(sqlStr);
+            sql.setString(1,userId);
+            res = sql.executeQuery();
+            while (res.next()){
+                result.put("Money",res.getInt("money"));
+                result.put("Count",res.getInt("count"));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public JSONObject StatisticalSchdeuleByDname(String Dname){
+        String sqlStr = "select SUM(Amoney) as 'money' from applicant union select count(*) as 'count' from schedule where id = ?";
+        JSONObject result = new JSONObject();
+        try {
+            sql = con.prepareStatement(sqlStr);
+            sql.setString(1,Dname);
+            while (res.next()){
+                result.put("Money",res.getInt("money"));
+                result.put("Count",res.getInt("count"));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public JSONObject StaticEveryOne(){
+        String sqlStr = "select userinfo.username, count(*) as 'count',SUM(Amoney) as 'money' from tecsystem.applicant, tecsystem.userinfo where userinfo.id = applicant.id group by userinfo.username";
+        JSONObject results = new JSONObject();
+        try{
+            sql = con.prepareStatement(sqlStr);
+            res = sql.executeQuery();
+            while (res.next()){
+                JSONObject re = new JSONObject();
+                re.put("Count",res.getInt("count"));
+                re.put("Money",res.getInt("money"));
+                String username = res.getString("username");
+                results.put(username,re);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return results;
+    }
+
+    public JSONObject StaticEveryPart(){
+        String sqlStr = "select DName , count(*) as 'count',SUM(Amoney) as 'money' from tecsystem.applicant group by DName";
+        JSONObject results = new JSONObject();
+        try{
+            sql = con.prepareStatement(sqlStr);
+            res = sql.executeQuery();
+            while(res.next()){
+                JSONObject re = new JSONObject();
+                re.put("Count",res.getInt("count"));
+                re.put("Money",res.getInt("Money"));
+                results.put("Dname",re);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return results;
     }
 }
