@@ -16,11 +16,11 @@ import java.util.Date;
 @WebServlet(name = "GetIn.register")
 public class register extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String username = request.getParameter("userName");
-        String userId = request.getParameter("userId");
-        String email = request.getParameter("email");
-        String password = encrypt.encryptToMD5(request.getParameter("password"));
-        String repassword = encrypt.encryptToMD5(request.getParameter("repassword"));
+        String username = request.getParameter("name");
+        String userId = request.getParameter("id");
+        String email = request.getParameter("mailbox");
+        String password = encrypt.encryptToMD5(request.getParameter("pwd"));
+        String repassword = encrypt.encryptToMD5(request.getParameter("repwd"));
         String code = request.getParameter("code");
         JSONObject result = new JSONObject();
         String sessionCode = request.getSession().getAttribute("code").toString();
@@ -40,24 +40,25 @@ public class register extends HttpServlet {
                 Date date = new Date();
                 info.put("log_time",date.toString());
                 Db_tools db = new Db_tools();
-                if(db.InsertUserInfo(info)){
-                    sendMail sender = new sendMail();
+                sendMail sender = new sendMail();
                     try {
                         sender.sendEmail(info.get("email").toString(),encrypt.encryptToMD5(info.get("id").toString()));
                         request.getSession().setAttribute("id",info.get("id").toString());
-                        result.put("reason","注册成功");
-                        result.put("success",200);
-                        response.getWriter().write(result.toString());
+                        if(db.InsertUserInfo(info)) {
+                            result.put("reason", "注册成功");
+                            result.put("success", 200);
+                        }else {
+                                result.put("reason","用户已存在");
+                                result.put("success",202);
+                                response.getWriter().write(result.toString());
+                            }
+                            response.getWriter().write(result.toString());
                     }catch (Exception e){
                         result.put("reason","邮件未发送");
                         result.put("success",201);
                         response.getWriter().write(result.toString());
                     }
-                }else {
-                    result.put("reason","用户已存在");
-                    result.put("success",202);
-                    response.getWriter().write(result.toString());
-                }
+
             }else {
                 result.put("reason","验证码错误");
                 result.put("success",203);
@@ -71,6 +72,6 @@ public class register extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/user/register.jsp").forward(request,response);
+        response.sendRedirect("/login.do");
     }
 }

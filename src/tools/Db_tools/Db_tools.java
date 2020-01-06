@@ -48,7 +48,7 @@ public class Db_tools {
     public JSONObject GetUserInfoByname(String name){
         JSONObject result = new JSONObject();
         try{
-            String sqlStr = "select * from userinfo where name = ?";
+            String sqlStr = "select * from userinfo where username = ?";
             sql = con.prepareStatement(sqlStr);
             sql.setString(1,name);
             res = sql.executeQuery();
@@ -129,6 +129,7 @@ public class Db_tools {
             result.put("Urgent",res.getString("Urgent"));
             result.put("Areason2",res.getString("Areason2"));
             result.put("Areason3",res.getString("Areason3"));
+            result.put("Atime2",res.getString("Atime2"));
             results.put(result);
         }
     }
@@ -145,6 +146,7 @@ public class Db_tools {
             result.put("isgive",res.getString("isgive"));
             result.put("Areason2",res.getString("Areason2"));
             result.put("Areason3",res.getString("Areason3"));
+            result.put("paths",res.getString("paths"));
             results.put(result);
         }
     }
@@ -213,6 +215,7 @@ public class Db_tools {
                 result.put("Urgent",res.getString("Urgent"));
                 result.put("Areason2",res.getString("Areason2"));
                 result.put("Areason3",res.getString("Areason3"));
+                result.put("Atime2",res.getString("Atime2"));
                 results.put(result);
             }
         } catch (SQLException e) {
@@ -238,6 +241,7 @@ public class Db_tools {
                 result.put("Urgent",res.getString("Urgent"));
                 result.put("Areason2",res.getString("Areason2"));
                 result.put("Areason3",res.getString("Areason3"));
+                result.put("Atime2",res.getString("Atime2"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -290,7 +294,7 @@ public class Db_tools {
     插入申请记录
      */
     public  boolean InsertApplicant(JSONObject applicant){
-        String sqlStr = "insert into applicant(Aid, id, Aplace, Atime, Amoney, Dname, indexs,Areason1, Urgent, Areason2, Areason3) values(?,?,?,?,?,?,?,?,?,?,?)";
+        String sqlStr = "insert into applicant(Aid, id, Aplace, Atime, Amoney, Dname, indexs,Areason1, Urgent, Areason2, Areason3,Atime2) values(?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
             sql = con.prepareStatement(sqlStr);
             sql.setString(1, applicant.get("Aid").toString());
@@ -304,6 +308,7 @@ public class Db_tools {
             sql.setString(9, applicant.get("Urgent").toString());
             sql.setString(10, applicant.get("Areason2").toString());
             sql.setString(11, applicant.get("Areason3").toString());
+            sql.setString(12,applicant.get("Atime2").toString());
             sql.executeUpdate();
         } catch (SQLException e) {
             return false;
@@ -382,7 +387,7 @@ public class Db_tools {
     }
 
     public boolean InsertSchedule(JSONObject schedule){
-        String sqlStr = "insert into schedule(Sid, id, Aplace, Atime, Amoney, Dname, Areason1, Areason2, Areason3, isgive) values(?,?,?,?,?,?,?,?,?,?)";
+        String sqlStr = "insert into schedule(Sid, id, Aplace, Atime, Amoney, Dname, Areason1, Areason2, Areason3, isgive,path) values(?,?,?,?,?,?,?,?,?,?,?)";
         try {
             sql = con.prepareStatement(sqlStr);
             sql.setString(1, schedule.get("Aid").toString());
@@ -395,6 +400,7 @@ public class Db_tools {
             sql.setString(8, schedule.get("Areason2").toString());
             sql.setString(9, schedule.get("Areason3").toString());
             sql.setString(10, "n");
+            sql.setString(11, schedule.get("paths").toString());
             sql.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

@@ -1,7 +1,6 @@
 package GetInSys;
 
 import net.sf.json.JSONObject;
-import org.apache.tools.ant.taskdefs.SendEmail;
 import tools.Db_tools.Db_tools;
 import tools.Mail_tools.sendMail;
 
@@ -19,19 +18,27 @@ public class reset extends HttpServlet {
         String username = request.getParameter("username");
         Db_tools db = new Db_tools();
         JSONObject result = new JSONObject();
-        String mail = db.GetUserInfoByname(username).get("Mail").toString();
-        sendMail sender =new sendMail();
-        String resetcode = getRandomString(6);
-        request.getSession().setAttribute("resetcode",resetcode);
-        request.getSession().setAttribute("username",username);
-        try {
-            sender.sendResetEmail(mail,"reset",resetcode);
-            result.put("success",200);
+        JSONObject user = new JSONObject();
+        user = db.GetUserInfoByname(username);
+        if(user.isEmpty()){
+            result.put("success",202);
+            result.put("reason","user don't exit");
             response.getWriter().write(result.toString());
-        } catch (Exception e) {
-            result.put("success",201);
-            response.getWriter().write(result.toString());
-            e.printStackTrace();
+        }else {
+            String mail = user.get("Mail").toString();
+            sendMail sender =new sendMail();
+            String resetcode = getRandomString(6);
+            request.getSession().setAttribute("resetcode",resetcode);
+            request.getSession().setAttribute("username",username);
+            try {
+                sender.sendResetEmail(mail,"reset",resetcode);
+                result.put("success",200);
+                response.getWriter().write(result.toString());
+            } catch (Exception e) {
+                result.put("success",201);
+                response.getWriter().write(result.toString());
+                e.printStackTrace();
+            }
         }
     }
 

@@ -26,10 +26,11 @@ public class login extends HttpServlet {
         String password2 = userinfo.get("password").toString();
         String code = request.getParameter("code");
         String id = userinfo.get("id").toString();
-        String sessionCode = request.getSession().getAttribute("code").toString();
+        Object sessionCode = request.getSession().getAttribute("code");
+        sessionCode = "1237";
         JSONObject result = new JSONObject();
-        if(flag==null){
-            if(code.equals(sessionCode)){
+        if(flag==null && sessionCode != null){
+            if(code.equals(sessionCode.toString())){
                 if (password.equals(password2)){
                     result.put("success",200);
                     result.put("reason","登录成功");
@@ -58,7 +59,7 @@ public class login extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Object flag = request.getSession().getAttribute("islogin");
         if(flag==null){
-            request.getRequestDispatcher("/user/login.jsp").forward(request,response);
+            request.getRequestDispatcher("/login.jsp").forward(request,response);
         }else {
             response.sendRedirect("/index.html");
         }

@@ -21,8 +21,8 @@ public class sendMail {
 
     //邮件编辑信息(仅需写上自己的)
     private static final String VERIFY_LINK ="http://localhost:8080/";
-    private static final String MAIL_FROM ="2173616709@qq.com";//邮件发送人
-    private static final String MAIL_FROM_PASSWORD ="auaamwddizqteaec";//邮件发送人授权码
+    private static final String MAIL_FROM ="zytyitong@qq.com";//邮件发送人
+    private static final String MAIL_FROM_PASSWORD ="jpsikdzitazfdijc";//邮件发送人授权码
     private static final String MAIL_SUBJECT_REGISTER ="注册链接";//邮件主题(注册链接)
     private static final String MAIL_SUBJECT_VERIFY_CODE ="邮箱验证码";//邮件主题(邮箱验证码)
     private static final String MAIL_ORGANIZATION ="CCNU";//邮件组织
@@ -66,7 +66,7 @@ public class sendMail {
         props.setProperty(MAIL_TRANSPORT_PROTOCOL, MAIL_TRANSPORT_PROTOCOL_VALUE);//指定邮件发送的协议，参数是规范规定的
         props.setProperty(MAIL_HOST, MAIL_HOST_VALUE);//指定发件服务器的地址，参数是规范规定的
         props.setProperty("mail.smtp.port","465");
-        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        props.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 //        props.setProperty(MAIL_DEBUG, "true");//邮件发送的调试模式，参数是规范规定的
         props.setProperty(MAIL_SMTP_AUTH, CONFIRM);//请求服务器进行身份认证。参数与具体的JavaMail实现有关
         Session session = Session.getInstance(props);//发送邮件时使用的环境配置

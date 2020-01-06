@@ -18,6 +18,7 @@ import java.util.Map;
 public class applicant extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Object flag = request.getSession().getAttribute("islogin");
+        //flag = "sss";
         if(flag==null){
             response.sendRedirect("/GetIn.login");
         }else {
@@ -37,6 +38,7 @@ public class applicant extends HttpServlet {
             appliant.put("Urgent",request.getParameter("Urgent"));
             appliant.put("Areason2",request.getParameter("Areason2"));
             appliant.put("Areason3",request.getParameter("Areason3"));
+            appliant.put("Atime2",request.getParameter("Atime2"));
             if(db.InsertApplicant(appliant)){
                 result.put("success",true);
                 response.getWriter().write(result.toString());
@@ -51,9 +53,7 @@ public class applicant extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Object flag = request.getSession().getAttribute("islogin");
         if(flag==null){
-            response.sendRedirect("/GetIn.login");
-        }else {
-            request.getRequestDispatcher("/user/GetIn.login.jsp").forward(request,response);
+            response.sendRedirect("/login.do");
         }
     }
 }

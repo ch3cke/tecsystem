@@ -28,7 +28,7 @@ public class getAllApplicant extends HttpServlet {
                 result.put("success", 202);
             }
         }else {
-            result.put("reason", " GetIn.login first");
+            result.put("reason", " login first");
             result.put("success", 201);
         }
 
