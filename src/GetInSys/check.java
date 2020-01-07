@@ -15,7 +15,7 @@ public class check extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String recode = request.getParameter("recode");
         String password = request.getParameter("newpasswd");
-        String username = (String)request.getSession().getAttribute("id");
+        String username = (String)request.getSession().getAttribute("username");
         String recode2 = (String)request.getSession().getAttribute("resetcode");
         JSONObject result = new JSONObject();
         if(recode.equals(recode2)){

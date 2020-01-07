@@ -20,7 +20,7 @@ public class getAllApplicant extends HttpServlet {
         Object flag = request.getSession().getAttribute("statues");
         JSONObject result = new JSONObject();
         if (flag!=null) {
-            if (flag.toString().equals("admin")) {
+            if (flag.toString().equals("manage")) {
                 Db_tools db = new Db_tools();
                 response.getWriter().write(db.GetAllApplicant().toString());
             } else {

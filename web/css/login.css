@@ -1,0 +1,79 @@
+@charset "UTF-8";
+body {
+            margin: 0;
+            padding: 0;
+        }
+      
+     section.board{
+    
+      float:left;
+      border: 1px solid #ccc;
+box-shadow: 0 1px 3px rgba(0,0,0,.075);
+border-radius: 3px;
+margin-top: 100px;
+padding:0 20px;
+margin-left: 50px;
+      font-weight: bolder;
+     }
+    
+        .card {
+            text-align: center;
+        }
+
+        form {
+            /* background: #fafbfc; */
+            width: 400px;
+            height: 400px;
+            margin: 0 auto;
+            padding-top: 100px;
+            box-shadow: 0 1px 15px rgba(27,31,35,.15) !important;
+            
+        }
+
+       .card i,.copyright i {
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            margin-top: 4px;
+            margin-left: 5px;
+        }
+
+        input {
+            width: 250px;
+            height: 27px;
+            padding-left: 35px;
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+
+       
+
+        input[type="checkbox"]{width: 40px;margin-right:0;}
+        label span{font-size:14px;color:rgb(153, 153, 153);}
+        label span:hover{color:black; }
+        input.forget{visibility: hidden;}
+       .submit {width: 290px;margin: 0 auto; background: #39b1ef;height:35px;line-height:35px;font-size:18px;margin-top:30px;
+       
+        
+            width: 280px;
+            height: 35px;
+            padding-left: 110px;
+            padding-right: 120px;
+          
+            color: white;
+            border: 0;
+          
+        }
+        .register{color:#535353;float:right;margin-right: 55px;margin-top: 15px;}
+        .register:active,.register:hover{color:rgb(238, 18, 18);}
+        label .submit:focus,
+        label .submit:hover{
+            background:#1296db;
+        }
+
+        footer{
+    color:#999 ;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 50px;
+}

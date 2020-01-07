@@ -18,7 +18,7 @@ public class resetUserInfo extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Object flag = request.getSession().getAttribute("islogin");
         if(flag==null){
-            response.sendRedirect("/GetIn.login");
+            response.sendRedirect("/login.do");
         }else {
             JSONObject userinfo = new JSONObject();
             userinfo.put("id",request.getSession().getAttribute("id").toString());
@@ -39,6 +39,12 @@ public class resetUserInfo extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        Object flag = request.getSession().getAttribute("islogin");
+        Db_tools db = new Db_tools();
+        if(flag==null){
+            response.sendRedirect("/login.do");
+        }else {
+            response.getWriter().write(db.GetUserInfoById(request.getSession().getAttribute("id").toString()).toString());
+        }
     }
 }

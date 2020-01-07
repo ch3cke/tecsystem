@@ -16,11 +16,11 @@ import java.util.Date;
 @WebServlet(name = "GetIn.register")
 public class register extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String username = request.getParameter("name");
-        String userId = request.getParameter("id");
-        String email = request.getParameter("mailbox");
-        String password = encrypt.encryptToMD5(request.getParameter("pwd"));
-        String repassword = encrypt.encryptToMD5(request.getParameter("repwd"));
+        String username = request.getParameter("userName");
+        String userId = request.getParameter("userId");
+        String email = request.getParameter("email");
+        String password = encrypt.encryptToMD5(request.getParameter("password"));
+        String repassword = encrypt.encryptToMD5(request.getParameter("repassword"));
         String code = request.getParameter("code");
         JSONObject result = new JSONObject();
         String sessionCode = request.getSession().getAttribute("code").toString();
@@ -42,7 +42,7 @@ public class register extends HttpServlet {
                 Db_tools db = new Db_tools();
                 sendMail sender = new sendMail();
                     try {
-                        sender.sendEmail(info.get("email").toString(),encrypt.encryptToMD5(info.get("id").toString()));
+                        sender.sendEmail(info.get("email").toString(),info.get("id").toString());
                         request.getSession().setAttribute("id",info.get("id").toString());
                         if(db.InsertUserInfo(info)) {
                             result.put("reason", "注册成功");
@@ -72,6 +72,12 @@ public class register extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.sendRedirect("/login.do");
+        Object flag = request.getSession().getAttribute("islogin");
+        if(flag==null){
+            request.getRequestDispatcher("/register.jsp").forward(request,response);
+        }else {
+            String statue = request.getSession().getAttribute("statues").toString();
+            response.sendRedirect("/"+statue+"/home.jsp");
+        }
     }
 }

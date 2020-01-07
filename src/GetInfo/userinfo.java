@@ -14,6 +14,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
+/*
+*用户的财务明细
+ */
 @WebServlet(name = "GetInfo.userinfo")
 public class userinfo extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -28,9 +32,10 @@ public class userinfo extends HttpServlet {
         }else {
             String id  = request.getSession().getAttribute("id").toString();
             //String id = "2294458237@qq.com";
-            Map<String,String> info = new HashMap<>();
             Db_tools db = new Db_tools();
-            response.getWriter().write(db.GetApplicantByid(id).toString());
+            request.setCharacterEncoding("utf-8");
+            response.setCharacterEncoding("utf-8");
+            response.getWriter().write(db.GetAllScheduleById(id).toString());
         }
     }
 }

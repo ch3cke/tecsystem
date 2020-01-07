@@ -1,0 +1,220 @@
+body{
+	overflow-x: hidden;
+	background-color:#F8F8F8;
+}
+table{
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+h1{
+	text-align: center;
+}
+a{
+	text-decoration: none;
+}
+a:hover{
+	text-decoration: underline;
+}
+img{
+	border: 0;
+}
+#page{
+	padding-bottom: 100px;
+}
+.page-min-width{
+	min-width: 1024px;
+}
+.wrapper{
+	position: relative;
+	margin:  0 auto;
+	border: none;
+	width: 992px;
+}
+.wrapper .settings-page{
+	box-shadow:0 1px 3px 0 rgba(0,0,0,0.02), 0 4px 8px 0 rgba(0,0,0,0.02) ;
+	-webkit-box-shadow:0 1px 3px 0 rgba(0,0,0,0.02), 0 4px 8px 0 rgba(0,0,0,0.02);
+}
+#user_settings{
+	padding-bottom: 30px;
+	background: #fff;
+	border-radius: 4px;
+	margin: 60px;
+}
+#user_settings .setting-units{
+	border-top: 1px solid #ededed;
+	padding:0 26px;
+	color: #8C7E7E;
+}
+#user_settings .setting-units .setting-unit{
+	border-bottom: 1px solid rgba(34,25,25,.1);
+	border-top: 1px solid rgba(255,255,255,.7);
+	position: relative;
+	cursor: pointer;
+}
+#user_settings .setting-units .setting-unit .title{
+
+	line-height: 60px;
+	height: 60px;
+	padding-left: 20px;
+	color: #333;
+	font-size: 16px;
+}
+#user_settings .setting-units .preview{
+	position: absolute;
+	left: 190px;
+	top: 0;
+	line-height: 60px;
+	font-size: 14px;
+}
+#user_settings .setting-units .setting-unit .edit-label:hover{
+	color: #C90000;
+}
+#user_settings .setting-units .setting-unit .edit-label{
+	font-size:14px;
+	line-height: 60px;
+	height: 60px;
+	position:absolute;
+	right: 25px;
+	top: 0;
+	color: #8C7E7E;
+	padding-right: 16px;
+	background: url('https://huaban.com/img/editor_arrow.png') right 25px no-repeat;
+}
+
+#user_settings .setting-units .setting-unit .holder:before{
+	content: "";
+	rgba(34,25,25,.1);
+	display: block;
+	width: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+#user_settings .setting-units .setting-unit .holder{
+	position: relative;
+}
+#user_settings .inner{
+	padding: 20px;
+}
+#user_settings .setting-units .setting-unit .list{
+	font-size: 14px;
+	margin-left: 70px;
+}
+#user_settings .setting-units .open{
+	background: rgba(255,255,255,.5);
+	cursor: default;
+}
+#preview_avatar{
+	width: 40px;
+	height: 40px;
+	display: block;
+	margin-top: 10px;
+}
+#user_settings .setting-units .setting-unit .holder:before{
+	content: "";
+	border-bottom: 1px dashed rgba(34,25,25,.1);
+	display: block;
+	width: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+#user_settings .setting-units .setting-unit .holder{
+	position: relative;
+}
+#user_settings  .inner{
+	padding: 20px;
+}
+#user_settings .setting-units .setting-unit .list{
+	font-size: 14px;
+	margin-left: 70px;
+}
+#user_settings .setting-units .setting-unit .list .name{
+	text-align: right;
+	width: 90px;
+	line-height: 30px;
+	vertical-align: top;
+	padding-right: 10px;
+}
+#user_settings .setting-units .setting-unit .list td{
+	padding: 5px 0;
+}
+.clear-input{
+	display: inline-block;
+	padding: 0 10px;
+	height: 38px;
+	font-size: 16px;
+	line-height: 1;
+	color: #777;
+	background: #fff;
+	border: 1px solid #ddd;
+	border-radius: 2px;
+	widows: 250px;
+	box-shadow: inset 0 1px 2px rgba(0,0,0,.05);
+	-webkit-transition: color .2s linear,border-color .3s linear;
+}
+.rbtn{
+	display: inline-block;
+	text-shadow: none;
+	background: #ec414d;
+	color: #fff;
+	box-shadow: none;
+	border: 1px solid #ec414d;
+}
+.btn{
+	display: inline-block;
+	line-height: 1;
+	border-radius: 2px;
+	font-size: 14px;
+	padding: 0 12px;
+	height: 28px;
+	line-height: 28px;
+	background: #ededed;
+	cursor: pointer;
+	text-decoration: none;
+	border: 1px solid #ededed;
+	color: #444444;
+	white-space: nowrap;
+	user-select:none;
+	text-align: center;
+	box-shadow: 0 0 0 transparent;
+}
+#user_settings .setting-units .user-avatar .list td.avatar{
+	vertical-align: top;
+	position: relative;
+}
+#user_settings .setting-units .user-avatar .list td .buttons{
+	vertical-align: top;
+	padding-left: 30px;
+}
+#user_settings .setting-units .user-avatar .list td .buttons .btn{
+	display: block;
+	margin-bottom: 15px;
+}
+.btn18{
+	font-size:18px;
+	padding: 0 15px;
+	border-radius: 3px;
+	height: 36px;
+	line-height: 36px;
+	margin-left: 20px;
+}
+#current_avatar{
+	max-width: 100px;
+	max-height: 100px;
+	border: 12px solid #fff;
+	box-shadow: 0 1px 1px rgba(34,25,25,0.4);
+	-webkit-box-shadow: 0 1px 1px rgba(34,25,25,0.4);
+}
+#user_settings .setting-units .user-avatar .load{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+}
+#_set_profile .sex label{
+	margin-right: 20px;
+	padding: 5px;
+}
+#user_settings .setting-units .holder{
+	display: none;
+}

@@ -316,14 +316,21 @@ public class Db_tools {
         return true;
     }
 
-    public JSONArray GetAllSchedule(){
-        String sqlStr = "select * from schedule";
-        JSONObject result = new JSONObject();
+    public JSONArray GetAllScheduleById(String id){
+        String sqlStr = "select Sid, Aplace, Amoney, isgive from schedule where id = ?";
         JSONArray results = new JSONArray();
         try {
             sql = con.prepareStatement(sqlStr);
+            sql.setString(1,id);
             res = sql.executeQuery();
-            setValue2(result,results);
+            while (res.next()){
+                JSONObject result = new JSONObject();
+                result.put("Sid",res.getString("Sid"));
+                result.put("Aplace",res.getString("Aplace"));
+                result.put("Amoney",res.getString("Amoney"));
+                result.put("isgive",res.getString("isgive"));
+                results.put(result);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -353,6 +360,20 @@ public class Db_tools {
             e.printStackTrace();
         }
         return result;
+    }
+
+    public JSONArray GetAllSchedule(){
+        String sqlStr = "select * from schedule";
+        JSONArray results = new JSONArray();
+        JSONObject result = new JSONObject();
+        try {
+            sql = con.prepareStatement(sqlStr);
+            res = sql.executeQuery();
+            setValue2(result,results);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return results;
     }
 
     public JSONArray GetAllScheduleByDname(String Dname){

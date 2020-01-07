@@ -8,8 +8,11 @@
       <root url="jar://$PROJECT_DIR$/lib/commons-logging.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/ezmorph-1.0.2.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/json-lib-1.1-jdk13.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-io-2.6.jar!/" />
     </CLASSES>
-    <JAVADOC />
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/lib/commons-io-2.6-bin.zip!/commons-io-2.6/docs" />
+    </JAVADOC>
     <SOURCES />
   </library>
 </component>

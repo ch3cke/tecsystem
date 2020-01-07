@@ -20,19 +20,21 @@ public class applicant extends HttpServlet {
         Object flag = request.getSession().getAttribute("islogin");
         //flag = "sss";
         if(flag==null){
-            response.sendRedirect("/GetIn.login");
+            response.sendRedirect("/login.do");
         }else {
             JSONObject result = new JSONObject();
-            Date time = new Date();
             Db_tools db = new Db_tools();
+            JSONObject userinfo = new JSONObject();
+            userinfo =  db.GetUserInfoById(request.getSession().getAttribute("id").toString());
+            Date time = new Date();
             JSONObject appliant = new JSONObject();
             appliant.put("Aid",encrypt.encryptToMD5(time.toString()));
             appliant.put("id",request.getSession().getAttribute("id").toString());
             //appliant.put("id","2294458237@qq.com");
             appliant.put("Aplace",request.getParameter("Aplace"));
-            appliant.put("Atime",request.getParameter("Atime"));
+            appliant.put("Atime",request.getParameter("Atime1"));
             appliant.put("Amoney",request.getParameter("Amoney"));
-            appliant.put("Dname",request.getParameter("Dname"));
+            appliant.put("Dname",userinfo.get("Dname"));
             appliant.put("indexs","not");
             appliant.put("Areason1",request.getParameter("Areason1"));
             appliant.put("Urgent",request.getParameter("Urgent"));
