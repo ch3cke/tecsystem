@@ -19,7 +19,7 @@ public class reset extends HttpServlet {
         Db_tools db = new Db_tools();
         JSONObject result = new JSONObject();
         JSONObject user = new JSONObject();
-        user = db.GetUserInfoByname(username);
+        user = db.GetUserInfoById(username);
         if(user.isEmpty()){
             result.put("success",202);
             result.put("reason","user don't exit");

@@ -22,6 +22,22 @@ public class Db_tools {
             e.printStackTrace();
         }
     }
+    
+    public boolean UpdateuserSA(JSONObject info){
+        String sqlStr = "update userinfo set age=?, sex=? where id =?";
+        try {
+            sql = con.prepareStatement(sqlStr);
+            sql.setString(1,info.getString("age"));
+            sql.setString(2,info.getString("sex"));
+            sql.setString(3,info.getString("id"));
+            sql.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+    }
 
     //获取所有的用户信息
     /*
@@ -75,6 +91,10 @@ public class Db_tools {
         }
     }
 
+    public Boolean UpdateUserM(String id,String mail){
+        String sqlStr = "update userinfo set Mail=? where id =?";
+        sql = con.prepareStatement(sqlStr);
+    }
 
     public Boolean UpdateUserMail(String id){
         String sqlStr = "update userinfo set mailck=? where id =?";
@@ -92,7 +112,7 @@ public class Db_tools {
 
     //插入用户信息
     /*
-    @param GetInfo.userinfo 用户信息
+    @param userinfo 用户信息
      */
     public boolean InsertUserInfo(JSONObject userinfo){
         try {
@@ -250,7 +270,7 @@ public class Db_tools {
 
     public JSONObject GetApplicantByAid(String aid){
         JSONObject result = new JSONObject();
-        String sqlStr = "select * from GetApplicant.applicant where Aid = ?";
+        String sqlStr = "select * from applicant where Aid = ?";
         getApplicant(aid, result, sqlStr);
         return result;
     }
@@ -272,7 +292,7 @@ public class Db_tools {
     通过状态查找记录
      */
     public JSONArray GetApplicantByIndex(String indexs){
-        String sqlStr = "select * from GetApplicant.applicant where indexs = ?";
+        String sqlStr = "select * from applicant where indexs = ?";
         JSONObject result = new JSONObject();
         JSONArray results = new JSONArray();
         getResult(indexs, sqlStr, result, results);
@@ -283,7 +303,7 @@ public class Db_tools {
     通过姓名查找申请记录
      */
     public JSONArray GetApplicantByDName(String Dname){
-        String sqlStr = "select * from GetApplicant.applicant where Dname = ?";
+        String sqlStr = "select * from applicant where Dname = ?";
         JSONObject result = new JSONObject();
         JSONArray results = new JSONArray();
         getResult(Dname, sqlStr, result, results);
@@ -503,7 +523,7 @@ public class Db_tools {
     }
 
     public boolean UpdateUserpasswd(String username, String password){
-        String sqlStr = "update GetInfo.userinfo set password=? where username =?";
+        String sqlStr = "update userinfo set password=? where username =?";
         return updateValue(username,password,sqlStr);
     }
 
@@ -540,7 +560,7 @@ public class Db_tools {
     }
 
     public boolean UpdateApplicant(String aid,String indexs){
-        String sqlStr = "update GetApplicant.applicant set indexs = ? where aid = ?";
+        String sqlStr = "update applicant set indexs = ? where aid = ?";
         return updateValue(aid, indexs, sqlStr);
     }
 

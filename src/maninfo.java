@@ -1,3 +1,4 @@
+import net.sf.json.JSONObject;
 import tools.Db_tools.Db_tools;
 
 import javax.servlet.ServletException;
@@ -17,7 +18,10 @@ public class maninfo extends HttpServlet {
         }else {
             request.setCharacterEncoding("utf-8");
             response.setCharacterEncoding("utf-8");
-            response.getWriter().write(db.GetUserInfoById(request.getSession().getAttribute("id").toString()).toString());
+            JSONObject inf = new JSONObject();
+            inf = db.GetUserInfoById(request.getSession().getAttribute("id").toString());
+            inf.remove("password");
+            response.getWriter().write(inf.toString());
         }
     }
 

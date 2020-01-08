@@ -16,11 +16,12 @@ public class logout extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Object flag = request.getSession().getAttribute("islogin");
         if(flag==null){
-            response.sendRedirect("/index.html");
+            response.sendRedirect("/login.jsp");
         }else {
             request.getSession().removeAttribute("islogin");
             request.getSession().removeAttribute("id");
             request.getSession().removeAttribute("statues");
+            response.sendRedirect("/login.jsp");
         }
     }
 }

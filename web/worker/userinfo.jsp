@@ -49,7 +49,6 @@
                     <a class="edit-label">编辑</a>
                     <div class="holder">
                         <div class="inner">
-                            <form id="info" action="#" method="post">
                                 <table class="list">
                                     <tbody>
                                     <tr>
@@ -73,13 +72,13 @@
                                     <tr>
                                         <td class="name">年龄:</td>
                                         <td>
-                                            <input value="#" name="age" class="clear-input">
+                                            <input value="#" name="age" id = "age" class="clear-input">
                                         </td>
                                     </tr>
                                     <tr>
                                         <td></td>
                                         <td>
-                                            <a onclick="document.getElementById('info').submit()" class="submit-btn btn rbtn">
+                                            <a onclick="changes('info')" class="submit-btn btn rbtn">
                                                 <strong>保存</strong>
                                                 <span></span>
                                             </a>
@@ -87,7 +86,6 @@
                                     </tr>
                                     </tbody>
                                 </table>
-                            </form>
                         </div>
                     </div>
                 </div>
@@ -100,14 +98,14 @@
                 </div>
                 <div id="_set_medal" class="setting-unit">
                     <div class="title">奖牌数
-                        <div class="preview" style="opacity: 1;">
+                        <div class="preview" id="Medals" style="opacity: 1;">
                             ############
                         </div>
                     </div>
                 </div>
                 <div id="_set_dno" class="setting-unit">
                     <div class="title">部门编号
-                        <div class="preview" style="opacity: 1;">
+                        <div class="preview" id = "Did" style="opacity: 1;">
                             #########
                         </div>
 
@@ -115,20 +113,20 @@
                 </div>
                 <div id="_set_dname" class="setting-unit">
                     <div class="title">部门名称
-                        <div class="preview" style="opacity: 1;">
+                        <div class="preview" id="Dname" style="opacity: 1;">
                             #########
                         </div>
                     </div>
                     <div id="_set_email" class="setting-unit">
                         <div class="title">邮箱
-                            <div class="preview" style="opacity: 1;">
+                            <div class="preview" id="Mail" style="opacity: 1;">
                                 #########
                             </div>
                         </div>
                         <a class="edit-label">编辑</a>
                         <div class="holder">
                             <div class="inner">
-                                <form id = "em"action="#" method="post">
+                                <form id = "em" action="#" method="post">
                                     <table class="list">
                                         <tbody>
                                         <tr>
@@ -140,7 +138,7 @@
                                         <tr>
                                             <td></td>
                                             <td>
-                                                <a href="#" onclick="document.getElementById('em').submit();" class="submit-btn btn rbtn">
+                                                <a href="#" onclick="changes('mail')" class="submit-btn btn rbtn">
                                                     <strong>保存</strong>
                                                     <span></span>
                                                 </a>
@@ -165,12 +163,6 @@
                                     <table class="list">
                                         <tbody>
                                         <tr>
-                                            <td class="name">旧密码:</td>
-                                            <td>
-                                                <input type="password"  name="password[old]" class="clear-input">
-                                            </td>
-                                        </tr>
-                                        <tr>
                                             <td class="name">新密码:</td>
                                             <td>
                                                 <input type="password"  name="password[new]" class="clear-input">
@@ -179,7 +171,7 @@
                                         <tr>
                                             <td></td>
                                             <td>
-                                                <a href="#" onclick="document.getElementById('passwd').submit();" class="submit-btn btn rbtn">
+                                                <a href="#" onclick="changes('passwd')" class="submit-btn btn rbtn">
                                                     <strong>保存</strong>
                                                     <span></span>
                                                 </a>
@@ -205,10 +197,23 @@
             async : false,//是否异步请求
             success : function(data) {   //如果请求成功，返回数据。
                 console.log(data);
-
+                document.getElementById("id").innerText = data.name;
+                document.getElementById("name").innerText = data.name;
+                document.getElementById("age").value = data.age;
+                document.getElementById("userId").innerText = data.id;
+                document.getElementById("Medals").innerText = data.Medals;
+                document.getElementById("Did").innerText = data.Did;
+                document.getElementById("Dname").innerText= data.Dname;
+                document.getElementById("Mail").innerText = data.Mail;
             }
         })
     })
+    function changes(method) {
+        console.log(method);
+        $.ajax({
+            url:"/resetinfo.do"
+        })
+    }
 </script>
 </body>
 </html>
