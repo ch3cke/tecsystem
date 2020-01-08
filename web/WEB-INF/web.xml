@@ -100,7 +100,7 @@
         <url-pattern>/getschedule.do</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
-        <welcome-file>/worker/infos.jsp</welcome-file>
+        <welcome-file>/login.jsp</welcome-file>
     </welcome-file-list>
     <servlet>
         <servlet-name>putschedule</servlet-name>
@@ -164,6 +164,15 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>getScheduleOne</servlet-name>
-        <url-pattern>./getschedulesne</url-pattern>
+        <url-pattern>/getschedulesne.do</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>manindo</servlet-name>
+        <servlet-class>maninfo</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>manindo</servlet-name>
+        <url-pattern>/mainfo.do</url-pattern>
     </servlet-mapping>
 </web-app>
+

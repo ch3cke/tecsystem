@@ -40,12 +40,9 @@
             margin:20px;
         }
         .midle{
-            background-color:#fff;
-            margin:22px;
-            margin-top:40px;
-            margin-left:100px;
-            height:500px;
+            margin:3% 25%;
             background-color:rgb(255,240,245,0);
+            width:60%;
         }
         .midle_so{
             border:1px solid rgba(0,0,0,0.2);
@@ -71,7 +68,7 @@
             display:none;
             float:left;
             position:relative;
-            margin 5%;
+            margin:5%;
             width:20%;
             border-radius:20%;
             border:2px solid green;
@@ -129,16 +126,6 @@
     </div>
 </footer>
 <script type="text/javascript">
-    function getXmlHttpObject(){
-        var xmlHttpRequest;
-        /*不同的浏览器获取对象xmlhttprequest 对象的方法不同*/
-        if(window.ActiveXObject){
-            xmlHttpRequest=new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        else
-            xmlHttpRequest=new XMLHttpRequest();
-        return xmlHttpRequest;
-    }
 
     $(document).ready(function() {
         $.ajax({
@@ -159,7 +146,7 @@
                     "            <tbody>";
                 for(var i=0;i<data.length;i++){    //遍历data数组
                     var ls = data[i];
-                    html +="<tr><td>"+ls.Sid;
+                    html +="<tr><td><a href=/worker/infos.jsp?Sid="+ls.Sid+">"+ls.Sid;
                     html +="</td><td>"+ls.Aplace;
                     html +="</td><td>"+ls.Amoney+"</td><td>";
                     if(ls.isgive == 1){

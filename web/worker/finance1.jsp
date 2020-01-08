@@ -1,26 +1,23 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: ch3ck
-  Date: 2020/1/7
-  Time: 19:43
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>财务详细</title>
+
+    <meta charset="UTF-8">
+    <title>报表申请页面</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../css/normalize.css">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/featherlight.min.css">
     <link href='https://fonts.googleapis.com/css?family=Arimo:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
-    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script  src="../js/jquery-2.2.3.min.js"></script>
 
@@ -37,13 +34,13 @@
         }
 
         #top{
-
+            background-color:rgb(255,240,245,0);
 
         }
 
         .midle{
             margin:3% 25%;
-
+            background-color:rgb(255,240,245,0);
             width:60%;
         }
         .midle_so{
@@ -112,7 +109,7 @@
             display:none;
             float:left;
             position:relative;
-            margin:5%;
+            margin 5%;
             width:20%;
             border-radius:20%;
             border:2px solid green;
@@ -122,7 +119,9 @@
             cursor: pointer;
             height:60%;
             color:green;
-        }</style>
+        }
+
+    </style>
 </head>
 <body>
 <header id="top">
@@ -141,38 +140,40 @@
                     <a href="hischel.jsp">报表查询</a>
                 </li>
 
-                <li><a class="nav-cta" id="nav-cta">个人中心</a></li>
-                <ul id="navigation_b">
-                    <li class="list_b"><a  href="userinfo.jsp">个人主页</a></li>
+                <li><a class="nav-cta" id="nav-cta" href="userinfo.jsp">个人中心</a></li>
 
-                    <li class="list_b"><a  href="/logout.do">退出</a></li>
-                </ul>
+
+
+                <li ><a  href="/logout.do">退出</a></li>
+            </ul>
             </ul>
         </nav>
     </div>
 </header>
 <div class="midle">
     <div  class="mindle_table">
-            <div  style="margin:15px 0;">
-                申请编号：
-                <nobr id = "Sid">
-                </nobr>
-            </div>
-            <div  style="margin:15px 0">
-                住宿说明：
-                <textarea id = "Areason1">
-                </textarea>
-            </div>
-            <div  style="margin:15px 0">车费说明：<textarea id = "Areason2">
-                </textarea></div>
-            <div  style="margin:15px 0">其他费用：<textarea id = "Areason3">
-                </textarea></div>
-            <div  style="margin:15px 0">预算：<nobr id = "Amoney"></nobr>
-            </div>
-            <div  style="margin:15px 0">申请时间：<nobr id= "Atime"></nobr></div>
-            <div  style="margin:15px 0">票据：
-                 <div id = path></div>
-            </div>
+        <form action=  "<%=request.getContextPath() %>/putschedule.do" onsubmit="return check()">
+            <div id = "test"></div>
+            <label for="name" style="margin:15px 0">出差开始时间：</label>
+            <input class="list" type="date"  name="Atime1"   value="" id="Atime1">
+            <label for="name" style="margin:15px 0">车费说明：</label>
+            <textarea name="Areason2"  rows="3" id="Areason2"></textarea><br/>
+            <label for="name" style="margin:15px 0">出差结束时间：</label>
+            <input class="list" type="date"  name="Atime2"   value="" id="Atime2">
+            <label for="name" style="margin:15px 0">其他费用：</label>
+            <textarea name="Areason3" rows="3" id="Areason3"></textarea><br/>
+            <label for="name" style="margin:15px 0">出差预算：</label>
+            <input class="list1" type="text" name="Amoney"   value="" id="Amoney">
+            <label for="name" style="margin:15px 0 0 4% ">紧急原因：</label>
+            <textarea name="Urgent"  rows="3" id="Urgent"></textarea><br/>
+            <label for="name" style="margin:15px 0">出差地点：</label>
+            <input class="list1" type="text" name="Aplace"   value="" id="Aplace">
+            <label for="name" style="margin:15px 0 0 4% ">住宿说明：</label>
+            <textarea name="Areason1"  rows="3" id="Areason1"></textarea><br/>
+            <label for="name" style="margin:15px 0">票据：</label>
+            <input class="fil" type="file" id="file" name="file" ><br/>
+            <input class="sub" type="submit" value="申请">
+        </form>
     </div>
 </div>
 <footer>
@@ -189,29 +190,59 @@
         <div class="clear"></div>
     </div>
 </footer>
-<script  type="text/javascript">
+<script type="text/javascript">
     var sid = window.location.href.split("=")[1];
-    console.log(sid);
-    $(document).ready(function() {
-        $.ajax({
-            url: "/getschedulesne.do",//后台请求的数据，用的是PHP
-            dataType: "json",//数据格式
-            data: {'Sid':sid},
-            type: "get",//请求方式
-            async: false,//是否异步请求
-            success: function (data) {
-                $("#Sid").html(data.Sid);
-                $("#Areason1").html(data.Areason1);
-                $("#Areason2").html(data.Areason2);
-                $("#Areason3").html(data.Areason3);
-                $("#Amoney").html(data.Amoney);
-                $("#Atime").html(data.Atime);
-                tm = "<img src = /upload/"+data.path;
-                $("#path").html(tm);
-                console.log(data);
-            },
-        })
-    })
+    // $("#test").html(sid);
+    x = document.getElementById("test");
+    x.innerText = sid;
+    function getXmlHttpObject(){
+        var xmlHttpRequest;
+        /*不同的浏览器获取对象xmlhttprequest 对象的方法不同*/
+        if(window.ActiveXObject){
+            xmlHttpRequest=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        else
+            xmlHttpRequest=new XMLHttpRequest();
+        return xmlHttpRequest;
+    }
+    var myxmlHttpRequest;
+    function checkName(){
+        myxmlHttpRequest=getXmlHttpObject();
+        if(myxmlHttpRequest){
+            //第一个参数表示请求的方式  get
+            //第二个参数指定url,对那个页面发出ajax请求
+            var url="#"+$("#").value;
+            //第三个参数true表示使用异步机制
+            // 打开请求
+            myxmlHttpRequest.open("get",url,true);
+            //指定回调函数
+            myxmlHttpRequest.onreadystatechange=chuli;
+            //真的发送请求，如果是get方法 填入null  如果是post请求则填入实际的数据
+            myxmlHttpRequest.send(null);
+        }
+
+    }
+    function $(id){
+        return document.getElementById(id);
+    }
+    function chuli(){
+        //window.alert("处理函数被调用"+myxmlHttpRequest.readyState);
+        if(myxmlHttpRequest.readyState=4){
+            //取出值要根据返回值的格式而定，.text
+            //window.alert("服务器返回了"+myxmlHttpRequest.responseText);
+            var data =myxmlHttpRequest.responseText;
+            var dataobj=data.parseJSON();
+            if(dataObj.success==200){
+                alert("员工申请成功，请等待审核！");
+            }
+            else
+                alert("申请失败");
+
+        }
+        else
+            alert("申请失败");
+    }
 </script>
+
 </body>
 </html>

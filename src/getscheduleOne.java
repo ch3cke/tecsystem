@@ -15,6 +15,8 @@ public class getscheduleOne extends HttpServlet {
         if(flag==null){
             response.sendRedirect("/login.do");
         }else {
+            request.setCharacterEncoding("utf-8");
+            response.setCharacterEncoding("utf-8");
             String Sid = request.getParameter("Sid");
             response.getWriter().write(db.GetScheduleBySid(Sid).toString());
         }

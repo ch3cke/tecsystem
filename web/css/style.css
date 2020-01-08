@@ -3,7 +3,7 @@
 * {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
-	box-sizing: border-box; 
+	box-sizing: border-box;
 }
 
 html, html a {
@@ -16,7 +16,7 @@ body {
 	font-size: 17px;
 	color: #444;
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	background: #fff; 
+	background: #fff;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -25,7 +25,7 @@ h1, h2, h3, h4, h5, h6 {
 	font-weight: 700;
 	color: #444;
 	margin: 0;
-	padding: 0; 
+	padding: 0;
 }
 
 h2 { font-size: 60px;}
@@ -55,16 +55,16 @@ img, embed, object, video {
 ul, li {
 	list-style: none;
 	margin: 0;
-	padding: 0; 
+	padding: 0;
 }
 
 a {
-	text-decoration: none; 
+	text-decoration: none;
 	color: #5dae87;
 }
 
 a:hover {
-	text-decoration: none; 
+	text-decoration: none;
 	color: #42966e;
 }
 
@@ -76,11 +76,11 @@ a:hover {
 .clear {
 	clear: both;
 }
-	
+
 .wrapper {
 	max-width: 1190px;
 	margin: 0 auto;
-	position: relative; 
+	position: relative;
 }
 .tlinks{text-indent:-9999px;height:0;line-height:0;font-size:0;overflow:hidden;}
 input[type=text] {
@@ -119,26 +119,26 @@ a.button-1, a.button-2, button {
 	margin: 10px;
 	text-align: center;
 	padding: 18px 0;
-	text-decoration: none; 
+	text-decoration: none;
 }
 
 a.button-1:hover {
 	border-color: #42966e;
 	background: #42966e;
-	text-decoration: none; 
+	text-decoration: none;
 }
 
 a.button-2 {
 	border-color: #444;
 	background: none;
 	color: #444;
-	text-decoration: none; 
+	text-decoration: none;
 }
 
 a.button-2:hover {
 	background: #444;
 	color: #fff;
-	text-decoration: none; 
+	text-decoration: none;
 }
 
 @media only screen and (max-width: 640px) {
@@ -270,7 +270,7 @@ header#top nav ul li a.nav-cta {
 		margin-top: 64px;
 	}
 	#banner p.subtitle {
-	 font-size: 16px;
+		font-size: 16px;
 	}
 }
 
@@ -550,7 +550,7 @@ ul.portfolio-list li a:hover {
 	padding: 100px 0;
 	color: #fff;
 }
-	
+
 .email-list-section h3 {
 	color: #fff;
 	text-align: center;
@@ -716,8 +716,9 @@ ul.pricing-table ul.features li:hover {
 /*Text Section*/
 
 .text-section {
+	height:5px;
 	text-align: left;
-	padding: 5px 0;
+	padding: px 0;
 	background: #fff;
 }
 
@@ -728,7 +729,8 @@ footer {
 	margin-top: 0px;
 	color: #fff;
 	text-align: center;
-	padding: 20px 0 20px;
+	padding: 20px 0 0!important;
+	z-index:9999;
 }
 
 footer a.logo {
@@ -824,11 +826,33 @@ footer a.social.google {
 		margin-bottom: 20px;
 	}
 	footer a.logo {
-		 margin: 10px auto 40px auto;
+		margin: 10px auto 40px auto;
 	}
 	footer .footer-links a {
 		margin: 0 5px!important;
 		font-size: 14px;
 	}
-
 }
+#middle{
+	text-align:center;
+}
+.carousel{
+	margin:10px 0;
+	width:60% !important;
+	height: 520px !important;
+	display: inline-block;
+}
+.carousel-item{
+	height: 600px !important;
+}
+.right-table{
+	vertical-align:top;
+	margin-top:10px;
+	margin-left:10px;
+	display: inline-block;
+	height: 520px;
+	width: 35%;
+}
+
+
+

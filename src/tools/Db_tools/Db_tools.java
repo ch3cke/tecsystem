@@ -339,7 +339,7 @@ public class Db_tools {
 
     public JSONObject GetScheduleBySid(String sid){
         JSONObject result = new JSONObject();
-        String sqlStr = "select * from schedule where Aid = ?";
+        String sqlStr = "select * from schedule where Sid = ?";
         try {
             sql = con.prepareStatement(sqlStr);
             sql.setString(1,sid);

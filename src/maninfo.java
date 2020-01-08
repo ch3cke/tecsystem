@@ -1,7 +1,3 @@
-package GetSchedule;
-
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 import tools.Db_tools.Db_tools;
 
 import javax.servlet.ServletException;
@@ -11,20 +7,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "getSchedule")
-public class getSchedule extends HttpServlet {
-    Db_tools db = new Db_tools();
+@WebServlet(name = "maninfo")
+public class maninfo extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Object flag = request.getSession().getAttribute("islogin");
-        if(flag!=null){
-            JSONArray Applicants = new JSONArray();
+        Db_tools db = new Db_tools();
+        if(flag==null){
+            response.sendRedirect("/login.do");
+        }else {
             request.setCharacterEncoding("utf-8");
             response.setCharacterEncoding("utf-8");
-            String userid = request.getSession().getAttribute("id").toString();
-            Applicants = db.GetApplicantByid(userid);
-            response.getWriter().write(Applicants.toString());
-        }else {
-            response.sendRedirect("/login");
+            response.getWriter().write(db.GetUserInfoById(request.getSession().getAttribute("id").toString()).toString());
         }
     }
 

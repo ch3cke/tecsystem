@@ -11,13 +11,13 @@
 	<link rel="stylesheet" href="../css/featherlight.min.css">
 	<link href='https://fonts.googleapis.com/css?family=Arimo:400,700' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
-	<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
-	<script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
-	<script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script src="../js/jquery.min.js"></script>
+	<script src="../js/popper.min.js"></script>
+	<script src="../js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">  
-	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="../js/jquery.min.js"></script>
+	<script src="../js/bootstrap.min.js"></script>
+	<script src="../js/jquery-latest.min.js"></script>
 	<script type="text/javascript" src="../js/jquery-2.2.3.min.js"></script>
 
 	
@@ -138,33 +138,29 @@ color:green;
 		</div>
 	</header>
 	<!-- 职工申请表的填写 -->
-<div class="midle">
-<div  class="mindle_table">
-<form action=  "<%=request.getContextPath() %>/applicant.do" onsubmit="return check()">
-<label for="name" style="margin:15px 0">职工编号：</label>
-<input class="list1" type="text" name="userId"   value="" id="userId">
-<label for="name" style="margin:15px 0">住宿说明：</label>
-          <textarea name="Areason1"  rows="3" id="Areason1"></textarea><br/>
-<label for="name" style="margin:15px 0">部门名称：</label>
-<input class="list1" type="text" name="Dname"   value="" id="Dname">
-<label for="name" style="margin:15px 0">车费说明：</label>
-      <textarea name="Areason2"  rows="3" id="Areason2"></textarea><br/>
-<label for="name" style="margin:15px 0">出差地点：</label>
- <input class="list1" type="text" name="Aplace"   value="" id="Aplace"">            
-<label for="name" style="margin:15px 0">其他费用：</label>
-       <textarea name="Areason3" rows="3" id="Areason3"></textarea><br/>
-<label for="name" style="margin:15px 0">出差开始时间：</label>
- <input class="list" type="date"  name="Atime1"   value="" id="Atime1">  
- <label for="name" style="margin:15px 0">出差结束时间：</label>
- <input class="list" type="date"  name="Atime2"   value="" id="Atime2"><br/>            
-<label for="name" style="margin:15px 0">出差预算：</label>
- <input class="list1" type="text" name="Amoney"   value="" id="Amoney">                       
-<label for="name" style="margin:15px 0">紧急原因：</label>
-       <textarea name="Urgent"  rows="3" id="Urgent"></textarea><br/>
-<input class="sub"  type="submit" value="申请">
-</form>
-</div>
-</div>
+	<div class="midle">
+		<div  class="mindle_table">
+			<form action=  "<%=request.getContextPath() %>/applicant" onsubmit="return check()">
+				<label for="name" style="margin:15px 0">出差开始时间：</label>
+				<input class="list" type="date"  name="Atime1"   value="" id="Atime1">
+				<label for="name" style="margin:15px 0">车费说明：</label>
+				<textarea name="Areason2"  rows="3" id="Areason2"></textarea><br/>
+				<label for="name" style="margin:15px 0">出差结束时间：</label>
+				<input class="list" type="date"  name="Atime2"   value="" id="Atime2">
+				<label for="name" style="margin:15px 0">其他费用：</label>
+				<textarea name="Areason3" rows="3" id="Areason3"></textarea><br/>
+				<label for="name" style="margin:15px 0">出差预算：</label>
+				<input class="list1" type="text" name="Amoney"   value="" id="Amoney">
+				<label for="name" style="margin:15px 0 0 4% ">紧急原因：</label>
+				<textarea name="Urgent"  rows="3" id="Urgent"></textarea><br/>
+				<label for="name" style="margin:15px 0">出差地点：</label>
+				<input class="list1" type="text" name="Aplace"   value="" id="Aplace">
+				<label for="name" style="margin:15px 0 0 4% ">住宿说明：</label>
+				<textarea name="Areason1"  rows="3" id="Areason1"></textarea><br/>
+				<input class="sub"  type="submit" value="申请">
+			</form>
+		</div>
+	</div>
 	<footer>
 		<div class="wrapper">
 			<a class="logo" href="#">Chase</a>

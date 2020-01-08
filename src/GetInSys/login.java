@@ -16,6 +16,7 @@ import java.io.IOException;
 @WebServlet(name = "GetIn.login")
 public class login extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        JSONObject result = new JSONObject();
         try{
             HttpSession res = request.getSession();
             JSONObject userinfo = new JSONObject();
@@ -28,7 +29,6 @@ public class login extends HttpServlet {
             String code = request.getParameter("code");
             String id = userinfo.get("id").toString();
             Object sessionCode = request.getSession().getAttribute("code");
-            JSONObject result = new JSONObject();
             if(flag==null && sessionCode != null){
                 if(code.equals(sessionCode.toString())){
                     if (password.equals(password2)){
@@ -55,7 +55,9 @@ public class login extends HttpServlet {
                 response.getWriter().write(result.toString());
             }
         }catch (Exception e){
-            response.getWriter().write("error");
+            result.put("reason","用户名或密码错误");
+            result.put("success",201);
+            response.getWriter().write(result.toString());
         }
 
     }
@@ -63,7 +65,9 @@ public class login extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Object flag = request.getSession().getAttribute("islogin");
         if(flag==null){
-            request.getRequestDispatcher("/login.jsp").forward(request,response);
+            if(request.getParameter("email").isEmpty()){
+                request.getRequestDispatcher("/login.jsp").forward(request,response);
+            }
         }else {
             if(request.getSession().getAttribute("statues").toString().equals("manage")) {
                 response.sendRedirect("/manage/home.jsp");
