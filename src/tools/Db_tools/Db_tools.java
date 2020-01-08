@@ -93,7 +93,11 @@ public class Db_tools {
 
     public Boolean UpdateUserM(String id,String mail){
         String sqlStr = "update userinfo set Mail=? where id =?";
-        sql = con.prepareStatement(sqlStr);
+        try {
+            sql = con.prepareStatement(sqlStr);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public Boolean UpdateUserMail(String id){
