@@ -6,15 +6,13 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<title>个人中心</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="../css/normalize.css">
-		<link rel="stylesheet" href="../css/style.css">
-		<link rel="stylesheet" href="../css/style2.css">
-		<link rel="stylesheet" href="../css/featherlight.min.css">
-		<link href='https://fonts.googleapis.com/css?family=Arimo:400,700' rel='stylesheet' type='text/css'>
-		
-		<script src="../js/jquery-2.2.3.min.js"></script>
-		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-		
+		 <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/style2.css">
+    <link rel="stylesheet" href="../css/featherlight.min.css">
+    <link href='../css/css.css' rel='stylesheet' type='text/css'>
+    <script src="../js/jquery-2.2.3.min.js"></script>
+    <script src="../js/jquery-latest.min.js"></script>		
 </head>
 <body>
  <header id="top">

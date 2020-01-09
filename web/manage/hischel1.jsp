@@ -4,23 +4,17 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>报表统计页面</title>
+	<title>报表统计页面（部门）</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../css/normalize.css">
 	<link rel="stylesheet" href="../css/style.css">
 	<link rel="stylesheet" href="../css/featherlight.min.css">
-	<link href='https://fonts.googleapis.com/css?family=Arimo:400,700' rel='stylesheet' type='text/css'>
-	<link href="https://cdn.bootcss.com/chosen/1.8.8.rc6/chosen.css" rel="stylesheet">
-	<script src="https://cdn.bootcss.com/chosen/1.8.8.rc6/chosen.jquery.js"></script>
+	<link href="../css/css.css" rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
-	<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
-	<script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+	<script src="../js/jquery-2.2.3.min.js"></script>
+	<script src="../js/popper.min.js"></script>
 	<script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">  
-	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-	<script type="text/javascript" src="js/featherlight.min.js"></script> 
+	<script src="../js/jquery-latest.min.js"></script>
 <style>
   /* Make the image fully responsive */
   .carousel-inner img {
@@ -99,26 +93,6 @@ width:10%;
 	</header>
 	<div class="midle">
 	<div  class="mindle_table">
-<table class="table">
-
-	<thead>
-		<tr>
-<th>部门编号</th>
-<th>出差总次数</th>
-<th>费用</th>
-</tr>
-	</thead>
-<tbody>
-		  <c:forEach items="${dataobjs}" var="dataobj">
-	   <tr>
-	  
-	  <td>${dataobj.getAid }</td>
-	   <td>${dataobj.getAplace }</td>
-	  <td>${dataobj.getAMoney}</td>
-	  
-	  </tr>
-	  </c:forEach>
-	</tbody>
 	
 </table>
 </div>
@@ -138,50 +112,43 @@ width:10%;
 			<div class="clear"></div>
 		</div>
 	</footer>
-	<script type="text/javascript">
-function getXmlHttpObject(){
-	var xmlHttpRequest;
-            /*不同的浏览器获取对象xmlhttprequest 对象的方法不同*/
-    if(window.ActiveXObject){
-    	xmlHttpRequest=new ActiveXObject("Microsoft.XMLHTTP");
-    }
-    else
-    xmlHttpRequest=new XMLHttpRequest();
-    return xmlHttpRequest;
-}
-var myxmlHttpRequest;
-window.onload =function(){
-	 myxmlHttpRequest=getXmlHttpObject();
-	if(myxmlHttpRequest){
-		//第一个参数表示请求的方式  get
-		//第二个参数指定url,对那个页面发出ajax请求
-		var url="#"+$("#").value;
-        //第三个参数true表示使用异步机制
-        // 打开请求
-		myxmlHttpRequest.open("get",url,true);
-		//指定回调函数
-		myxmlHttpRequest.onreadystatechange=chuli;
-		//真的发送请求，如果是get方法 填入null  如果是post请求则填入实际的数据
-         myxmlHttpRequest.send(null);
-         			}
-
-}
-function $(id){
-	return document.getElementById(id);
-}
-function chuli(){
-	//window.alert("处理函数被调用"+myxmlHttpRequest.readyState);
-	if(myxmlHttpRequest.readyState=4){
-		//取出值要根据返回值的格式而定，.text
-		//window.alert("服务器返回了"+myxmlHttpRequest.responseText);
-		var data =myxmlHttpRequest.responseText;
-		var dataObjs =data.parseJSON();
-	   
-		
-	}
-	else
-		alert("查询失败");
-}
+		<script type="text/javascript">
+    $(document).ready(function() {
+        $.ajax({
+            url : "/userinfoapplicant.do",//后台请求的数据，用的是PHP
+            dataType : "json",//数据格式
+            type : "get",//请求方式
+            async : false,//是否异步请求
+            success : function(data) {   //如果请求成功，返回数据。
+                console.log(data);
+                var html = "<table class=\"table\">\n" +
+                    "            <thead>\n" +
+                    "            <tr>\n" +
+                    "                <th>记录编号</th>\n" +
+                    "                <th>出差地点</th>\n" +
+                    "                <th>费用</th> <th>状态</th>\n" +
+                    "            </tr>\n" +
+                    "            </thead>\n" +
+                    "            <tbody>";
+                for(var i=0;i<data.length;i++){    //遍历data数组
+                    var ls = data[i];
+                    html +="<tr><td><a href=/worker/infos.jsp?Sid="+ls.Sid+">"+ls.Sid;
+                    html +="</td><td>"+ls.Aplace;
+                    html +="</td><td>"+ls.Amoney+"</td><td>";
+                    if(ls.isgive == 1){
+                        html = html+"given</td></tr>";
+                    }else {
+                        html = html+"not</td></tr>";
+                    }
+                }
+                html+"</tbody>\n" +
+                "\n" +
+                "        </table>"
+                $("#test").html(html); //在html页面id=test的标签里显示html内容
+                console.log(html)
+            },
+        })
+    })
 </script>
 </body>
 </html>

@@ -43,6 +43,7 @@
             margin:3% 25%;
             background-color:rgb(255,240,245,0);
             width:60%;
+            height: 500px;
         }
         .midle_so{
             border:1px solid rgba(0,0,0,0.2);

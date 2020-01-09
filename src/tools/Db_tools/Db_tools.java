@@ -8,9 +8,9 @@ import java.sql.*;
 
 
 public class Db_tools {
-    private String ConnetcStr = "jdbc:mysql://47.98.167.108:3306/tecsystem";
-    private String user = "db_user";
-    private String pass = "guess";
+    private String ConnetcStr = "jdbc:mysql://localhost:3306/tecsystem";
+    private String user = "root";
+    private String pass = "root";
     private Connection con;
     private PreparedStatement sql;
     private ResultSet res;
@@ -46,7 +46,7 @@ public class Db_tools {
     public JSONObject GetUserInfo(String mail){
         JSONObject result = new JSONObject();
         try{
-            String sqlStr = "select * from userinfo where mail = ?";
+            String sqlStr = "select * from userinfo where id = ?";
             sql = con.prepareStatement(sqlStr);
             sql.setString(1,mail);
             res = sql.executeQuery();
@@ -91,13 +91,24 @@ public class Db_tools {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @param mail
+     * @return
+     */
     public Boolean UpdateUserM(String id,String mail){
         String sqlStr = "update userinfo set Mail=? where id =?";
         try {
             sql = con.prepareStatement(sqlStr);
+            sql.setString(1,mail);
+            sql.setString(2,id);
+            sql.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
+        return true;
     }
 
     public Boolean UpdateUserMail(String id){
@@ -260,7 +271,7 @@ public class Db_tools {
                 result.put("Atime",res.getString("Atime"));
                 result.put("Amoney",res.getString("Amoney"));
                 result.put("Dname",res.getString("Dname"));
-                result.put("index",res.getString("index"));
+                result.put("index",res.getString("indexs"));
                 result.put("Areason1",res.getString("Areason1"));
                 result.put("Urgent",res.getString("Urgent"));
                 result.put("Areason2",res.getString("Areason2"));

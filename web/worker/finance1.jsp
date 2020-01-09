@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="../js/jquery.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="../js/jquery-latest.min.js"></script>
     <script  src="../js/jquery-2.2.3.min.js"></script>
 
     <style>
@@ -152,7 +152,8 @@
 </header>
 <div class="midle">
     <div  class="mindle_table">
-        <form action=  "<%=request.getContextPath() %>/putschedule.do" onsubmit="return check()">
+        <%--<form action=  "<%=request.getContextPath() %>/putschedule.do" onsubmit="return check()">--%>
+            <strong>编号：</strong>
             <div id = "test"></div>
             <label for="name" style="margin:15px 0">出差开始时间：</label>
             <input class="list" type="date"  name="Atime1"   value="" id="Atime1">
@@ -162,18 +163,19 @@
             <input class="list" type="date"  name="Atime2"   value="" id="Atime2">
             <label for="name" style="margin:15px 0">其他费用：</label>
             <textarea name="Areason3" rows="3" id="Areason3"></textarea><br/>
-            <label for="name" style="margin:15px 0">出差预算：</label>
+            <label for="name" style="margin:15px 0">实际支出：</label>
             <input class="list1" type="text" name="Amoney"   value="" id="Amoney">
             <label for="name" style="margin:15px 0 0 4% ">紧急原因：</label>
             <textarea name="Urgent"  rows="3" id="Urgent"></textarea><br/>
             <label for="name" style="margin:15px 0">出差地点：</label>
-            <input class="list1" type="text" name="Aplace"   value="" id="Aplace">
+            <input class="list1" type="text" name="Aplace" id="Aplace" value=""/>
             <label for="name" style="margin:15px 0 0 4% ">住宿说明：</label>
             <textarea name="Areason1"  rows="3" id="Areason1"></textarea><br/>
             <label for="name" style="margin:15px 0">票据：</label>
             <input class="fil" type="file" id="file" name="file" ><br/>
-            <input class="sub" type="submit" value="申请">
-        </form>
+            <%--<input class="sub" type="submit" value="申请">--%>
+            <button onclick="uploadFile()">提交</button>
+        <%--</form>--%>
     </div>
 </div>
 <footer>
@@ -191,10 +193,49 @@
     </div>
 </footer>
 <script type="text/javascript">
-    var sid = window.location.href.split("=")[1];
-    // $("#test").html(sid);
-    x = document.getElementById("test");
-    x.innerText = sid;
+    $(document).ready(function() {
+        $.ajax({
+            url: "/getappone.do",//后台请求的数据，用的是PHP
+            dataType: "json",//数据格式
+            data:{'aid':window.location.href.split('=')[1]},
+            type: "get",//请求方式
+            async: false,//是否异步请求
+            success: function (data) {
+                x = document.getElementById("test");
+                x.innerText = data.Aid;
+                y = document.getElementById("Aplace");
+                document.getElementById("Atime1").value = data.Atime;
+                document.getElementById("Atime2").value = data.Atime2;
+                y.value = data.Aplace;
+                console.log(data);
+            },
+        })
+    });
+    function uploadFile() {
+        var myform = new FormData();
+        console.log(document.getElementById("Atime1").value);
+        myform.append("Atime",document.getElementById("Atime1").value);
+        myform.append("Atime2",document.getElementById("Atime2").value);
+        myform.append("Areason2",document.getElementById("Areason2").value);
+        myform.append('Areason1',document.getElementById("Areason1").value);
+        myform.append('Areason3',document.getElementById("Areason3").value);
+        myform.append('Amoney',document.getElementById("Amoney").value);
+        myform.append('Aplace',document.getElementById("Aplace").value);
+        myform.append('Urgent',document.getElementById("Urgent").value);
+        myform.append('file',document.getElementById("file").value);
+        console.log(myform.getAll("file"));
+        $.ajax({
+            url:"/putschedule.do",
+            type: "POST",
+            data:myform,
+            async: false,
+            contentType:false,
+            processData:false,
+            success:function (data) {
+                console.log(data);
+            }
+        })
+    }
     function getXmlHttpObject(){
         var xmlHttpRequest;
         /*不同的浏览器获取对象xmlhttprequest 对象的方法不同*/
@@ -222,9 +263,9 @@
         }
 
     }
-    function $(id){
-        return document.getElementById(id);
-    }
+    // function $(id){
+    //     return document.getElementById(id);
+    // }
     function chuli(){
         //window.alert("处理函数被调用"+myxmlHttpRequest.readyState);
         if(myxmlHttpRequest.readyState=4){

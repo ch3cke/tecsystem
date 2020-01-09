@@ -22,7 +22,7 @@ public class sendMail {
     //邮件编辑信息(仅需写上自己的)
     private static final String VERIFY_LINK ="http://localhost:8080/";
     private static final String MAIL_FROM ="zytyitong@qq.com";//邮件发送人
-    private static final String MAIL_FROM_PASSWORD ="jpsikdzitazfdijc";//邮件发送人授权码
+    private static final String MAIL_FROM_PASSWORD ="zbodrasodyvcdjce";//邮件发送人授权码
     private static final String MAIL_SUBJECT_REGISTER ="注册链接";//邮件主题(注册链接)
     private static final String MAIL_SUBJECT_VERIFY_CODE ="邮箱验证码";//邮件主题(邮箱验证码)
     private static final String MAIL_ORGANIZATION ="CCNU";//邮件组织

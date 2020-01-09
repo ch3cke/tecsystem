@@ -100,7 +100,7 @@
         <url-pattern>/getschedule.do</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
-        <welcome-file>/login.jsp</welcome-file>
+        <welcome-file>/index.html</welcome-file>
     </welcome-file-list>
     <servlet>
         <servlet-name>putschedule</servlet-name>
@@ -173,6 +173,22 @@
     <servlet-mapping>
         <servlet-name>manindo</servlet-name>
         <url-pattern>/mainfo.do</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>resetman</servlet-name>
+        <servlet-class>resetman</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>resetman</servlet-name>
+        <url-pattern>/resetman.do</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>getoneapp</servlet-name>
+        <servlet-class>getoneapp</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>getoneapp</servlet-name>
+        <url-pattern>/getappone.do</url-pattern>
     </servlet-mapping>
 </web-app>
 

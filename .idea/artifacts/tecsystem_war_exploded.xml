@@ -7,6 +7,10 @@
         <element id="directory" name="classes">
           <element id="module-output" name="tecsystem" />
         </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="com.liferay.org.apache.commons.fileupload:com.liferay.org.apache.commons.fileupload:6.2.0.1" />
+          <element id="library" level="project" name="com.sun.mail:javax.mail:1.4.6-rc1" />
+        </element>
       </element>
     </root>
   </artifact>

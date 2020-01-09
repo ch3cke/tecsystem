@@ -9,15 +9,10 @@
 	<link rel="stylesheet" href="../css/normalize.css">
 	<link rel="stylesheet" href="../css/style.css">
 	<link rel="stylesheet" href="../css/featherlight.min.css"> 
-	<link href='https://fonts.googleapis.com/css?family=Arimo:400,700' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
-	<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
-	<script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
-	<script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">  
-	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<link href="../css/css.css" rel='stylesheet' type='text/css'>
+	<script src="..js/jquery-2.2.3.min.js"></script>
+	<script src="../js/popper.min.js"></script>
+	<script src="../js/jquery-latest.min.js"></script>
 	
 <style>
   /* Make the image fully responsive */
@@ -95,7 +90,7 @@ textarea{
 <body>
 	<header id="top">
 		<div class="wrapper">
-			<h1 class="logo"></h1>
+			<h1 class="logo"><a href="#">Chase</a></h1>
 		 
 			<nav>
 				<ul id="navigation">

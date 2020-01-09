@@ -26,13 +26,23 @@
 <body>
 <header id="top">
     <div class="wrapper">
-        <h1 class="logo"><a href="#">主页</a></h1>
+        <h1 class="logo"><a href="#">Chase</a></h1>
+
         <nav>
             <ul id="navigation">
-                <li><a href="#home">出差申请</a></li>
-                <li><a href="#about">报销申请</a></li>
-                <li><a href="#services">报表查询</a></li>
-                <li><a class="nav-cta" href="#">个人中心</a></li>
+                <li><a href="home.jsp">主页</a></li>
+                <li>
+                    <a href="applicant.jsp">出差申请</a></li>
+                <li>
+                    <a href="finance.jsp">报销申请</a>
+                </li>
+                <li>
+                    <a href="hischel.jsp">报表查询</a>
+                </li>
+
+                <li><a class="nav-cta" id="nav-cta" href="userinfo.jsp">个人中心</a></li>
+                <li ><a  href="/logout.do">退出</a></li>
+
             </ul>
         </nav>
     </div>
@@ -49,43 +59,43 @@
                     <a class="edit-label">编辑</a>
                     <div class="holder">
                         <div class="inner">
-                                <table class="list">
-                                    <tbody>
-                                    <tr>
-                                        <td class="name">姓名:</td>
-                                        <td>
-                                            <%--<input value="#" name="name" id="username" class="clear-input" readonly="readonly"><span>（姓名不可修改）</span>--%>
-                                            <div id = "name"></div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="name">性别:</td>
-                                        <td class="sex">
-                                            <label>
-                                                <input type="radio" name="sex" value="1"checked="checked">男
-                                            </label>
-                                            <label>
-                                                <input type="radio" name="sex" value="2">女
-                                            </label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="name">年龄:</td>
-                                        <td>
-                                            <input value="#" name="age" id = "age" class="clear-input">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td>
-                                            <a onclick="changes('info')" class="submit-btn btn rbtn">
-                                                <strong>保存</strong>
-                                                <span></span>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                            <table class="list">
+                                <tbody>
+                                <tr>
+                                    <td class="name">姓名:</td>
+                                    <td>
+                                        <%--<input value="#" name="name" id="username" class="clear-input" readonly="readonly"><span>（姓名不可修改）</span>--%>
+                                        <div id = "name"></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="name">性别:</td>
+                                    <td class="sex">
+                                        <label>
+                                            <input type="radio" name="sex" value="1"checked="checked">男
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="sex" value="2">女
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="name">年龄:</td>
+                                    <td>
+                                        <input value="#" name="age" id = "age" class="clear-input">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>
+                                        <a onclick="changes('info')" class="submit-btn btn rbtn">
+                                            <strong>保存</strong>
+                                            <span></span>
+                                        </a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -132,7 +142,7 @@
                                         <tr>
                                             <td class="name">新邮箱:</td>
                                             <td>
-                                                <input value="#" name="mailbox" class="clear-input">
+                                                <input value="#" id="newmail" name="mailbox" class="clear-input">
                                             </td>
                                         </tr>
                                         <tr>
@@ -165,7 +175,7 @@
                                         <tr>
                                             <td class="name">新密码:</td>
                                             <td>
-                                                <input type="password"  name="password[new]" class="clear-input">
+                                                <input type="password"  name="newpassword" class="clear-input">
                                             </td>
                                         </tr>
                                         <tr>
@@ -205,14 +215,54 @@
                 document.getElementById("Did").innerText = data.Did;
                 document.getElementById("Dname").innerText= data.Dname;
                 document.getElementById("Mail").innerText = data.Mail;
+                if(data.sex=="女"){
+                    document.getElementsByName("sex")[1].checked = true;
+                }
             }
         })
     })
+
+    function checkMail(mail) {
+        var email=mail
+        var emreg=/^\w{3,}(\.\w+)*@[A-z0-9]+(\.[A-z]{2,5}){1,2}$/;
+        if(emreg.test(email.value)===false)
+            return false;
+        else
+            return true;
+    }
+
     function changes(method) {
         console.log(method);
-        $.ajax({
-            url:"/resetinfo.do"
-        })
+        var sex;
+        var rsid = document.getElementsByName("sex");
+        if(rsid[0].checked===true){
+            sex = "男";
+        }else {
+            sex = "女";
+        }
+        var age = document.getElementById("age").value;
+        var mail = document.getElementById("newmail").value;
+        var password = $('input:password[name="newpassword"]').val();
+        var datas = {"sex":sex,"age":age,"mail":mail,"password":password,"method":method};
+        if(checkMail(mail)){
+            $.ajax({
+                url:"/resetman.do",
+                dataType: "JSON",
+                type: "post",
+                async:false,
+                data:datas,
+                success:function (data) {
+                    console.log(data);
+                    if(data.success===200){
+                        document.getElementById("Mail").value=mail;
+                        alert("修改成功");
+                        window.location.reload();
+                    }
+                }
+            })
+        }else {
+            alert("邮箱格式错误");
+        }
     }
 </script>
 </body>

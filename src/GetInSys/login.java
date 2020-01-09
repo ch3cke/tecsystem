@@ -65,9 +65,7 @@ public class login extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Object flag = request.getSession().getAttribute("islogin");
         if(flag==null){
-            if(request.getParameter("email").isEmpty()){
                 request.getRequestDispatcher("/login.jsp").forward(request,response);
-            }
         }else {
             if(request.getSession().getAttribute("statues").toString().equals("manage")) {
                 response.sendRedirect("/manage/home.jsp");

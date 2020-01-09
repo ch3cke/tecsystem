@@ -6,16 +6,16 @@
 	<meta charset="UTF-8">
 	<title>主页</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="/css/normalize.css">
-	<link rel="stylesheet" href="/css/style.css">
-	<link rel="stylesheet" href="/css/featherlight.min.css">
+	<link rel="stylesheet" href="../css/normalize.css">
+	<link rel="stylesheet" href="../css/style.css">
+	<link rel="stylesheet" href="../css/featherlight.min.css">
 	<link href='https://fonts.googleapis.com/css?family=Arimo:400,700' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
-	<script src="/js/jquery.min.js"></script>
-	<script src="/js/popper.min.js"></script>
-	<script src="/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="/js/jquery-2.2.3.min.js"></script>
-	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="../js/jquery.min.js"></script>
+	<script src="../js/popper.min.js"></script>
+	<script src="../js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../js/jquery-2.2.3.min.js"></script>
+	<script src="../js/jquery-latest.min.js"></script>
 	<script type="text/javascript">
 	$(document).ready(function () {
 		$("#nav-cta").click(function(){
@@ -95,13 +95,13 @@ color:green;
 	  <!-- 轮播图片 -->
 	  <div class="carousel-inner">
 	    <div class="carousel-item active">
-	      <img src="/images/img_fjords_wide.jpg">
+	      <img src="../images/img_fjords_wide.jpg">
 	    </div>
 	    <div class="carousel-item">
-	      <img src="/images/img_nature_wide.jpg">
+	      <img src="../images/img_nature_wide.jpg">
 	    </div>
 	    <div class="carousel-item">
-	      <img src="/images/img_mountains_wide.jpg">
+	      <img src="../images/img_mountains_wide.jpg">
 	    </div>
 	  </div>
 	 

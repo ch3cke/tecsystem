@@ -41,23 +41,23 @@ public class register extends HttpServlet {
                 info.put("log_time",date.toString());
                 Db_tools db = new Db_tools();
                 sendMail sender = new sendMail();
-                    try {
-                        sender.sendEmail(info.get("email").toString(),info.get("id").toString());
-                        request.getSession().setAttribute("id",info.get("id").toString());
                         if(db.InsertUserInfo(info)) {
-                            result.put("reason", "注册成功");
-                            result.put("success", 200);
+                            try {
+                                sender.sendEmail(info.get("email").toString(),info.get("id").toString());
+                                request.getSession().setAttribute("id",info.get("id").toString());
+                                result.put("reason", "注册成功");
+                                result.put("success", 200);
+                            }catch (Exception e){
+                                result.put("reason","邮件未发送");
+                                result.put("success",201);
+                                response.getWriter().write(result.toString());
+                            }
                         }else {
                                 result.put("reason","用户已存在");
                                 result.put("success",202);
                                 response.getWriter().write(result.toString());
                             }
                             response.getWriter().write(result.toString());
-                    }catch (Exception e){
-                        result.put("reason","邮件未发送");
-                        result.put("success",201);
-                        response.getWriter().write(result.toString());
-                    }
 
             }else {
                 result.put("reason","验证码错误");

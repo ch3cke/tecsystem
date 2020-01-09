@@ -106,7 +106,7 @@ margin:2% 18%;
         }
         function changUrl(url) {
             var timestamp = (new Date()).valueOf();
-            url = url.substring(0,32);
+            url = url.valueOf('?');
             if((url.indexOf("&")>=0)){
                 url = url +"×tamp=" + timestamp;
             }else {

@@ -10,20 +10,16 @@
 	<link rel="stylesheet" href="../css/style.css">
 	<link rel="stylesheet" href="../css/featherlight.min.css">
 	<script type="text/javascript" src="../js/FileUpload.js" ></script>
-	<link href='https://fonts.googleapis.com/css?family=Arimo:400,700' rel='stylesheet' type='text/css'>
+	<link href="../css/css.css" rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
-	<script rel="stylesheet" type="text/javascript" href=""></script>
-	<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
-	<script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+	<script src="../js/jquery-2.2.3.min.js"></script>
+	<script src="../js/popper.min.js"></script>
 	<script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-	<script type="text/javascript" src="js/featherlight.min.js"></script> 
-	<!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.13.1/bootstrap-table.min.css">
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.13.1/bootstrap-table.min.js"></script>
-    <!-- Latest compiled and minified Locales -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.13.1/locale/bootstrap-table-zh-CN.min.js"></script>
+	<script src="../js/jquery-latest.min.js"></script>
+	<script type="text/javascript" src="..js/featherlight.min.js"></script> 
+    <link rel="stylesheet" href="../css/bootstrap-table.min.css">
+    <script src="../js/bootstrap-table.min.js"></script>
+    <script src="../js/bootstrap-table-zh-CN.min.js"></script>
 <style>
   /* Make the image fully responsive */
   .carousel-inner img {

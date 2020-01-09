@@ -17,6 +17,8 @@ import java.util.Map;
 @WebServlet(name = "GetApplicant.applicant")
 public class applicant extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
         Object flag = request.getSession().getAttribute("islogin");
         //flag = "sss";
         if(flag==null){
@@ -42,10 +44,10 @@ public class applicant extends HttpServlet {
             appliant.put("Areason3",request.getParameter("Areason3"));
             appliant.put("Atime2",request.getParameter("Atime2"));
             if(db.InsertApplicant(appliant)){
-                result.put("success",true);
+                result.put("success",200);
                 response.getWriter().write(result.toString());
             }else {
-                result.put("success",false);
+                result.put("success",201);
                 response.getWriter().write(result.toString());
             }
 

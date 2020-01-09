@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>思拓易差旅报销系统</title>
+		<link rel="stylesheet" href="css/StyleSheet.css" />
+		<script src="js/jquery-1.10.2.min.js"></script>
+		<script src="js/MyUtil.js"></script>
+		<script src="js/jquery.easypiechart.min.js"></script>
+		<link rel="stylesheet" href="css/Chart.css" />
+		<script src="http://push.zhanzhang.baidu.com/push.js"></script>
+		<script src="//hm.baidu.com/hm.js?634070bc68e558a903ace14043cecfc7"></script>
+		<!--百度统计-->
+		<script>
+			var _hmt = _hmt || [];
+		    (function() {
+		      var hm = document.createElement("script");
+		      hm.src = "//hm.baidu.com/hm.js?634070bc68e558a903ace14043cecfc7";
+		      var s = document.getElementsByTagName("script")[0];
+		      s.parentNode.insertBefore(hm, s);
+		    })();  
+		</script>
+		<script src="js/main.js" id="kf5-provide-supportBox" kf5-domain="1506093917.kf5.com"></script>
+	</head>
+	<body style="">
+		<!--Header-->
+		<div class="Page_Header">
+			<div class="Context_Middle" style="margin-top:12px;">
+				<div style="float:left;">
+					<div style="display:none;">
+						<h1>网上报销软件</h1><span>报销管理,差旅管理,费用管理软件</span>
+					</div>
+					<a href="#/"><img src="images/logo.png" style="vertical-align:top;" alt="喜报报销管理"></a>
+				</div>
+				<div class="Main_Menu">
+					<div class="Menu_Item"><a href="#"style="display:hidden"></a></div>
+					<div class="Menu_Item"><a href="#"></a></div>
+					<div class="Menu_Item"><a href="#"></a></div>
+					<div class="Menu_Item"><a href="#"></a></div>
+					<div style="display:inline-block;">
+						<div class="Menu_Item">
+							<button type="button" class="btnLogin" onclick="window.location.href='login.jsp';">登录</button>
+						</div>
+						<div class="Menu_Item">
+							<button type="button" class="btnRegister" onclick="window.location.href='register.jsp';">注册</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div style="height:100px;">
+		</div>
+
+
+
+
+		<div style="height:600px;overflow:hidden;">
+			<div style="height:500px;">
+				<div style="display: inline-block; width: 1144px; margin-left: 0px;" id="divBannerCotainer">
+					<a href="#">
+						<div class="banner_Page" style="background-image: url(images/6.png); height: 500px; width: 143px;">
+							<div class="Context_Middle">
+								<p style="font-size:43px;color:#ffffff;margin-top:74px;">企业商旅报销与费用管控平台</p>
+								<p style="font-size:29px;color:#ffffff;margin-top:27px;">—— 全 流 程 费 用 管 理 ——</p>
+								<p style="margin-top:48px">
+									<input type="text" id="tbxInputMobile1" class="home_input_mobile" placeholder="输入邮箱快速注册" maxlength="11">
+								</p>
+								<p style="margin-top:45px;">
+									<button class="home_input_regist">一键注册</button>
+								</p>
+							</div>
+						</div>
+					</a>
+					<a>
+						<div class="banner_Page" style="background-image: url(images/544.png); height: 500px; width: 143px;">
+							<div class="Context_Middle">
+								<p style="font-size:43px;color:#ffffff;margin-top:74px;"></p>
+								<p style="font-size:29px;color:#ffffff;margin-top:27px;"></p>
+							</div>
+						</div>
+					</a>
+					<a href="#">
+						<div class="banner_Page" style="background-image: url(images/543.png); height: 500px; width: 143px;">
+							<div class="Context_Middle">
+								<p style="font-size:43px;color:#ffffff;margin-top:74px;"></p>
+								<p style="font-size:29px;color:#ffffff;margin-top:27px;"></p>
+							</div>
+						</div>
+					</a>
+					<a href="#">
+						<div class="banner_Page" style="background-image: url(images/516.png); height: 500px; width: 143px;">
+							<div class="Context_Middle">
+								<p style="font-size:43px;color:#ffffff;margin-top:74px;"></p>
+								<p style="font-size:29px;color:#ffffff;margin-top:27px;"></p>
+							</div>
+						</div>
+					</a>
+				</div>
+				<div class="Context_Middle" style="margin-top:-50px;text-align:center;">
+					<input type="button" class="bannerSwitch banner_Normal" bi="0">
+					<input type="button" class="bannerSwitch banner_Normal" bi="1">
+					<input type="button" class="bannerSwitch banner_Normal" bi="2">
+					<input type="button" class="bannerSwitch banner_Sel" bi="3">
+				</div>
+			</div>
+			<div style="height:70px;background-color:#fff">
+				<div class="Context_Middle Role_News">
+					<span style="float:left;"></span>
+					<div class="news_txt" id="divNewsList">
+
+						<div><a target="_black" href="#"><br></a></div>
+					</div>
+					<a href="#" target="_blank"></a>
+				</div>
+			</div>
+		</div>
+
+		<!--核心功能-->
+		<div style="height:530px;overflow:hidden">
+			<div class="Context_Middle" style="text-align:center;">
+				<p style="font-size:36px;color:#515152;margin-top:20px;">核心功能</p>
+				<div style="margin-top:60px;display:inline-block;height:295px;">
+					<div class="home_hxgn">
+						<img src="images/ContextImage10.png" alt="">
+						<p class="p1">规范</p>
+						<p class="p2">
+							对内员工报销
+							<br>全面规范费用管理
+							<br>
+						</p>
+					</div>
+					<div class="home_hxgn">
+						<img src="images/ContextImage11.png" alt="">
+						<p class="p1">易用</p>
+						<p class="p2">
+							网页端
+							<br>随时随地
+							<br>提交报销与审批
+							<br>
+							<br>
+						</p>
+					</div>
+					<div class="home_hxgn">
+						<img src="images/ContextImage12.png" alt="">
+						<p class="p1">管控</p>
+						<p class="p2">
+							预算管控
+							<br>报销标准管控
+							<br>报销额度管控
+						</p>
+					</div>
+					<div class="home_hxgn">
+						<img src="images/ContextImage13.png" alt="">
+						<p class="p1">连接</p>
+						<p class="p2">
+							<br>对内连接ERP财务系统
+							<br>内外系统互连互通
+						</p>
+					</div>
+				</div>
+				<p style="">
+					<a href="/Product/Function" target="_blank">
+						<button class="bt_more">了解更多</button>
+					</a>
+				</p>
+			</div>
+		</div>
+
+		<!--基本功能-->
+		<div style="height:auto;overflow:hidden;background-color:#f4f4f4;">
+			<div class="Context_Middle" style="text-align:center;">
+				<p style="font-size:36px; font-family:'微软雅黑'; color:#515152;margin-top:50px;">基本功能</p>
+				<div class="home_jbgn">
+					<button class="BaseFuncBtn">
+						<img src="images/14.png" class="NormalIcon" alt="旅管理">
+						<img src="images/14.png" class="ActiveIcon" alt="报销审批软件">
+						<p class="Name">企业差旅与采购</p>
+						<p class="SubTitle">
+							无缝对接携程商旅、华住酒店、滴滴出行及京东商城等，一站式预订机票、酒店、火车票、用车及办公用品采购
+							<br>
+						</p>
+					</button>
+					<button class="BaseFuncBtn">
+						<img src="images/15.png" class="NormalIcon" alt="旅管理">
+						<img src="images/15.png" class="ActiveIcon" alt="报销审批软件">
+						<p class="Name">公务卡</p>
+						<p class="SubTitle">
+							企业采购、员工商旅商务卡集中支出，公司统一还款，费用透明合规。通过无缝对接银行商务卡信息系统，一键导入交易信息，即可报销。
+							<br>
+						</p>
+					</button>
+					<button class="BaseFuncBtn">
+						<img src="images/16.png" class="NormalIcon" alt="旅管理">
+						<img src="images/16.png" class="ActiveIcon" alt="报销审批软件">
+						<p class="Name">电子发票</p>
+						<p class="SubTitle">
+							对接电子发票平台，可扫描纸质增值税发票二维码，自动采集发票信息，支持发票验真
+						</p>
+					</button>
+					<button class="BaseFuncBtn">
+						<img src="images/17.png" class="NormalIcon" alt="旅管理">
+						<img src="images/17.png" class="ActiveIcon" alt="报销审批软件">
+						<p class="Name">费用管控</p>
+						<p class="SubTitle">
+							可针对预算（成本中心、项目、费用类别）、报销标准、报销额度等进行管控，支持超标提醒
+						</p>
+					</button>
+					<button class="BaseFuncBtn">
+						<img src="images/18.png" class="NormalIcon" alt="旅管理">
+						<img src="images/18.png" class="ActiveIcon" alt="报销审批软件">
+						<p class="Name">移动报销</p>
+						<p class="SubTitle">
+							通过手机端、网页端即可提交报销单，报销单可关联成本中心、部门、项目、出差申请及借款单，支持在线冲销
+						</p>
+					</button>
+					<button class="BaseFuncBtn">
+						<img src="images/14.png" class="NormalIcon" alt="旅管理">
+						<img src="images/14.png" class="ActiveIcon" alt="报销审批软件">
+						<p class="Name">对公支付</p>
+						<p class="SubTitle">
+							打通供应商付款流程，提供采购--合同--费用--付款申请，支持供应商批量导入与维护
+						</p>
+					</button>
+					<button class="BaseFuncBtn">
+						<img src="images/15.png" class="NormalIcon" alt="旅管理">
+						<img src="images/15.png" class="ActiveIcon" alt="报销审批软件">
+						<p class="Name">审批流程</p>
+						<p class="SubTitle">
+							可按照报销金额、费用类别、项目及申请人职位设置审批条件
+							<br>流程引擎自动判断审批权限，并进行逐级审批
+							<br>
+						</p>
+					</button>
+					<button class="BaseFuncBtn">
+						<img src="images/16.png" class="NormalIcon" alt="旅管理">
+						<img src="images/16.png" class="ActiveIcon" alt="报销审批软件">
+						<p class="Name">审核支付</p>
+						<p class="SubTitle">
+							支持微信、支付宝、网银及银企直联等支付
+							<br>
+						</p>
+					</button>
+					<button class="BaseFuncBtn">
+						<img src="images/17.png" class="NormalIcon" alt="旅管理">
+						<img src="images/17.png" class="ActiveIcon" alt="报销审批软件">
+						<p class="Name">记帐凭证</p>
+						<p class="SubTitle">
+							支持用友、金蝶、SAP、Oracle、JDE等财务系统无缝集成，从而自动生成记账凭证
+						</p>
+					</button>
+					<button class="BaseFuncBtn">
+						<img src="images/18.png" class="NormalIcon" alt="旅管理">
+						<img src="images/18.png" class="ActiveIcon" alt="报销审批软件">
+						<p class="Name">费用分析</p>
+						<p class="SubTitle">
+							可按照成本中心、项目、客户、供应商、部门、员工、费用类别及时间等维度生成费用分析报告，可从费用分析报告中钻取到具体的报销单据
+							<br>
+						</p>
+					</button>
+				</div>
+				<div style="clear:both;"></div>
+				<p style="margin-top:30px;">
+					<!--<a href="/Product/Module" target="_blank">
+	                <button class="bt_more">了解更多</button>
+	            </a>-->
+				</p>
+			</div>
+		</div>
+
+		<!--报销流程-->
+		<div style="height:100px;margin-top:-100px;" id="divBX">
+		</div>
+		<div style="height:575px;overflow:hidden">
+			<div class="Context_Middle" style="text-align:center;">
+				<p style="font-size:36px;color:#515152;margin-top:50px;">应用价值</p>
+				<div style="margin-top:35px;display:inline-block;height:300px;">
+					<div class="home_bxlc">
+						<img src="images/ContextImage10.png" alt="报销审批软件">
+						<p class="p1">管理规范90%</p>
+						<p class="p2">
+							为企业提供
+							<br>一套完善的
+							<br>报销管理与费控体系
+							<br>加强企业政策执行力
+						</p>
+					</div>
+					<div class="home_bxlc">
+						<img src="images/ContextImage11.png" alt="报销审批软件">
+						<p class="p1">效率提升 60%</p>
+						<p class="p2">
+							简化报销与审批流程
+							<br>提升员工工作效率
+							<br>将员工精力
+							<br>集中在关键业务上
+							<br>
+						</p>
+					</div>
+					<div class="home_bxlc">
+						<img src="images/ContextImage12.png" alt="报销审批软件">
+						<p class="p1">费用节省 30%</p>
+						<p class="p2">
+							全方位费用管控策略
+							<br>有效杜绝计划外的支出
+							<br>大大节省企业日常
+							<br>与差旅费用支出成本
+							<br>
+						</p>
+					</div>
+					<div class="home_bxlc">
+						<img src="images/ContextImage13.png" alt="报销审批软件">
+						<p class="p1">数据透明 50%</p>
+						<p class="p2">
+							为企业决策人
+							<br>提供前瞻性的数据
+							<br>通过重要的指标来
+							<br>制定决策和推动改进
+							<br>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--应用价值-->
+		<div style="height:100px;margin-top:-100px; display:none;" id="divYYJZ">
+		</div>
+		<div style="height:440px;overflow:hidden;background-color:#f4f4f4; display:none;">
+			<div class="home_hyjz_wrap">
+				<p style="font-size:36px;color:#515152;margin-top:50px;">应用价值</p>
+				<div style="margin-top:36px;display:inline-block;height:400px;" id="divHXGN">
+					<div class="home_hyjz">
+						<div class="chart" data-percent="95" style="color:#65c434">
+							<span class="percent"></span>
+						</div>
+						<p class="p1">流程规范性提升</p>
+					</div>
+					<div class="home_hyjz">
+						<div class="chart" data-percent="80" style="color:#509be5">
+							<span class="percent"></span>
+						</div>
+						<p class="p1">处理效率提升</p>
+					</div>
+					<div class="home_hyjz">
+						<div class="chart" data-percent="70" style="color:#e67e22">
+							<span class="percent"></span>
+						</div>
+						<p class="p1">成本有效降低</p>
+					</div>
+					<div class="home_hyjz">
+						<div class="chart" data-percent="98" style="color:#d46bcb">
+							<span class="percent"></span>
+						</div>
+						<p class="p1">数据透明度提升</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			(function() {
+				var bp = document.createElement('script');
+				var curProtocol = window.location.protocol.split(':')[0];
+				if (curProtocol === 'https') {
+					bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+				} else {
+					bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+				}
+				var s = document.getElementsByTagName("script")[0];
+				s.parentNode.insertBefore(bp, s);
+			})();
+		</script>
+
+		<!--页脚-->
+		<div class="Page_footer">
+			<div class="Context_Middle" style="margin-top:20px; text-align:left;">
+				<span>Copyright © Shanghai Galaxy Information &amp; Technology Co., Ltd.　 </span>
+				<strong>差旅管理</strong>|<strong>费用管理</strong>|<strong>网上报销软件</strong>
+				<div style="float:right">
+					<a href="#" class="link">隐私政策</a><span class="sp">|</span>
+					<a href="#" class="link">使用条款</a>
+				</div>
+			</div>
+		</div>
+
+
+		<script type="text/javascript">
+			var NewList = new Array();
+
+			NewList[0] =
+				"<div><a href=\"#\"></a></div>";
+			NewList[1] =
+				"<div><a href=\"/#\"><br/></a></div>";
+			NewList[2] =
+				"<div><a href=\"#\"><br/></a></div>";
+			NewList[3] =
+				"<div><a href=\"#\"><br/></a></div>";
+			NewList[4] =
+				"<div><a  href=\"#\"></a></div>";
+
+			var BannerIndex = 0;
+			var BannerCount = 4;
+			var BannerTime, NewTime;
+			var ShowPieChar = false;
+			$(function() {
+
+				$(".home_input_mobile").keypress(function(event) {
+					var keyCode = event.which;
+					if (keyCode == 46 || (keyCode >= 48 && keyCode <= 57) || keyCode == 8) //8是删除键
+						return true;
+					else
+						return false;
+				}).focus(function() {
+					this.style.imeMode = 'disabled';
+				});
+
+				$(".home_input_regist").click(function() {
+					var Btn = $(this);
+					var Mob = $(".home_input_mobile", Btn.parent().parent()).val();
+					var URL = 'https://web.xibaoxiao.com/#/register?BackURL=http%3a%2f%2fwww.xibaoxiao.com%2f' + '&MOB=' + Mob;
+					window.open(URL);
+
+					return false;
+				});
+
+				//$(".home_input_mobile").each(function(){ $(this).numeral();});
+
+				$(".bannerSwitch").click(function() {
+					if (BannerTime != null)
+						window.clearTimeout(BannerTime);
+
+					BannerIndex = $(this).attr("BI");
+					SwitchBanner(BannerIndex);
+				});
+
+				BannerTime = setTimeout(AutoSwitchBanner, 5 * 1000);
+				NewTime = setInterval(AutoSwitchNew, 5 * 1000);
+
+				$(window).scroll(function() {
+					if ($("#divHXGN").isOnScreen() && ShowPieChar == false) {
+						$('.chart').each(function() {
+							$(this).easyPieChart({
+								lineWidth: 30,
+								size: 185,
+								lineCap: 'butt',
+								barColor: $(this).css("color"),
+								trackColor: '#ecf0f1',
+								scaleColor: false,
+								animate: 2000,
+								onStep: function(from, to, percent) {
+									$(this.el).find('.percent').text(Math.round(percent));
+								}
+							});
+						});
+
+						ShowPieChar = true;
+					}
+				});
+
+				$(".home_soft_down").mouseenter(function() {
+					var qCode = $(".qcode", $(this));
+					var x = $(this).offset().left;
+					var y = $(this).offset().top + $(this).height();
+					qCode.css("top", y);
+					qCode.css("left", x);
+					qCode.fadeIn();
+				});
+
+				$(".home_soft_down").mouseleave(function() {
+					var qCode = $(".qcode", $(this));
+					qCode.fadeOut();
+				});
+
+				$("#tbxInputMobile1").focus(function() {
+					clearTimeout(BannerTime);
+				});
+				$("#tbxInputMobile1").blur(function() {
+					BannerTime = setTimeout(AutoSwitchBanner, 5 * 1000);
+				});
+
+				AutoSwitchNew();
+			});
+
+			$(function() {
+				$(window).resize(function() {
+					ResizeBanner1();
+				});
+
+			});
+
+			function ResizeBanner1() {
+				w = $(window).width();
+				$(".banner_Page").width(w);
+
+				$("#divBannerCotainer").width($("#divBannerCotainer div").length * w);
+			};
+
+			function SwitchBanner(BIndex) {
+				w = $(window).width();
+				$("#divBannerCotainer").animate({
+					marginLeft: (-BIndex * w)
+				});
+
+				$(".bannerSwitch").removeClass("banner_Sel");
+				$(".bannerSwitch").removeClass("banner_Normal");
+				$(".bannerSwitch").addClass("banner_Normal");
+				$($(".bannerSwitch")[BIndex]).removeClass("banner_Normal");
+				$($(".bannerSwitch")[BIndex]).addClass("banner_Sel");
+
+				BannerTime = setTimeout(AutoSwitchBanner, 5 * 1000);
+			}
+
+			function AutoSwitchBanner() {
+				BannerIndex += 1;
+				if (BannerIndex >= BannerCount)
+					BannerIndex = 0;
+
+				SwitchBanner(BannerIndex);
+			}
+
+
+
+			var CurNewIndex = 0;
+
+			function AutoSwitchNew() {
+				var CNew = NewList[CurNewIndex % NewList.length];
+				$("#divNewsList").append($(CNew));
+				$("#divNewsList div:first-child").animate({
+					marginTop: "-25px"
+				}, "normal", function() {
+					if ($("#divNewsList").children.length > 1)
+						$("#divNewsList div:first-child").remove();
+				});
+				CurNewIndex++;
+			}
+
+			function OpenPage(URL) {
+				window.open(URL);
+			}
+		</script>
+
+
+
+
+		<script type="text/javascript">
+			window.KF5SupportBoxAPI.ready(function() {
+				// 在这里调用除 init、ready 以外的其他API方法
+				// .........
+				window.KF5SupportBoxAPI.removeButton();
+			});
+
+			var FristIndex = 0;
+			var HelperPageCount = 4;
+			$(function() {
+				$(window).resize(function() {
+					ResizeBanner();
+				});
+
+				$(window).trigger("resize");
+
+				$("#btnWX").mouseenter(function() {
+					var qCode = $(".qcode", $(this));
+					var x = $(this).offset().left;
+					var y = $(this).offset().top + $(this).height();
+					qCode.css("top", y);
+					qCode.css("left", x);
+					qCode.fadeIn();
+				});
+
+				$("#btnWX").mouseleave(function() {
+					var qCode = $(".qcode", $(this));
+					qCode.fadeOut();
+				});
+
+				$("#divChart1").mouseenter(function() {
+					$("#divChart11").animate({
+						marginLeft: 0
+					}, 100);
+				}).mouseleave(function() {
+					$("#divChart11").animate({
+						marginLeft: 150
+					}, 100);
+				});
+
+				$("#divChart2").mouseenter(function() {
+					$("#divChart22").animate({
+						marginLeft: 0
+					}, 100);
+				}).mouseleave(function() {
+					$("#divChart22").animate({
+						marginLeft: 150
+					}, 100);
+				});
+
+				$("#divChart3").mouseenter(function() {
+					$("#divChart33").animate({
+						marginLeft: 0
+					}, 100);
+				}).mouseleave(function() {
+					$("#divChart33").animate({
+						marginLeft: 150
+					}, 100);
+				});
+
+				$("#divChart4").mouseenter(function() {
+					$("#divChart44").animate({
+						marginLeft: 0
+					}, 100);
+				}).mouseleave(function() {
+					$("#divChart44").animate({
+						marginLeft: 150
+					}, 100);
+				});
+
+			});
+
+			//----------------------------------在线咨询代码--------------------------------------//
+			function ResizeBanner() {
+				w = $(window).width();
+				$(".banner_Page").width(w);
+			};
+		</script>
+
+		<iframe src="javascript:false" title="" style="display: none;"></iframe>
+		<link rel="styleSheet" type="text/css" href="css/supportBtn.css">
+		<div class="kf5-support-chat kf5-chatSupport-right-bottom" style="position: relative;z-index: 2147483000">
+			<div id="kf5-support-block" class="kf5-supportBox" style="display: none"><a id="kf5-close-btn" class="kf5-support-chat_close kf5-waves"
+				 href="javascript:;"></a>
+				<div id="kf5-loading" class="kf5-loading kf5-loading-md kf5-center"></div>
+				<div id="kf5-iframe-holder"></div>
+			</div>
+			<div id="kf5-support-btn" style="color: rgb(255, 255, 255); background: rgb(70, 119, 193); display: none;" class="kf5-chatSupport-btn kf5-chatSupport-style3 kf5-chatSupport-icon15 kf5-waves waves-effect waves-light"><span>帮助</span>
+				<div id="msg-number" class="kf5-chatSupport_msgNumber" style="display: none"></div>
+			</div>
+			<div id="kf5-backdrop" class="kf5-backdrop" style="display: none;"><a class="kf5-backdrop-close">关闭</a><a href=""
+				 target="_blink"><img id="kf5-view-image" class="kf5-backdrop-img" src=""></a></div>
+		</div>
+	</body>
+</html>

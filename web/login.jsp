@@ -61,7 +61,7 @@
     </label>
     <br />
     <label>
-        <button class="submit" id="login" onclick="check()" value="登录"/>
+        <button class="submit" id="login" onclick="check()">登录</button>
     </label>
 </section>
 

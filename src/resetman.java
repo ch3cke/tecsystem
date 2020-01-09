@@ -31,8 +31,24 @@ public class resetman extends HttpServlet {
                     result.put("success",201);
                 }
             }else if(method.equals("mail")){
-                db.UpdateUserMail()
+                String mail = request.getParameter("mail");
+                if(mail.matches("/^\\w{3,}(\\.\\w+)*@[A-z0-9]+(\\.[A-z]{2,5}){1,2}$/")){
+                    if(db.UpdateUserM(request.getSession().getAttribute("id").toString(),mail)){
+                        result.put("success",200);
+                    }else {
+                        result.put("success",201);
+                    }
+                }else {
+                    result.put("success",202);
+                }
+            }else if(method.equals("password")){
+                if(db.UpdateUserpasswd(request.getSession().getAttribute("username").toString(),request.getParameter("password"))){
+                    result.put("success",200);
+                }else {
+                    result.put("success",201);
+                }
             }
+            response.getWriter().write(result.toString());
         }
     }
 
