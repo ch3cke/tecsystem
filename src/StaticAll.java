@@ -1,3 +1,4 @@
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import tools.Db_tools.Db_tools;
 
@@ -24,16 +25,16 @@ public class StaticAll extends HttpServlet {
             if(statues.equals("manage")){
                 String method = request.getParameter("method");
                 if(method.equals("person")){
-                    response.getWriter().write(db.StaticEveryOne("applicant").toString());
+                    response.getWriter().write(getPlace(method,"applicant",db.StaticEveryOne("applicant")).toString());
                 }else if(method.equals("depart")) {
-                    response.getWriter().write(db.StaticEveryPart("applicant").toString());
+                    response.getWriter().write(getPlace(method,"applicant",db.StaticEveryPart("applicant")).toString());
                 }
             }else if(statues.equals("finance")) {
                 String method = request.getParameter("method");
                 if(method.equals("person")){
-                    response.getWriter().write(db.StaticEveryOne("applicant").toString());
+                    response.getWriter().write(getPlace(method,"schedule",db.StaticEveryOne("schedule")).toString());
                 }else if(method.equals("depart")) {
-                    response.getWriter().write(db.StaticEveryPart("applicant").toString());
+                    response.getWriter().write(getPlace(method,"schedule",db.StaticEveryPart("schedule")).toString());
                 }
             }else {
                 JSONObject resu = new JSONObject();
@@ -44,5 +45,16 @@ public class StaticAll extends HttpServlet {
         }else {
             response.sendRedirect("/login.do");
         }
+    }
+
+    private JSONArray getPlace(String method, String table, JSONArray info){
+        Db_tools db = new Db_tools();
+        JSONArray results = new JSONArray();
+        for(int i = 0;i<info.length();i++){
+            JSONObject re = info.getJSONObject(i);
+            re.put("path",db.StaticPlace(table,info.getJSONObject(i).getString("name"),method));
+            results.put(re);
+        }
+        return results;
     }
 }

@@ -1,5 +1,7 @@
 package tools.Db_tools;
 
+import GetInSys.check;
+import GetInfo.userinfo;
 import groovy.sql.Sql;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -643,9 +645,9 @@ public class Db_tools {
         return results;
     }
 
-    public JSONObject StaticEveryOne(String table){
+    public JSONArray StaticEveryOne(String table){
+        JSONArray results = new JSONArray();
         String sqlStr = "select userinfo.username, count(*) as 'count',SUM(Amoney) as 'money' from tecsystem."+table+", tecsystem.userinfo where userinfo.id = "+table+".id group by userinfo.username";
-        JSONObject results = new JSONObject();
         try{
             sql = con.prepareStatement(sqlStr);
             res = sql.executeQuery();
@@ -653,8 +655,8 @@ public class Db_tools {
                 JSONObject re = new JSONObject();
                 re.put("Count",res.getInt("count"));
                 re.put("Money",res.getInt("money"));
-                String username = res.getString("username");
-                results.put(username,re);
+                re.put("name",res.getString("username"));
+                results.put(re);
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -662,9 +664,9 @@ public class Db_tools {
         return results;
     }
 
-    public JSONObject StaticEveryPart(String table){
-        String sqlStr = "select DName , count(*) as 'count',SUM(Amoney) as 'money' from tecsystem."+table+" group by DName";
-        JSONObject results = new JSONObject();
+    public JSONArray StaticEveryPart(String table){
+        JSONArray results = new JSONArray();
+        String sqlStr = "select Dname , count(*) as 'count',SUM(Amoney) as 'money' from tecsystem."+table+" group by DName";
         try{
             sql = con.prepareStatement(sqlStr);
             res = sql.executeQuery();
@@ -672,12 +674,36 @@ public class Db_tools {
                 JSONObject re = new JSONObject();
                 re.put("Count",res.getInt("count"));
                 re.put("Money",res.getInt("Money"));
-                results.put(res.getString("Dname"),re);
+                re.put("name",res.getString("Dname"));
+                results.put(re);
             }
         }catch (Exception e){
             e.printStackTrace();
         }
         return results;
+    }
+
+    public JSONObject StaticPlace(String table,String username,String method){
+        String sqlStr = "select Aplace,count(Aplace) as 'time' from"+table+" where id = (select id from userinfo where username="+username+") group by Aplace";
+        JSONObject result = new JSONObject();
+        if(method.equals("depart")){
+            sqlStr = "select Aplace,count(Aplace) as 'time' from"+table+" where id = (select id from userinfo where username="+username+") group by Aplace";
+        }else {
+            sqlStr = "select Aplace,count(Aplace) as 'time' from"+table+" where Dname ="+username+" group by Aplace";
+        }
+        try {
+            sql = con.prepareStatement(sqlStr);
+            res = sql.executeQuery();
+            while (res.next()){
+                JSONObject r = new JSONObject();
+                r.put("place",res.getString("Aplace"));
+                r.put("count",res.getString("time"));
+                result.put(username,r);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 
 }
