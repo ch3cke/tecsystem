@@ -21,12 +21,19 @@ public class StaticAll extends HttpServlet {
         if(flag!=null){
             statues = request.getSession().getAttribute("statues").toString();
             Db_tools db = new Db_tools();
-            if(statues.equals("admin")){
+            if(statues.equals("manage")){
                 String method = request.getParameter("method");
                 if(method.equals("person")){
-                    response.getWriter().write(db.StaticEveryOne().toString());
-                }else {
-                    response.getWriter().write(db.StaticEveryPart().toString());
+                    response.getWriter().write(db.StaticEveryOne("applicant").toString());
+                }else if(method.equals("depart")) {
+                    response.getWriter().write(db.StaticEveryPart("applicant").toString());
+                }
+            }else if(statues.equals("finance")) {
+                String method = request.getParameter("method");
+                if(method.equals("person")){
+                    response.getWriter().write(db.StaticEveryOne("applicant").toString());
+                }else if(method.equals("depart")) {
+                    response.getWriter().write(db.StaticEveryPart("applicant").toString());
                 }
             }else {
                 JSONObject resu = new JSONObject();

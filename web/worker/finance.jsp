@@ -192,16 +192,21 @@
                     "            <tbody>";
                 for(var i=0;i<data.length;i++){    //遍历data数组
                     var ls = data[i];
-                    if(ls.isgive == 1){
+                    if(ls.index === "1"){
                         html +="<tr><td><a href=/worker/finance1.jsp?sid="+ls.Aid+">"+ls.Aid;
                         html +="</td><td>"+ls.Aplace;
                         html +="</td><td>"+ls.Amoney+"</td><td>";
                         html = html+"已通过</td></tr>";
+                    }else if(ls.index==="-1") {
+                        html +="<tr><td>"+ls.Aid;
+                        html +="</td><td>"+ls.Aplace;
+                        html +="</td><td>"+ls.Amoney+"</td><td>";
+                        html = html+"被驳回</td></tr>";
                     }else {
                         html +="<tr><td>"+ls.Aid;
                         html +="</td><td>"+ls.Aplace;
                         html +="</td><td>"+ls.Amoney+"</td><td>";
-                        html = html+"未通过</td></tr>";
+                        html = html+"未审核</td></tr>";
                     }
                 }
                 html+"</tbody>\n" +

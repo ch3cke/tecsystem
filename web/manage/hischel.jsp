@@ -81,7 +81,7 @@ input{
                 <a href="hischel.jsp">报表查询</a>
             </li>
 					<li><a class="nav-cta" href="userinfo.jsp" >个人中心</a></li>
-					<li ><a  href="../login.jsp">退出</a></li>
+					<li ><a  href="/logout">退出</a></li>
 				</ul>
 			</nav>
 		</div>
@@ -108,37 +108,13 @@ input{
 	<script type="text/javascript">
     $(document).ready(function() {
         $.ajax({
-            url : "/userinfoapplicant.do",//后台请求的数据，用的是PHP
+            url : "/static",//后台请求的数据，用的是PHP
             dataType : "json",//数据格式
-            type : "get",//请求方式
+            type : "post",//请求方式
+			data:{"method":"depart"},
             async : false,//是否异步请求
             success : function(data) {   //如果请求成功，返回数据。
                 console.log(data);
-                var html = "<table class=\"table\">\n" +
-                    "            <thead>\n" +
-                    "            <tr>\n" +
-                    "                <th>记录编号</th>\n" +
-                    "                <th>出差地点</th>\n" +
-                    "                <th>费用</th> <th>状态</th>\n" +
-                    "            </tr>\n" +
-                    "            </thead>\n" +
-                    "            <tbody>";
-                for(var i=0;i<data.length;i++){    //遍历data数组
-                    var ls = data[i];
-                    html +="<tr><td><a href=/worker/infos.jsp?Sid="+ls.Sid+">"+ls.Sid;
-                    html +="</td><td>"+ls.Aplace;
-                    html +="</td><td>"+ls.Amoney+"</td><td>";
-                    if(ls.isgive == 1){
-                        html = html+"given</td></tr>";
-                    }else {
-                        html = html+"not</td></tr>";
-                    }
-                }
-                html+"</tbody>\n" +
-                "\n" +
-                "        </table>"
-                $("#test").html(html); //在html页面id=test的标签里显示html内容
-                console.log(html)
             },
         })
     })

@@ -124,13 +124,13 @@ textarea{
                 <a href="hischel.jsp">报表查询</a>
             </li>
 					<li><a class="nav-cta" href="userinfo.jsp" >个人中心</a></li>
-					<li ><a  href="../login.jsp">退出</a></li>
+					<li ><a  href="logout">退出</a></li>
 				</ul>
 			</nav>
 		</div>
 	</header>
 	<div class="midle">
-<div  class="mindle_table">
+<div id="test" class="mindle_table">
 
 </div>
 </div>
@@ -151,7 +151,7 @@ textarea{
 <script type="text/javascript">
         $(document).ready(function() {
             $.ajax({
-                url : "/getschedule.do",//后台请求的数据，用的是PHP
+                url : "/getschedule",//后台请求的数据，用的是PHP
                 dataType : "json",//数据格式
                 type : "get",//请求方式
                 async : false,//是否异步请求
@@ -166,15 +166,23 @@ textarea{
                         "            </tr>\n" +
                         "            </thead>\n" +
                         "            <tbody>";
-                    for(var i=0;i<data.length;i++){    //遍历data数组
+                    for(var i=0;i<data.length;i++){    //遍历data数组
                         var ls = data[i];
-                        html +="<tr><td><a href=/worker/finance1.jsp?sid="+ls.Aid+">"+ls.Aid;
-                        html +="</td><td>"+ls.Aplace;
-                        html +="</td><td>"+ls.Amoney+"</td><td>";
-                        if(ls.isgive == 1){
-                            html = html+"given</td></tr>";
+                        if(ls.index == 1){
+                            html +="<tr><td><a href=/worker/finance1.jsp?sid="+ls.Aid+">"+ls.Aid;
+                            html +="</td><td>"+ls.Aplace;
+                            html +="</td><td>"+ls.Amoney+"</td><td>";
+                            html = html+"已通过</td></tr>";
+                        }else if(ls.index==="-1") {
+                            html +="<tr><td>"+ls.Aid;
+                            html +="</td><td>"+ls.Aplace;
+                            html +="</td><td>"+ls.Amoney+"</td><td>";
+                            html = html+"被驳回</td></tr>";
                         }else {
-                            html = html+"not</td></tr>";
+                            html +="<tr><td>"+ls.Aid;
+                            html +="</td><td>"+ls.Aplace;
+                            html +="</td><td>"+ls.Amoney+"</td><td>";
+                            html = html+"未审核</td></tr>";
                         }
                     }
                     html+"</tbody>\n" +

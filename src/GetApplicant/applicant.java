@@ -37,7 +37,7 @@ public class applicant extends HttpServlet {
             appliant.put("Atime",request.getParameter("Atime1"));
             appliant.put("Amoney",request.getParameter("Amoney"));
             appliant.put("Dname",userinfo.get("Dname"));
-            appliant.put("indexs","not");
+            appliant.put("indexs","0");
             appliant.put("Areason1",request.getParameter("Areason1"));
             appliant.put("Urgent",request.getParameter("Urgent"));
             appliant.put("Areason2",request.getParameter("Areason2"));

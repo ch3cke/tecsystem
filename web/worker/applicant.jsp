@@ -205,14 +205,6 @@
             var datas="Atime1="+document.getElementById("Atime1").value+"&Atime2="+document.getElementById("Atime2").value+"&Areason2="+document.getElementById("Areason2").value
                 +"&Areason1="+document.getElementById("Areason1").value+"&Areason3="+document.getElementById("Areason3").value+"&Amoney="+document.getElementById("Amoney").value+
                 "&Aplace="+document.getElementById("Aplace").value+"&Urgent="+document.getElementById("Urgent").value;
-            // myform.append('Atime1',document.getElementsByName("Atime1").value);
-            // myform.append('Atime2',document.getElementsByName("Atime2").value);
-            // myform.append('Areason2',document.getElementsByName("Areason2").value);
-            // myform.append('Areason1',document.getElementsByName("Areason1").value);
-            // myform.append('Areason3',document.getElementsByName("Areason3").value);
-            // myform.append('Amoney',document.getElementsByName("Amoney").value);
-            // myform.append('Aplace',document.getElementsByName("Aplace").value);
-            // myform.append('Urgent',document.getElementsByName("Urgent").value);
             console.log(datas);
             //指定回调函数
             myxmlHttpRequest.onreadystatechange=chuli;

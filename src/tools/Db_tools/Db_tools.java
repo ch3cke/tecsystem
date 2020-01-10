@@ -643,8 +643,8 @@ public class Db_tools {
         return results;
     }
 
-    public JSONObject StaticEveryOne(){
-        String sqlStr = "select userinfo.username, count(*) as 'count',SUM(Amoney) as 'money' from tecsystem.schedule, tecsystem.userinfo where userinfo.id = schedule.id group by userinfo.username";
+    public JSONObject StaticEveryOne(String table){
+        String sqlStr = "select userinfo.username, count(*) as 'count',SUM(Amoney) as 'money' from tecsystem."+table+", tecsystem.userinfo where userinfo.id = "+table+".id group by userinfo.username";
         JSONObject results = new JSONObject();
         try{
             sql = con.prepareStatement(sqlStr);
@@ -662,8 +662,8 @@ public class Db_tools {
         return results;
     }
 
-    public JSONObject StaticEveryPart(){
-        String sqlStr = "select DName , count(*) as 'count',SUM(Amoney) as 'money' from tecsystem.schedule group by DName";
+    public JSONObject StaticEveryPart(String table){
+        String sqlStr = "select DName , count(*) as 'count',SUM(Amoney) as 'money' from tecsystem."+table+" group by DName";
         JSONObject results = new JSONObject();
         try{
             sql = con.prepareStatement(sqlStr);
@@ -679,4 +679,5 @@ public class Db_tools {
         }
         return results;
     }
+
 }

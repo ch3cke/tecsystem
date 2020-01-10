@@ -18,6 +18,8 @@ public class getAllApplicant extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Object flag = request.getSession().getAttribute("statues");
+        request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
         JSONObject result = new JSONObject();
         if (flag!=null) {
             if (flag.toString().equals("manage")) {
