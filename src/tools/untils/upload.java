@@ -1,15 +1,16 @@
 package tools.untils;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import tools.Db_tools.Db_tools;
+
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -30,11 +31,24 @@ public class upload {
      *            在下载完成后要输出的文字
      * @return 正常下载时true,否则为false
      */
-    public static List<String> uploadFile(HttpServletRequest request, String outPath, int sizeLimit, int bufferSize,
+    public static boolean uploadFile(HttpServletRequest request, String outPath, int sizeLimit, int bufferSize,
                                         String message) {
         FileOutputStream out = null;
         InputStream in = null;
-        List<String> result = new ArrayList<>();
+
+        JSONObject se = new JSONObject();
+        try {
+            request.setCharacterEncoding("utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        String id = request.getSession().getAttribute("id").toString();
+        se.put("id",id);
+        Db_tools db = new Db_tools();
+        JSONObject user = new JSONObject();
+        String fileName="";
+        se.put("Dname",db.GetUserInfoById(id).get("Dname"));
+
 
         // 创建一个apache文件上传的文件的DiskFileItemFactory，用于初始化文件上传的参数设置
         DiskFileItemFactory factory = new DiskFileItemFactory();
@@ -53,7 +67,7 @@ public class upload {
 
         // 调用apache中的静态方法来判断当前请求时传输的内容是不是文件类型
         if (!ServletFileUpload.isMultipartContent(request)) {
-            return result;
+            return false;
         }
         try {
             // 将当前请求中的内容提取出里面的文件部分，并将文件部分提取出来，封装在FileItem中，
@@ -68,17 +82,22 @@ public class upload {
 
                 // 判断当前文件项目是不是只是普通表单字段，如果是，就不对其进行i/o操作
                 if (item.isFormField()) {
-                    continue;
+                    se.put(item.getFieldName(),new String(item.getString().getBytes("ISO8859-1"), StandardCharsets.UTF_8));
                 } else {
                     // 获取输入流，获取每个文件项目的输入流
                     in = item.getInputStream();
 
                     // 获取上传的文件的文件名
-                    String fileName = item.getName();
-                    result.add(fileName);
+                    fileName= item.getName();
+                    File test = new File(outPath);
+                    if(!test.exists()){
+                        test.mkdir();
+                    }
 
-                    // 开启输出流,输出到指定的文件
+                    // 开启输出流,输出
+                    //到指定的文件
                     out = new FileOutputStream(outPath + File.separator + fileName);
+
 
                     // 创建字节缓冲数组
                     byte[] buffer = new byte[bufferSize];
@@ -98,10 +117,15 @@ public class upload {
                 }
 
             }
-            return result;
+            se.put("paths",fileName);
+            if(db.InsertSchedule(se)) {
+                return true;
+            }else {
+                return false;
+            }
         } catch (FileUploadException | IOException e) {
             e.printStackTrace();
-            return result;
+            return false;
         }
     }
 

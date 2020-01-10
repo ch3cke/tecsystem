@@ -145,7 +145,7 @@
                 <ul id="navigation_b">
                     <li class="list_b"><a  href="userinfo.jsp">个人主页</a></li>
 
-                    <li class="list_b"><a  href="/logout.do">退出</a></li>
+                    <li class="list_b"><a  href="/logout">退出</a></li>
                 </ul>
             </ul>
         </nav>
@@ -171,7 +171,7 @@
             </div>
             <div  style="margin:15px 0">申请时间：<nobr id= "Atime"></nobr></div>
             <div  style="margin:15px 0">票据：
-                 <div id = path></div>
+                 <img id = path src="#"/>
             </div>
     </div>
 </div>
@@ -194,7 +194,7 @@
     console.log(sid);
     $(document).ready(function() {
         $.ajax({
-            url: "/getschedulesne.do",//后台请求的数据，用的是PHP
+            url: "/getschedulesne",//后台请求的数据，用的是PHP
             dataType: "json",//数据格式
             data: {'Sid':sid},
             type: "get",//请求方式
@@ -206,8 +206,7 @@
                 $("#Areason3").html(data.Areason3);
                 $("#Amoney").html(data.Amoney);
                 $("#Atime").html(data.Atime);
-                tm = "<img src = /upload/"+data.path;
-                $("#path").html(tm);
+                document.getElementById("path").src="../upload/"+data.path;
                 console.log(data);
             },
         })

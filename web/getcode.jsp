@@ -26,7 +26,7 @@
 	<div class="reset">
 		<div class="holder">
 			<div class="with-line">找回密码</div>
-			<form class="reset-form" action="/reset.do" method="post">
+			<form class="reset-form" action="/reset" method="post">
 				<input type="text" name="username" class="clear" placeholder="请输入用户名">
 				<a class="button1" href="reset.jsp">获取验证码</a>
 			</form>

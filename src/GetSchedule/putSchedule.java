@@ -16,38 +16,16 @@ import java.util.List;
 @WebServlet(name = "GetSchedule.putSchedule")
 public class putSchedule extends HttpServlet {
     Db_tools db = new Db_tools();
-    String ppath = "/upload/";
+    String ppath = "D:\\project\\tecsystem\\web\\upload";
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Object flag = request.getSession().getAttribute("islogin");
         JSONObject result = new JSONObject();
-        flag = "ssss";
+        request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
         if(flag!=null){
-            JSONObject schedule = new JSONObject();
-            //schedule.put("Sid",request.getSession().getAttribute("Aid"));
-            schedule.put("Aid","121212121212121121212");
-            File myfile = new File(ppath+schedule.get("Aid"));
-            if(!myfile.exists()){
-                myfile.mkdir();
-            }
-            schedule.put("id",request.getSession().getAttribute("id"));
-            schedule.put("id","2294458237@qq.com");
-            schedule.put("Aplace",request.getParameter("Aplace"));
-            schedule.put("Atime",request.getParameter("Atime"));
-            schedule.put("Amoney",request.getParameter("Amoney"));
-            schedule.put("Dname",request.getParameter("Dname"));
-            schedule.put("Areason1",request.getParameter("Areason1"));
-            schedule.put("Areason2",request.getParameter("Areason2"));
-            schedule.put("Areason3",request.getParameter("Areason3"));
-            schedule.put("isgive","n");
-            List<String> paths = upload.uploadFile(request,ppath+schedule.get("Aid"), 1024 * 30, 1024 * 30, null);
-            if(paths.isEmpty()){
-                result.put("success",202);
-                result.put("reason","nofile");
-            }else {
-                schedule.put("paths",paths.toString());
-            }
-            if(db.InsertSchedule(schedule)){
+            if(upload.uploadFile(request,ppath, 1024 * 30, 1024 * 30, null)){
                 result.put("success",200);
+                result.put("reason","ok");
             }else {
                 result.put("success",201);
             }

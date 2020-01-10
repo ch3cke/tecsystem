@@ -131,7 +131,7 @@
                 </li>
 
                 <li><a class="nav-cta" id="nav-cta" href="userinfo.jsp">个人中心</a></li>
-                <li ><a  href="/logout.do">退出</a></li>
+                <li ><a  href="/logout">退出</a></li>
 
             </ul>
         </nav>
@@ -188,13 +188,16 @@
     }
     var myxmlHttpRequest;
     var flag = 0;
+
+
     function check(){
+
         myxmlHttpRequest=getXmlHttpObject();
         if(myxmlHttpRequest){
             flag = 1;
             //第一个参数表示请求的方式  get
             //第二个参数指定url,对那个页面发出ajax请求】
-            var url="/applicant.do";
+            var url="/applicant";
             //第三个参数true表示使用异步机制
             // 打开请求
             myxmlHttpRequest.open("post",url,true);
@@ -218,6 +221,7 @@
         }
 
     }
+
     function $(id){
         return document.getElementById(id);
     }

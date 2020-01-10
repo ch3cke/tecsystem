@@ -8,9 +8,9 @@ import java.sql.*;
 
 
 public class Db_tools {
-    private String ConnetcStr = "jdbc:mysql://localhost:3306/tecsystem";
-    private String user = "root";
-    private String pass = "root";
+    private String ConnetcStr = "jdbc:mysql://47.98.167.108:3306/tecsystem";
+    private String user = "db_user";
+    private String pass = "ch3cke";
     private Connection con;
     private PreparedStatement sql;
     private ResultSet res;
@@ -214,13 +214,26 @@ public class Db_tools {
     查找所有申请记录
      */
     public JSONArray GetAllApplicant(){
-        String sqlStr = "select * from applicant";
-        JSONObject result = new JSONObject();
+        String sqlStr = "select applicant.Aid,applicant.Atime2,applicant.Atime,applicant.Amoney,userinfo.username,applicant.Dname,applicant.Areason1,applicant.Areason2,applicant.Areason3,applicant.indexs from userinfo,applicant where applicant.id = userinfo.id";
+
         JSONArray results = new JSONArray();
         try {
             sql = con.prepareStatement(sqlStr);
             res = sql.executeQuery();
-            setValue(result, results);
+            while(res.next()){
+                JSONObject result = new JSONObject();
+                result.put("Aid",res.getString("Aid"));
+                result.put("username",res.getString("username"));
+                result.put("Dname",res.getString("Dname"));
+                result.put("Amoney",res.getString("Amoney"));
+                result.put("index",res.getString("indexs"));
+                result.put("Areason1",res.getString("Areason1"));
+                result.put("Areason2",res.getString("Areason2"));
+                result.put("Areason3",res.getString("Areason3"));
+                result.put("Atime2",res.getString("Atime2"));
+                result.put("Atime",res.getString("Atime"));
+                results.put(result);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -390,6 +403,7 @@ public class Db_tools {
                 result.put("isgive",res.getString("isgive"));
                 result.put("Areason2",res.getString("Areason2"));
                 result.put("Areason3",res.getString("Areason3"));
+                result.put("path",res.getString("paths"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -443,7 +457,7 @@ public class Db_tools {
     }
 
     public boolean InsertSchedule(JSONObject schedule){
-        String sqlStr = "insert into schedule(Sid, id, Aplace, Atime, Amoney, Dname, Areason1, Areason2, Areason3, isgive,path) values(?,?,?,?,?,?,?,?,?,?,?)";
+        String sqlStr = "insert into schedule(Sid, id, Aplace, Atime, Amoney, Dname, Areason1, Areason2, Areason3, isgive,paths) values(?,?,?,?,?,?,?,?,?,?,?)";
         try {
             sql = con.prepareStatement(sqlStr);
             sql.setString(1, schedule.get("Aid").toString());
@@ -501,10 +515,10 @@ public class Db_tools {
     }
 
     public boolean InsertFinance(JSONObject finance){
-        String sqlStr = "insert into finance(Lid,IsFinance) values(?,?)";
+        String sqlStr = "insert into finance(Iid,IsFinance) values(?,?)";
         try {
             sql = con.prepareStatement(sqlStr);
-            sql.setString(1,finance.get("Iid").toString());
+            sql.setString(1,finance.get("Lid").toString());
             sql.setString(2,finance.get("IsFinance").toString());
             sql.executeUpdate();
         }catch (SQLException e){
@@ -610,19 +624,23 @@ public class Db_tools {
         return result;
     }
 
-    public JSONObject GetTen(){
-        String sqlStr = "select username, Medals from userinfo";
-        JSONObject result = new JSONObject();
+    public JSONArray GetTen(){
+        String sqlStr = "select id, username, Medals from userinfo order by Medals limit 0,10";
+        JSONArray results = new JSONArray();
         try {
             sql = con.prepareStatement(sqlStr);
             res = sql.executeQuery();
             while (res.next()){
-                result.put(res.getString("username"),res.getInt("Medals"));
+                JSONObject result = new JSONObject();
+                result.put("medals",res.getInt("Medals"));
+                result.put("id",res.getString("id"));
+                result.put("username",res.getString("username"));
+                results.put(result);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return result;
+        return results;
     }
 
     public JSONObject StaticEveryOne(){

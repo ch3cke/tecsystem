@@ -35,7 +35,7 @@ margin:2% 18%;
             <h2>Set up your account</h2>
         </div>
         <section class="card">
-           <form action="${pageContext.request.contextPath}/register.do" method="POST" onsubmit="return check()">
+           <form action="${pageContext.request.contextPath}/register" method="POST" onsubmit="return check()">
                 <label class="nor" for="userName"><br />
                     <span><span>*&nbsp;&nbsp;</span>姓名:</span><br />
                     <input type="text" name="userName" placeholder="请输入您的姓名" />
@@ -68,7 +68,7 @@ margin:2% 18%;
                 <label class="nor" for="verify"><br />
                     <span><span>*&nbsp;&nbsp;</span>验证:</span><br />
                     <input type="text" name="code" placeholder="请输入验证码" />
-                     <img id="img" src="${pageContext.request.contextPath}/getcode.do" style="text-align:center"/>
+                     <img id="img" src="${pageContext.request.contextPath}/getcode" style="text-align:center"/>
                     <a href="#" onclick="changImage()">换一张</a>
                 </label>
                 <br />

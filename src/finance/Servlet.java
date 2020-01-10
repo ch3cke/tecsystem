@@ -23,7 +23,7 @@ public class Servlet extends HttpServlet {
         }else {
             if(request.getSession().getAttribute("statues").equals("finance")){
                 String Sid = request.getParameter("Sid");
-                db.UpdateSchedule(Sid,"y");
+                db.UpdateSchedule(Sid,"1");
                 JSONObject schedule = new JSONObject();
                 schedule = db.GetScheduleBySid(request.getParameter("Sid"));
                 Integer Amoney = Integer.parseInt(db.GetApplicantByAid(request.getParameter("Sid")).getString("Amoney"));
@@ -31,7 +31,7 @@ public class Servlet extends HttpServlet {
                 if(Amoney>Bmoney){
                     db.UpdateUserMedal(schedule.getString("id"),(Amoney-Bmoney)/100);
                 }
-                db.UpdateFinance("Sid","y");
+                db.UpdateFinance("Sid","1");
                 sendMail sender = new sendMail();
                 try {
                     sender.sendMessageEmail(db.GetUserInfoById(db.GetApplicantByAid(request.getParameter("Sid")).getString("id")).getString("email"),"PASS",request.getParameter("Sid"));

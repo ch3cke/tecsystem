@@ -33,7 +33,7 @@ public class register extends HttpServlet {
                 info.put("statues","worker");
                 info.put("Medals","0");
                 info.put("age","20");
-                info.put("sex","man");
+                info.put("sex","男");
                 info.put("Did","000000");
                 info.put("Dname","default");
                 info.put("password",password);

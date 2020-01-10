@@ -27,10 +27,7 @@
 	background-size: cover;
 
 }
- 
-#top{
-background-color:rgb(255,240,245,0);
-}
+
 form{
 	width:800px;
 	margin:20px;
@@ -75,7 +72,7 @@ input{
                     <a href="finance.jsp">报销申请</a>
                     </li>
                  <li>  
-                <a href="audit.jsp">报表审核</a>
+                <a href="audit.html">报表审核</a>
             </li>
                      <li>  
                 <a href="hischel1.jsp">报表统计</a>

@@ -209,15 +209,15 @@ public class sendMail {
     }
 
     private static String prettyMessageLayout(String appliant){
-        return "<div>您的补贴申请："+appliant+"已经审核通过了。</div>\n" +
+        return "<div>您的补贴申请："+appliant+"已经被审核。</div>\n" +
                 "                </td>\n" +
                 "            </tr>\n" +
                 "            <tr>\n" +
                 "                <td colspan=\"2\" style=\"font-size:\n" +
                 "12px; line-height: 20px; padding-top: 14px;\n" +
                 "padding-bottom: 25px; color: #909090;\">\n" +
-                "                    <div>请登录系统：<a href=\""+MAIL_WEBSITE+"GetIn.login"+"\" style=\"color: #03c5ff; text-decoration:\n" +
-                "underline;\" rel=\"noopener\" target=\"_blank\">"+MAIL_WEBSITE+"GetIn.login"+"</a></div>\n" +
+                "                    <div>请登录系统：<a href=\""+MAIL_WEBSITE+"\\login"+"\" style=\"color: #03c5ff; text-decoration:\n" +
+                "underline;\" rel=\"noopener\" target=\"_blank\">"+MAIL_WEBSITE+"\\login"+"</a></div>\n" +
                 "                    <div style=\"padding-top:\n" +
                 "4px;\">(如果不能打开页面，请复制该地址到浏览器打开) 请及时填写回执信息</div>\n" +
                 "                </td>\n" +

@@ -122,7 +122,7 @@
                     <a href="finance.jsp">报销申请</a>
                     </li>
                  <li>  
-                <a href="audit.jsp">报表审核</a>
+                <a href="audit.html">报表审核</a>
             </li>
                      <li>  
                 <a href="hischel1.jsp">报表统计</a>

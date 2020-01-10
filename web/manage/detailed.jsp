@@ -1,14 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
+<%--
+  Created by IntelliJ IDEA.
+  User: ch3ck
+  Date: 2020/1/7
+  Time: 19:43
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>历史出差页面</title>
+    <title>财务详细</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/css/normalize.css">
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/featherlight.min.css">
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/featherlight.min.css">
     <link href='https://fonts.googleapis.com/css?family=Arimo:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
@@ -18,6 +22,7 @@
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script  src="../js/jquery-2.2.3.min.js"></script>
 
     <style>
         /* Make the image fully responsive */
@@ -29,32 +34,70 @@
             font-size: 100%;
         //background: url(../images/img1.png) no-repeat 0px 0px;
             background-size: cover;
-
         }
 
         #top{
-            background-color:rgb(255,240,245,0);
+
+
         }
-        form{
-            width:800px;
-            margin:20px;
-        }
+
         .midle{
             margin:3% 25%;
-            background-color:rgb(255,240,245,0);
+
             width:60%;
-            height: 500px;
         }
         .midle_so{
             border:1px solid rgba(0,0,0,0.2);
-            margin:20px;
-        }
+            margin:5%;
 
-        input{
+        }
+        .sub{
+            text-align:center;
+            border-radius: 4px;
+            margin: 5% 18%;
+            width:15%;
+        }
+        .list1{
+            width:40%;
+            height: 40px;
+            line-height: 40px;
+            margin: 10px 0;
+            border:1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            padding-left: 5px;
+            /* 内容区width=padding+border */
+            box-sizing: border-box;
+        }
+        .list{
+            width:30%;
+            height: 40px;
+            line-height: 40px;
+            margin: 10px 0;
+            border:1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            padding-left: 5px;
+            /* 内容区width=padding+border */
+            box-sizing: border-box;
+        }
+        textarea{
+            width:40%;
+            height: 10%;
+            line-height: 40px;
+            margin: 10px 0;
+            border:1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            padding-left: 5px;
+            /* 内容区width=padding+border */
+            box-sizing: border-box;
+        }
+        .fil{
             width:20%;
             height: 35px;
             line-height: 40px;
-            margin: 10px 0;
+            margin: -5% 7% 0 9.5%;
             border:1px solid #ccc;
             border-radius: 4px;
             font-size: 16px;
@@ -75,12 +118,11 @@
             border:2px solid green;
             color:green;
         }
-        .list{
+        .list_b{
             cursor: pointer;
             height:60%;
             color:green;
-        }
-    </style>
+        }</style>
 </head>
 <body>
 <header id="top">
@@ -99,19 +141,39 @@
                     <a href="hischel.jsp">报表查询</a>
                 </li>
 
-                <li><a class="nav-cta" id="nav-cta" href="userinfo.jsp">个人中心</a></li>
+                <li><a class="nav-cta" id="nav-cta">个人中心</a></li>
+                <ul id="navigation_b">
+                    <li class="list_b"><a  href="userinfo.jsp">个人主页</a></li>
 
-                <li ><a  href="/logout">退出</a></li>
+                    <li class="list_b"><a  href="/logout">退出</a></li>
+                </ul>
             </ul>
         </nav>
     </div>
 </header>
 <div class="midle">
     <div  class="mindle_table">
-        <p id = "test"></p>
+        <div  style="margin:15px 0;">
+            申请编号：
+            <nobr id = "Sid"></nobr>
+        </div>
+        <div  style="margin:15px 0;">
+            申请人：
+            <nobr id = "username"></nobr>
+        </div>
+        <div  style="margin:15px 0">
+            住宿说明：
+            <textarea id = "Areason1"></textarea>
+        </div>
+        <div  style="margin:15px 0">车费说明：<textarea id = "Areason2">
+                </textarea></div>
+        <div  style="margin:15px 0">其他费用：<textarea id = "Areason3">
+                </textarea></div>
+        <div  style="margin:15px 0">预算：<nobr id = "Amoney"></nobr>
+        </div>
+        <div  style="margin:15px 0">申请时间：<nobr id= "Atime"></nobr></div>
     </div>
 </div>
-
 <footer>
     <div class="wrapper">
         <a class="logo" href="#">Chase</a>
@@ -126,43 +188,19 @@
         <div class="clear"></div>
     </div>
 </footer>
-<script type="text/javascript">
-
+<script  type="text/javascript">
+    var sid = window.location.href.split("=")[1];
+    console.log(sid);
     $(document).ready(function() {
-        $.ajax({
-            url : "/userinfoapplicant",//后台请求的数据，用的是PHP
-            dataType : "json",//数据格式
-            type : "get",//请求方式
-            async : false,//是否异步请求
-            success : function(data) {   //如果请求成功，返回数据。
-                console.log(data);
-                var html = "<table class=\"table\">\n" +
-                    "            <thead>\n" +
-                    "            <tr>\n" +
-                    "                <th>记录编号</th>\n" +
-                    "                <th>出差地点</th>\n" +
-                    "                <th>费用</th> <th>状态</th>\n" +
-                    "            </tr>\n" +
-                    "            </thead>\n" +
-                    "            <tbody>";
-                for(var i=0;i<data.length;i++){    //遍历data数组
-                    var ls = data[i];
-                    html +="<tr><td><a href=/worker/infos.jsp?Sid="+ls.Sid+">"+ls.Sid;
-                    html +="</td><td>"+ls.Aplace;
-                    html +="</td><td>"+ls.Amoney+"</td><td>";
-                    if(ls.isgive == 1){
-                        html = html+"已发放</td></tr>";
-                    }else {
-                        html = html+"未发放</td></tr>";
-                    }
-                }
-                html+"</tbody>\n" +
-                "\n" +
-                "        </table>"
-                $("#test").html(html); //在html页面id=test的标签里显示html内容
-                console.log(html)
-            },
-        })
+        var data = JSON.parse(localStorage.getItem(sid));
+        console.log(data);
+        $("#Sid").html(data.Aid);
+        $("#Areason1").html(data.Areason1);
+        $("#Areason2").html(data.Areason2);
+        $("#Areason3").html(data.Areason3);
+        $("#Amoney").html(data.Amoney);
+        $("#Atime").html(data.Atime);
+        $("#username").html(data.username);
     })
 </script>
 </body>

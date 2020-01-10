@@ -51,7 +51,7 @@
     <label class="nor" for="verify"style="display:block;margin-left:2%"><br />
         <i class="fa fa-user"></i>
         <input type="text" name="code" class="code" id="code" placeholder="验证码"  style="width:125px"/>
-        <img id="img" src="${pageContext.request.contextPath}/getcode.do" style="text-align:center"/>
+        <img id="img" src="${pageContext.request.contextPath}/getcode" style="text-align:center"/>
         <a href="#" onclick="chaneImage()">换一张</a>
     </label>
     <br />
@@ -106,7 +106,7 @@
             flag = 1;
             //第一个参数表示请求的方式  get
             //第二个参数指定url,对那个页面发出ajax请求】
-            var url="/login.do";
+            var url="/login";
             //第三个参数true表示使用异步机制
             // 打开请求
             myxmlHttpRequest.open("POST",url,true);
@@ -133,10 +133,10 @@
             //window.alert("服务器返回了"+myxmlHttpRequest.responseText);
             var data =myxmlHttpRequest.responseText;
             var dataObj=JSON.parse(data);
-            console.log(dataObj);
+            console.log(data);
             if(dataObj.success==200){
                 alert("登录成功");
-                window.location.href="/worker/home.jsp";
+                window.location.href="/"+dataObj.statue+"/home.jsp";
                 flag =0;
             }
             if(dataObj.success==202){
@@ -157,7 +157,7 @@
     function upload() {
         var datas={"email":$("email").value,"password":$("password").value,"code":$("code").value};
         $.ajax({
-            url : "/login.do",//后台请求的数据，用的是PHP
+            url : "/login",//后台请求的数据，用的是PHP
             dataType : "json",//数据格式
             type : "post",//请求方式
             data:   datas,

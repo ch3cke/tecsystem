@@ -20,20 +20,22 @@ public class review extends HttpServlet {
         String indexs = request.getParameter("indexs");
         JSONObject result = new JSONObject();
         if(flag != null){
-            if(flag.toString()=="admin"){
+            if(flag.toString().equals("manage")){
                 Db_tools db = new Db_tools();
                 if(db.UpdateApplicant(aid,indexs)){
                     sendMail sender = new sendMail();
                     String userid = db.GetApplicantByAid(aid).getString("id");
                     try {
-                        sender.sendMessageEmail(db.GetUserInfoById(userid).getString("email"),"allow",aid);
+                        sender.sendMessageEmail(db.GetUserInfoById(userid).getString("Mail"),"allow",aid);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    JSONObject fina = new JSONObject();
-                    fina.put("lid",aid);
-                    fina.put("isgive","n");
-                    db.InsertFinance(fina);
+                    if(indexs.matches("1")){
+                        JSONObject fina = new JSONObject();
+                        fina.put("Lid",aid);
+                        fina.put("IsFinance","n");
+                        Object ss = db.InsertFinance(fina);
+                    }
                     result.put("success",200);
                     result.put("reason","success");
                 }else {

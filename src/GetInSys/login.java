@@ -33,6 +33,7 @@ public class login extends HttpServlet {
                 if(code.equals(sessionCode.toString())){
                     if (password.equals(password2)){
                         result.put("success",200);
+                        result.put("statue",userinfo.get("statues"));
                         result.put("reason","登录成功");
                         res.setAttribute("islogin",true);
                         res.setAttribute("id",id);

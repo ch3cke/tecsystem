@@ -145,7 +145,7 @@
                 <ul id="navigation_b">
                     <li class="list_b"><a  href="userinfo.jsp">个人主页</a></li>
 
-                    <li class="list_b"><a  href="/logout.do">退出</a></li>
+                    <li class="list_b"><a  href="/logout">退出</a></li>
                 </ul>
             </ul>
         </nav>
@@ -153,26 +153,9 @@
 </header>
 
 <div class="midle">
-    <div  class="mindle_table">
-        <p id = "test"></p>
+    <div id = "test" class="mindle_table">
     </div>
 </div>
-<%--<table class="table">--%>
-<%--<thead>--%>
-<%--<tr>--%>
-<%--<th>申请表编号</th>--%>
-<%--</tr>--%>
-<%--</thead>--%>
-<%--<tbody>--%>
-<%--<c:forEach items="${dataobjs}" var="dataobj">--%>
-<%--<tr>--%>
-
-<%--<td><a href="querybyaid?aid=${dataobj.getAid}">${dataobj.getAid}</a></td>--%>
-<%--</tr>--%>
-<%--</c:forEach>--%>
-<%--</tbody>--%>
-
-<%--</table>--%>
 </div>
 </div>
 <footer>
@@ -192,7 +175,7 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $.ajax({
-            url : "/getschedule.do",//后台请求的数据，用的是PHP
+            url : "/getschedule",//后台请求的数据，用的是PHP
             dataType : "json",//数据格式
             type : "get",//请求方式
             async : false,//是否异步请求
@@ -209,13 +192,16 @@
                     "            <tbody>";
                 for(var i=0;i<data.length;i++){    //遍历data数组
                     var ls = data[i];
-                    html +="<tr><td><a href=/worker/finance1.jsp?sid="+ls.Aid+">"+ls.Aid;
-                    html +="</td><td>"+ls.Aplace;
-                    html +="</td><td>"+ls.Amoney+"</td><td>";
                     if(ls.isgive == 1){
-                        html = html+"given</td></tr>";
+                        html +="<tr><td><a href=/worker/finance1.jsp?sid="+ls.Aid+">"+ls.Aid;
+                        html +="</td><td>"+ls.Aplace;
+                        html +="</td><td>"+ls.Amoney+"</td><td>";
+                        html = html+"已通过</td></tr>";
                     }else {
-                        html = html+"not</td></tr>";
+                        html +="<tr><td>"+ls.Aid;
+                        html +="</td><td>"+ls.Aplace;
+                        html +="</td><td>"+ls.Amoney+"</td><td>";
+                        html = html+"未通过</td></tr>";
                     }
                 }
                 html+"</tbody>\n" +

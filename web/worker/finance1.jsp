@@ -144,7 +144,7 @@
 
 
 
-                <li ><a  href="/logout.do">退出</a></li>
+                <li ><a  href="/logout">退出</a></li>
             </ul>
             </ul>
         </nav>
@@ -195,7 +195,7 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $.ajax({
-            url: "/getappone.do",//后台请求的数据，用的是PHP
+            url: "/getappone",//后台请求的数据，用的是PHP
             dataType: "json",//数据格式
             data:{'aid':window.location.href.split('=')[1]},
             type: "get",//请求方式
@@ -214,18 +214,19 @@
     function uploadFile() {
         var myform = new FormData();
         console.log(document.getElementById("Atime1").value);
-        myform.append("Atime",document.getElementById("Atime1").value);
-        myform.append("Atime2",document.getElementById("Atime2").value);
-        myform.append("Areason2",document.getElementById("Areason2").value);
-        myform.append('Areason1',document.getElementById("Areason1").value);
-        myform.append('Areason3',document.getElementById("Areason3").value);
-        myform.append('Amoney',document.getElementById("Amoney").value);
-        myform.append('Aplace',document.getElementById("Aplace").value);
-        myform.append('Urgent',document.getElementById("Urgent").value);
-        myform.append('file',document.getElementById("file").value);
+        myform.append("Aid",encodeURIComponent(document.getElementById("test").innerText));
+        myform.append("Atime",encodeURIComponent(document.getElementById("Atime1").value));
+        myform.append("Atime2",encodeURIComponent(document.getElementById("Atime2").value));
+        myform.append("Areason2",encodeURIComponent(document.getElementById("Areason2").value));
+        myform.append('Areason1',encodeURIComponent(document.getElementById("Areason1").value));
+        myform.append('Areason3',encodeURIComponent(document.getElementById("Areason3").value));
+        myform.append('Amoney',encodeURIComponent(document.getElementById("Amoney").value));
+        myform.append('Aplace',encodeURIComponent(document.getElementById("Aplace").value));
+        myform.append('Urgent',encodeURIComponent(document.getElementById("Urgent").value));
+        myform.append('file',document.getElementById("file").files[0]);
         console.log(myform.getAll("file"));
         $.ajax({
-            url:"/putschedule.do",
+            url:"/putschedule",
             type: "POST",
             data:myform,
             async: false,
@@ -233,6 +234,13 @@
             processData:false,
             success:function (data) {
                 console.log(data);
+                if(data.success===200){
+                    alert("成功");
+                    location.reload();
+                }else {
+                    alert("失败");
+                    location.reload();
+                }
             }
         })
     }

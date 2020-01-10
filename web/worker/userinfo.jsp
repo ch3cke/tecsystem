@@ -41,7 +41,7 @@
                 </li>
 
                 <li><a class="nav-cta" id="nav-cta" href="userinfo.jsp">个人中心</a></li>
-                <li ><a  href="/logout.do">退出</a></li>
+                <li ><a  href="/logout">退出</a></li>
 
             </ul>
         </nav>
@@ -201,7 +201,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $.ajax({
-            url:"/mainfo.do",
+            url:"/mainfo",
             dataType:"JSON",
             type : "get",//请求方式
             async : false,//是否异步请求
@@ -244,9 +244,8 @@
         var mail = document.getElementById("newmail").value;
         var password = $('input:password[name="newpassword"]').val();
         var datas = {"sex":sex,"age":age,"mail":mail,"password":password,"method":method};
-        if(checkMail(mail)){
-            $.ajax({
-                url:"/resetman.do",
+        $.ajax({
+                url:"/resetman",
                 dataType: "JSON",
                 type: "post",
                 async:false,
@@ -260,9 +259,6 @@
                     }
                 }
             })
-        }else {
-            alert("邮箱格式错误");
-        }
     }
 </script>
 </body>
