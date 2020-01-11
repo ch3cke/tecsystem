@@ -43,19 +43,7 @@
 			background-color:rgb(255,240,245,0);
 			width:60%;
 		}
-		.midle_so{
-			border:1px solid rgba(0,0,0,0.2);
-			margin:5%;
 
-		}
-		.sub{
-			text-align:center;
-			border-radius: 4px;
-			margin: 5% 18%;
-			width:7%;
-			line-height:170%;
-			color: #008021;
-		}
 		.list1{
 			width:40%;
 			height: 40px;
@@ -95,20 +83,9 @@
 		.nav-cta{
 			cursor: pointer;
 		}
-		#navigation_b{
-			display:none;
-			float:left;
-			position:relative;
-			margin 5%;
-			width:20%;
-			border-radius:20%;
-			border:2px solid green;
-			color:green;
-		}
-		.list_b{
-			cursor: pointer;
-			height:60%;
-			color:green;
+		.btn {
+			width: 8%;
+			margin: 0 8%;
 		}
 
 	</style>
@@ -120,7 +97,7 @@
 
 		<nav>
 			<ul id="navigation">
-				<li><a href="home.jsp">主页</a></li>
+				<li><a href="home.html">主页</a></li>
 				<li>
 					<a href="applicant.jsp">出差申请</a></li>
 				<li>
@@ -161,7 +138,7 @@
 		<input class="list1" type="text" name="Aplace"   value="" id="Aplace">
 		<label for="name" style="margin:15px 0 0 4% ">住宿说明：</label>
 		<textarea name="Areason1"  rows="3" id="Areason1"></textarea><br/>
-		<button onclick="check()">申请</button>
+		<button id="but" type="button" class="btn  btn-success" onclick="check()">申请</button>
 		<%--</form>--%>
 	</div>
 </div>

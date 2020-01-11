@@ -45,10 +45,7 @@
             width:60%;
             height: 500px;
         }
-        .midle_so{
-            border:1px solid rgba(0,0,0,0.2);
-            margin:20px;
-        }
+
 
         input{
             width:20%;
@@ -65,21 +62,7 @@
         .nav-cta{
             cursor: pointer;
         }
-        #navigation_b{
-            display:none;
-            float:left;
-            position:relative;
-            margin:5%;
-            width:20%;
-            border-radius:20%;
-            border:2px solid green;
-            color:green;
-        }
-        .list{
-            cursor: pointer;
-            height:60%;
-            color:green;
-        }
+
     </style>
 </head>
 <body>

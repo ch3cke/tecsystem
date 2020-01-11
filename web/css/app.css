@@ -10,6 +10,7 @@
     background: #efefef;
     height: 30px;
 }
+
 #headerNav{
     margin: 0 auto;
     position: relative;
@@ -18,7 +19,7 @@
 .header-nav a{
     color: #505050;
     font-size: 14px;
-    line-height: 30px;  
+    line-height: 30px;
 }
 .header-nav i{
     color: #1296db;
@@ -44,7 +45,7 @@ a{
 .header .banner #appname{
     font-size: 2em;
     font-weight: bold;
-    color: #1296db;
+    color: #fff;
     display:inline-block;
     margin-top: -5%;
     margin-left:2%;

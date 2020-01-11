@@ -3,9 +3,11 @@ package tools.Db_tools;
 import GetInSys.check;
 import GetInfo.userinfo;
 import groovy.sql.Sql;
+import net.sf.json.JSON;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+import java.net.URLDecoder;
 import java.sql.*;
 
 
@@ -24,7 +26,30 @@ public class Db_tools {
             e.printStackTrace();
         }
     }
-    
+
+    public JSONArray GetAllUser(){
+        String sqlStr = "select * from userinfo where deletes ='1'";
+        JSONArray results = new JSONArray();
+        try{
+            sql = con.prepareStatement(sqlStr);
+            res = sql.executeQuery();
+            while(res.next()){
+                JSONObject result = new JSONObject();
+                result.put("id",res.getString("id"));
+                result.put("username",res.getString("username"));
+                result.put("Did",res.getString("Did"));
+                result.put("Dname",res.getString("Dname"));
+                result.put("Mail",res.getString("Mail"));
+                result.put("statues",res.getString("statues"));
+                results.put(result);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return results;
+    }
+
+
     public boolean UpdateuserSA(JSONObject info){
         String sqlStr = "update userinfo set age=?, sex=? where id =?";
         try {
@@ -90,6 +115,7 @@ public class Db_tools {
             result.put("Medals",res.getInt("Medals"));
             result.put("statues",res.getString("statues"));
             result.put("mailck",res.getBoolean("mailck"));
+            result.put("delete",res.getString("deletes"));
         }
     }
 
@@ -349,7 +375,7 @@ public class Db_tools {
             sql = con.prepareStatement(sqlStr);
             sql.setString(1, applicant.get("Aid").toString());
             sql.setString(2, applicant.get("id").toString());
-            sql.setString(3, applicant.get("Aplace").toString());
+            sql.setString(3, URLDecoder.decode(applicant.get("Aplace").toString(),"utf-8"));
             sql.setString(4, applicant.get("Atime").toString());
             sql.setInt(5, Integer.parseInt(applicant.get("Amoney").toString()));
             sql.setString(6, applicant.get("Dname").toString());
@@ -360,7 +386,7 @@ public class Db_tools {
             sql.setString(11, applicant.get("Areason3").toString());
             sql.setString(12,applicant.get("Atime2").toString());
             sql.executeUpdate();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             return false;
         }
         return true;
@@ -414,13 +440,27 @@ public class Db_tools {
     }
 
     public JSONArray GetAllSchedule(){
-        String sqlStr = "select * from schedule";
+        String sqlStr = "select schedule.*, userinfo.username from schedule,userinfo where userinfo.id=schedule.id";
         JSONArray results = new JSONArray();
-        JSONObject result = new JSONObject();
         try {
             sql = con.prepareStatement(sqlStr);
             res = sql.executeQuery();
-            setValue2(result,results);
+            while(res.next()){
+                JSONObject result = new JSONObject();
+                result.put("Sid",res.getString("Sid"));
+                result.put("id",res.getString("id"));
+                result.put("Aplace",res.getString("Aplace"));
+                result.put("Atime",res.getString("Atime"));
+                result.put("Amoney",res.getString("Amoney"));
+                result.put("Dname",res.getString("Dname"));
+                result.put("Areason1",res.getString("Areason1"));
+                result.put("username",res.getString("username"));
+                result.put("isgive",res.getString("isgive"));
+                result.put("Areason2",res.getString("Areason2"));
+                result.put("Areason3",res.getString("Areason3"));
+                result.put("paths",res.getString("paths"));
+                results.put(result);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -464,17 +504,17 @@ public class Db_tools {
             sql = con.prepareStatement(sqlStr);
             sql.setString(1, schedule.get("Aid").toString());
             sql.setString(2, schedule.get("id").toString());
-            sql.setString(3, schedule.get("Aplace").toString());
+            sql.setString(3, URLDecoder.decode(schedule.get("Aplace").toString(),"UTF-8"));
             sql.setString(4, schedule.get("Atime").toString());
             sql.setInt(5, Integer.parseInt(schedule.get("Amoney").toString()));
             sql.setString(6, schedule.get("Dname").toString());
-            sql.setString(7, schedule.get("Areason1").toString());
-            sql.setString(8, schedule.get("Areason2").toString());
-            sql.setString(9, schedule.get("Areason3").toString());
-            sql.setString(10, "n");
+            sql.setString(7, URLDecoder.decode(schedule.get("Areason1").toString(),"UTF-8"));
+            sql.setString(8, URLDecoder.decode(schedule.get("Areason2").toString(),"UTF-8"));
+            sql.setString(9, URLDecoder.decode(schedule.get("Areason3").toString(),"UTF-8"));
+            sql.setString(10, "0");
             sql.setString(11, schedule.get("paths").toString());
             sql.executeUpdate();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
@@ -536,12 +576,12 @@ public class Db_tools {
     }
 
     public boolean UpdateSchedule(String Sid,String indexs){
-        String sqlStr = "update getSchedule set indexs = ? where Sid = ?";
+        String sqlStr = "update schedule set isgive = ? where Sid = ?";
         return updateValue(Sid, indexs, sqlStr);
     }
 
     public boolean DeleteUser(String id) {
-        String sqlStr = "DELETE FROM userinfo WHERE id = ?";
+        String sqlStr = "update userinfo set deletes ='0'WHERE id = ?";
         try {
             sql = con.prepareStatement(sqlStr);
             sql.setString(1, id);
@@ -647,15 +687,24 @@ public class Db_tools {
 
     public JSONArray StaticEveryOne(String table){
         JSONArray results = new JSONArray();
-        String sqlStr = "select userinfo.username, count(*) as 'count',SUM(Amoney) as 'money' from tecsystem."+table+", tecsystem.userinfo where userinfo.id = "+table+".id group by userinfo.username";
+        String cow = "indexs";
+        String sqlStr = "select userinfo.username, userinfo.id,userinfo.Dname, Atime,Aplace,Amoney,indexs from tecsystem."+table+", tecsystem.userinfo where userinfo.id = "+table+".id";
+        if(table.equals("schedule")){
+            cow = "isgive";
+            sqlStr = "select userinfo.username, userinfo.id,userinfo.Dname, Atime,Aplace,Amoney,isgive from tecsystem."+table+", tecsystem.userinfo where userinfo.id = "+table+".id";
+        }
         try{
             sql = con.prepareStatement(sqlStr);
             res = sql.executeQuery();
             while (res.next()){
                 JSONObject re = new JSONObject();
-                re.put("Count",res.getInt("count"));
-                re.put("Money",res.getInt("money"));
-                re.put("name",res.getString("username"));
+                re.put("username",res.getString("username"));
+                re.put("id",res.getString("id"));
+                re.put("Dname",res.getString("Dname"));
+                re.put("Atime",res.getString("Atime"));
+                re.put("Aplace",res.getString("Aplace"));
+                re.put("Amoney",res.getString("Amoney"));
+                re.put("index",res.getString(cow));
                 results.put(re);
             }
         }catch (Exception e){

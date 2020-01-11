@@ -1,79 +1,197 @@
 @charset "UTF-8";
+
+
 body {
-            margin: 0;
-            padding: 0;
-        }
-      
-     section.board{
-    
-      float:left;
-      border: 1px solid #ccc;
-box-shadow: 0 1px 3px rgba(0,0,0,.075);
-border-radius: 3px;
-margin-top: 100px;
-padding:0 20px;
-margin-left: 50px;
-      font-weight: bolder;
-     }
-    
-        .card {
-            text-align: center;
-        }
+    overflow: hidden;
+    margin : 0;
+    padding: 0;
+}
+button {
+    margin: 0;
+    padding: 0;
+    border: 1px solid transparent;
+    outline: none;
+}
 
-        form {
-            /* background: #fafbfc; */
-            width: 400px;
-            height: 400px;
-            margin: 0 auto;
-            padding-top: 100px;
-            box-shadow: 0 1px 15px rgba(27,31,35,.15) !important;
-            
-        }
+button{
+    display: inline-block;
+    border-radius: 4px;
+    background-color: #7e97c5;
+    border: none;
+    color: #fff;
+    text-align: center;
+    width: 250px;
+    height:35px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+}
+label button span{
+    color:#fff;
+    font-size:16px;
 
-       .card i,.copyright i {
-            position: absolute;
-            width: 25px;
-            height: 25px;
-            margin-top: 4px;
-            margin-left: 5px;
-        }
+}
+label button .submit{
+    color:#fff;
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
 
-        input {
-            width: 250px;
-            height: 27px;
-            padding-left: 35px;
-            font-size: 15px;
-            margin-bottom: 10px;
-        }
+label button .submit:hover:after {
+    content: 'Â»';
+    color:#fff;
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
 
-       
+section.board {
+    float: left;
+    border: 1px solid #ccc;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .075);
+    border-radius: 3px;
+    margin-top: 100px;
+    padding: 0 20px;
+    margin-left: 50px;
+    font-weight: bolder;
+}
 
-        input[type="checkbox"]{width: 40px;margin-right:0;}
-        label span{font-size:14px;color:rgb(153, 153, 153);}
-        label span:hover{color:black; }
-        input.forget{visibility: hidden;}
-       .submit {width: 290px;margin: 0 auto; background: #39b1ef;height:35px;line-height:35px;font-size:18px;margin-top:30px;
-       
-        
-            width: 280px;
-            height: 35px;
-            padding-left: 110px;
-            padding-right: 120px;
-          
-            color: white;
-            border: 0;
-          
-        }
-        .register{color:#535353;float:right;margin-right: 55px;margin-top: 15px;}
-        .register:active,.register:hover{color:rgb(238, 18, 18);}
-        label .submit:focus,
-        label .submit:hover{
-            background:#1296db;
-        }
+.card {
+    text-align: center;
+    position: absolute!important;
+    top: 10%;
+    right: 10%;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px 0 rgba(0, 0, 0, .3);
+    z-index: 10;
+    height:433px;
+    width:327px;
+}
 
-        footer{
-    color:#999 ;
+.form {
+    /* background: #fafbfc; */
+    width: 327px;
+    height: 433px;
+    margin: 0 auto;
+    box-shadow: 0 1px 15px rgba(27, 31, 35, .15) !important;
+}
+.login-inner {
+    width: 100%;
+    height: 100%;
+    min-width: 1366px;
+    min-height: 890px;
+    position: relative;
+    float: top;
+}
+
+.login-inner .background-img {
+    position: fixed;
+    z-index: -1;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.login-inner #scene {
+    position: absolute;
+    left: 15%;
+    top: 10%;
+    width: 34%;
+    height: 80%;
+    z-index: 3
+}
+
+.login-inner #scene div {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+}
+
+.login-inner #scene div img {
+    margin-top: 10vh;
+    width: 100%;
+}
+
+.login-inner .description {
+    margin-top: 40px;
+    margin-left: 10px;
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.login-inner .description .description-title {
+    font-size: 2em;
+    font-weight: bold;
+    color: #ffffffc2;
+}
+
+.login-inner .description .description-content {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #7e97c5;
+    line-height: 20px;
+}
+
+.card i, .copyright i {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    margin-top: 4px;
+    margin-left: 5px;
+}
+
+input {
+    width: 250px;
+    height: 27px;
+    padding-left: 35px;
+    font-size: 15px;
+    margin-bottom: 10px;
+    border-top-radius:20px;
+    border-bottom-radius:20px;
+}
+
+input[type="checkbox"] {
+    width: 40px;
+    margin-right: 0;
+}
+
+
+
+label span .submitmit{
+    color:#fff;
+}
+
+input.forget {
+    visibility: hidden;
+}
+
+.register {
+    color: #535353;
+    float: right;
+    margin-right: 55px;
+    margin-top: 15px;
+}
+
+.register:active, .register:hover {
+    color: rgb(238, 18, 18);
+}
+
+label .submit:focus, label .submit:hover {
+}
+
+footer {
+    color: #999;
     font-size: 14px;
     text-align: center;
     margin-top: 50px;
+}
+
+.card::-webkit-scrollbar {
+    display: none;
 }

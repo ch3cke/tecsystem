@@ -65,7 +65,7 @@ input{
 			 
 			<nav>
 				<ul id="navigation">
-					<li><a href="home.jsp">主页</a></li>
+					<li><a href="home.html">主页</a></li>
 					<li>  
                     <a href="applicant.jsp">出差申请</a></li>
                     <li>  
@@ -87,7 +87,7 @@ input{
 		</div>
 	</header>
 	<div class="midle">
-	<div  class="mindle_table">
+	<div  class="mindle_table" id="test">
 </div>
 </div>
 
@@ -111,10 +111,40 @@ input{
             url : "/static",//后台请求的数据，用的是PHP
             dataType : "json",//数据格式
             type : "post",//请求方式
-			data:{"method":"depart"},
+			data:{"method":"person"},
             async : false,//是否异步请求
             success : function(data) {   //如果请求成功，返回数据。
                 console.log(data);
+				var html = "<table class=\"table\">\n" +
+						"            <thead>\n" +
+						"            <tr>\n" +
+						"                <th>姓名</th>\n" +
+						"                <th>部门</th>\n"+
+						"                <th>出差日期</th>\n" +
+						"                <th>出差地点</th>\n" +
+						"                <th>总消费</th>\n" +
+						"                <th>状态</th>\n" +
+						"            </tr>\n" +
+						"            </thead>\n" +
+						"            <tbody>";
+				for(var i=0;i<data.length;i++){//遍历data数组
+					var ls = data[i];
+					html +="</td><td>"+ls.username;
+					html +="</td><td>"+ls.Dname;
+					html +="</td><td>"+ls.Atime;
+					html +="</td><td>"+ls.Aplace;
+					html +="</td><td>"+ls.Amoney+"</td><td>";
+					if(ls.index == 1){
+						html = html+"已审核</td></td>";
+					}else {
+						html = html+"未审核</td></tr>";
+					}
+				}
+				html+"</tbody>\n" +
+				"\n" +
+				"        </table>"
+				$("#test").html(html); //在html页面id=test的标签里显示html内容
+				console.log(html)
             },
         })
     })

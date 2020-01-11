@@ -115,7 +115,7 @@
 
        	<nav>
 				<ul id="navigation">
-					<li><a href="home.jsp">主页</a></li>
+					<li><a href="home.html">主页</a></li>
 					<li>  
                     <a href="applicant.jsp">出差申请</a></li>
                     <li>  

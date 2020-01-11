@@ -131,7 +131,7 @@
 
         <nav>
             <ul id="navigation">
-                <li><a href="home.jsp">主页</a></li>
+                <li><a href="home.html">主页</a></li>
                 <li>
                     <a href="applicant.jsp">出差申请</a></li>
                 <li>
@@ -141,12 +141,12 @@
                     <a href="hischel.jsp">报表查询</a>
                 </li>
 
-                <li><a class="nav-cta" id="nav-cta">个人中心</a></li>
-                <ul id="navigation_b">
-                    <li class="list_b"><a  href="userinfo.jsp">个人主页</a></li>
+                <li><a class="nav-cta" id="nav-cta" href="userinfo.jsp">个人中心</a></li>
+
+
 
                     <li class="list_b"><a  href="/logout">退出</a></li>
-                </ul>
+
             </ul>
         </nav>
     </div>

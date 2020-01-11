@@ -16,6 +16,8 @@ public class Servlet extends HttpServlet {
     Db_tools db = new Db_tools();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
         Object flag = request.getSession().getAttribute("islogin");
         JSONObject result = new JSONObject();
         if(flag==null){
@@ -23,18 +25,20 @@ public class Servlet extends HttpServlet {
         }else {
             if(request.getSession().getAttribute("statues").equals("finance")){
                 String Sid = request.getParameter("Sid");
-                db.UpdateSchedule(Sid,"1");
+                db.UpdateSchedule(Sid,request.getParameter("indexs"));
                 JSONObject schedule = new JSONObject();
                 schedule = db.GetScheduleBySid(request.getParameter("Sid"));
                 Integer Amoney = Integer.parseInt(db.GetApplicantByAid(request.getParameter("Sid")).getString("Amoney"));
                 Integer Bmoney = Integer.parseInt(schedule.getString("Amoney"));
-                if(Amoney>Bmoney){
+                if(Amoney>=Bmoney){
                     db.UpdateUserMedal(schedule.getString("id"),(Amoney-Bmoney)/100);
                 }
-                db.UpdateFinance("Sid","1");
+                db.UpdateFinance(Sid,"1");
                 sendMail sender = new sendMail();
+                String id = db.GetScheduleBySid(Sid).getString("id");
+                String email = db.GetUserInfoById(id).getString("Mail");
                 try {
-                    sender.sendMessageEmail(db.GetUserInfoById(db.GetApplicantByAid(request.getParameter("Sid")).getString("id")).getString("email"),"PASS",request.getParameter("Sid"));
+                    sender.sendMessageEmail(email,"PASS",Sid);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -49,6 +53,8 @@ public class Servlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
         Object flag = request.getSession().getAttribute("islogin");
         JSONObject result = new JSONObject();
         if(flag==null){

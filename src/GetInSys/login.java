@@ -28,38 +28,46 @@ public class login extends HttpServlet {
             String password2 = userinfo.get("password").toString();
             String code = request.getParameter("code");
             String id = userinfo.get("id").toString();
+            String index = userinfo.get("delete").toString();
             Object sessionCode = request.getSession().getAttribute("code");
-            if(flag==null && sessionCode != null){
-                if(code.equals(sessionCode.toString())){
-                    if (password.equals(password2)){
-                        result.put("success",200);
-                        result.put("statue",userinfo.get("statues"));
-                        result.put("reason","登录成功");
-                        res.setAttribute("islogin",true);
-                        res.setAttribute("id",id);
-                        res.setAttribute("username",userinfo.get("name"));
-                        res.setAttribute("statues",userinfo.get("statues"));
-                        response.getWriter().write(result.toString());
+            if(index.equals("1")){
+                if(flag==null && sessionCode != null){
+                    if(code.equals(sessionCode.toString())){
+                        if (password.equals(password2)){
+                            result.put("success",200);
+                            result.put("statue",userinfo.get("statues"));
+                            result.put("reason","登录成功");
+                            res.setAttribute("islogin",true);
+                            res.setAttribute("id",id);
+                            res.setAttribute("username",userinfo.get("name"));
+                            res.setAttribute("statues",userinfo.get("statues"));
+                        }else {
+                            result.put("reason","用户名或密码错误");
+                            result.put("success",201);
+                            response.getWriter().write(result.toString());
+                        }
                     }else {
-                        result.put("reason","用户名或密码错误");
-                        result.put("success",201);
+                        result.put("reason","验证码错误");
+                        result.put("success",202);
                         response.getWriter().write(result.toString());
                     }
-                }else {
-                    result.put("reason","验证码错误");
-                    result.put("success",202);
-                    response.getWriter().write(result.toString());
+                }
+                else {
+                    result.put("reason","用户已经登录");
+                    result.put("statue",request.getSession().getAttribute("statues"));
+                    result.put("success",203);
+                    //response.getWriter().write(result.toString());
                 }
             }else {
-                result.put("reason","用户已经登录");
-                result.put("success",203);
-                response.getWriter().write(result.toString());
+                result.put("reason","用户不存在");
+                result.put("success",205);
             }
         }catch (Exception e){
             result.put("reason","用户名或密码错误");
             result.put("success",201);
-            response.getWriter().write(result.toString());
+           //response.getWriter().write(result.toString());
         }
+        response.getWriter().write(result.toString());
 
     }
 
@@ -69,11 +77,13 @@ public class login extends HttpServlet {
                 request.getRequestDispatcher("/login.jsp").forward(request,response);
         }else {
             if(request.getSession().getAttribute("statues").toString().equals("manage")) {
-                response.sendRedirect("/manage/home.jsp");
+                response.sendRedirect("/manage/home.html");
             }else if(request.getSession().getAttribute("statues").toString().equals("finance")){
-                response.sendRedirect("/finance/home.jsp");
+                response.sendRedirect("/finance/home.html");
+            }else if(request.getSession().getAttribute("statues").toString().equals("root")){
+                response.sendRedirect("/admin/home.html");
             }else {
-                response.sendRedirect("/worker/home.jsp");
+                response.sendRedirect("/worker/home.html");
             }
         }
     }

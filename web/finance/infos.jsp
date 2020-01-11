@@ -1,20 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
     <title>财务详细</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../css/normalize.css">
-	<link rel="stylesheet" href="../css/style.css">
-	<link rel="stylesheet" href="../css/featherlight.min.css">
-	<link href="../css/css.css" rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
-	<script src="../js/jquery-2.2.3.min.js"></script>
-	<script src="../js/popper.min.js"></script>
-	<script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-	<script src="../js/jquery-latest.min.js"></script>
-
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/featherlight.min.css">
+    <link href="../css/css.css" rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="../js/jquery-2.2.3.min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="../js/jquery-latest.min.js"></script>
     <style>
         /* Make the image fully responsive */
         .carousel-inner img {
@@ -114,46 +113,46 @@
     <div class="wrapper">
         <h1 class="logo"><a href="#">Chase</a></h1>
 
-     <nav>
-				<ul id="navigation">
-					<li><a href="home.jsp">主页</a></li>
-					
-                 <li>  
-                <a href="audit.jsp">报表审核</a>
-            </li>
-                     <li>  
-                <a href="hischel.jsp">报表统计</a>
-            </li>
-                    <li>  
-                <a href="hischel1.jsp">报表查询</a>
-            </li>
-					<li><a class="nav-cta" href="userinfo.jsp" >个人中心</a></li>
-					<li ><a  href="../login.jsp">退出</a></li>
-				</ul>			</nav>
+        <nav>
+            <ul id="navigation">
+                <li><a href="home.html">主页</a></li>
+                <li>
+                    <a href="audit.html">报表审核</a>
+                </li>
+                <li>
+                    <a href="hischel1.jsp">报表统计</a>
+                </li>
+                <li>
+                    <a href="hischel.jsp">报表查询</a>
+                </li>
+                <li><a class="nav-cta" href="userinfo.jsp" >个人中心</a></li>
+                <li ><a  href="/logout">退出</a></li>
+            </ul>
+        </nav>
     </div>
 </header>
 <div class="midle">
     <div  class="mindle_table">
-            <div  style="margin:15px 0;">
-                申请编号：
-                <nobr id = "Sid">
-                </nobr>
-            </div>
-            <div  style="margin:15px 0">
-                住宿说明：
-                <textarea id = "Areason1">
+        <div  style="margin:15px 0;">
+            申请编号：
+            <nobr id = "Sid">
+            </nobr>
+        </div>
+        <div  style="margin:15px 0">
+            住宿说明：
+            <textarea id = "Areason1">
                 </textarea>
-            </div>
-            <div  style="margin:15px 0">车费说明：<textarea id = "Areason2">
+        </div>
+        <div  style="margin:15px 0">车费说明：<textarea id = "Areason2">
                 </textarea></div>
-            <div  style="margin:15px 0">其他费用：<textarea id = "Areason3">
+        <div  style="margin:15px 0">其他费用：<textarea id = "Areason3">
                 </textarea></div>
-            <div  style="margin:15px 0">预算：<nobr id = "Amoney"></nobr>
-            </div>
-            <div  style="margin:15px 0">申请时间：<nobr id= "Atime"></nobr></div>
-            <div  style="margin:15px 0">票据：
-                 <div id = path></div>
-            </div>
+        <div  style="margin:15px 0">预算：<nobr id = "Amoney"></nobr>
+        </div>
+        <div  style="margin:15px 0">申请时间：<nobr id= "Atime"></nobr></div>
+        <div  style="margin:15px 0">票据：
+            <div id = path></div>
+        </div>
     </div>
 </div>
 <footer>

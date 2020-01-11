@@ -120,6 +120,11 @@
             height:60%;
             color:green;
         }
+        .btn {
+            width: 8%;
+            margin: 0 8%;
+        }
+
 
     </style>
 </head>
@@ -130,7 +135,7 @@
 
         <nav>
             <ul id="navigation">
-                <li><a href="home.jsp">主页</a></li>
+                <li><a href="home.html">主页</a></li>
                 <li>
                     <a href="applicant.jsp">出差申请</a></li>
                 <li>
@@ -174,7 +179,7 @@
             <label for="name" style="margin:15px 0">票据：</label>
             <input class="fil" type="file" id="file" name="file" ><br/>
             <%--<input class="sub" type="submit" value="申请">--%>
-            <button onclick="uploadFile()">提交</button>
+            <button id="but" type="button" class="btn  btn-success" onclick="uploadFile()">提交</button>
         <%--</form>--%>
     </div>
 </div>
@@ -233,8 +238,10 @@
             contentType:false,
             processData:false,
             success:function (data) {
-                console.log(data);
-                if(data.success===200){
+                console.log(data.success);
+                var datsobj = JSON.parse(data);
+                console.log(datsobj);
+                if(datsobj.success==200){
                     alert("成功");
                     location.reload();
                 }else {

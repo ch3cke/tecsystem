@@ -16,6 +16,8 @@ import java.util.Date;
 @WebServlet(name = "GetIn.register")
 public class register extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
         String username = request.getParameter("userName");
         String userId = request.getParameter("userId");
         String email = request.getParameter("email");
@@ -35,7 +37,7 @@ public class register extends HttpServlet {
                 info.put("age","20");
                 info.put("sex","男");
                 info.put("Did","000000");
-                info.put("Dname","default");
+                info.put("Dname",request.getParameter("Dname"));
                 info.put("password",password);
                 Date date = new Date();
                 info.put("log_time",date.toString());
@@ -50,25 +52,21 @@ public class register extends HttpServlet {
                             }catch (Exception e){
                                 result.put("reason","邮件未发送");
                                 result.put("success",201);
-                                response.getWriter().write(result.toString());
                             }
                         }else {
                                 result.put("reason","用户已存在");
                                 result.put("success",202);
-                                response.getWriter().write(result.toString());
                             }
-                            response.getWriter().write(result.toString());
 
             }else {
                 result.put("reason","验证码错误");
                 result.put("success",203);
-                response.getWriter().write(result.toString());
             }
         }else {
             result.put("reason","密码不匹配");
             result.put("success",204);
-            response.getWriter().write(result.toString());
         }
+        response.getWriter().write(result.toString());
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -77,7 +75,7 @@ public class register extends HttpServlet {
             request.getRequestDispatcher("/register.jsp").forward(request,response);
         }else {
             String statue = request.getSession().getAttribute("statues").toString();
-            response.sendRedirect("/"+statue+"/home.jsp");
+            response.sendRedirect("/"+statue+"/home.html");
         }
     }
 }

@@ -15,6 +15,7 @@ public class GetTen extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Db_tools db = new Db_tools();
+        response.setCharacterEncoding("utf-8");
         response.getWriter().write(db.GetTen().toString());
     }
 }

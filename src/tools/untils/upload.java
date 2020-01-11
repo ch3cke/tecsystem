@@ -7,9 +7,11 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import tools.Db_tools.Db_tools;
+import tools.Db_tools.encrypt;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
+import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -82,7 +84,7 @@ public class upload {
 
                 // 判断当前文件项目是不是只是普通表单字段，如果是，就不对其进行i/o操作
                 if (item.isFormField()) {
-                    se.put(item.getFieldName(),new String(item.getString().getBytes("ISO8859-1"), StandardCharsets.UTF_8));
+                    se.put(item.getFieldName(), (new String(item.getString().getBytes("ISO8859-1"), StandardCharsets.UTF_8)));
                 } else {
                     // 获取输入流，获取每个文件项目的输入流
                     in = item.getInputStream();

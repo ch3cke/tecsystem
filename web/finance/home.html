@@ -1,5 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-		 pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="en">
 <head>
@@ -37,14 +35,10 @@
 <header id="top">
 	<div class="wrapper">
 		<h1 class="logo"><a href="#">Chase</a></h1>
+
 		<nav>
 			<ul id="navigation">
-				<li><a href="home.jsp">主页</a></li>
-				<li>
-					<a href="applicant.jsp">出差申请</a></li>
-				<li>
-					<a href="finance.jsp">报销申请</a>
-				</li>
+				<li><a href="home.html">主页</a></li>
 				<li>
 					<a href="audit.html">报表审核</a>
 				</li>
@@ -112,38 +106,38 @@
 	</div>
 </footer>
 <script type="text/javascript">
-    $(document).ready(function() {
-        $.ajax({
-            url : "/getten",//后台请求的数据，用的是PHP
-            dataType : "json",//数据格式
-            type : "get",//请求方式
-            async : false,//是否异步请求
-            success : function(data) {   //如果请求成功，返回数据。
-                console.log(data);
-                var html = "<table class=\"table table-striped\">\n" +
-                    "            <thead>\n" +
-                    "            <h2 style=\"text-align:center\"><img src=\"../images/medal.png\" style=\"width:40px;height:40px;margin-right:3px\">奖 牌 榜</h1>\n"+
-                    "            <tr>\n" +
-                    "                <th>工号</th>\n" +
-                    "                <th>姓名</th>\n" +
-                    "                <th>奖牌数</th>\n" +
-                    "            </tr>\n" +
-                    "            </thead>\n" +
-                    "            <tbody>";
-                for(var i=0;i<data.length;i++){    //遍历data数组
-                    var ls = data[i];
-                    html +="<tr><td>"+ls.id;
-                    html +="</td><td>"+ls.username;
-                    html +="</td><td>"+ls.medals+"</td><td>";
-                }
-                html+"</tbody>\n" +
-                "\n" +
-                "        </table>"
-                $("#test").html(html); //在html页面id=test的标签里显示html内容
-                console.log(html)
-            },
-        })
-    })
+	$(document).ready(function() {
+		$.ajax({
+			url : "/getten",//后台请求的数据，用的是PHP
+			dataType : "json",//数据格式
+			type : "get",//请求方式
+			async : false,//是否异步请求
+			success : function(data) {   //如果请求成功，返回数据。
+				console.log(data);
+				var html = "<table class=\"table table-striped\">\n" +
+						"            <thead>\n" +
+						"            <h2 style=\"text-align:center\"><img src=\"../images/medal.png\" style=\"width:40px;height:40px;margin-right:3px\">奖 牌 榜</h1>\n"+
+						"            <tr>\n" +
+						"                <th>工号</th>\n" +
+						"                <th>姓名</th>\n" +
+						"                <th>奖牌数</th>\n" +
+						"            </tr>\n" +
+						"            </thead>\n" +
+						"            <tbody>";
+				for(var i=0;i<data.length;i++){    //遍历data数组
+					var ls = data[i];
+					html +="<tr><td>"+ls.id;
+					html +="</td><td>"+ls.username;
+					html +="</td><td>"+ls.medals+"</td><td>";
+				}
+				html+"</tbody>\n" +
+				"\n" +
+				"        </table>"
+				$("#test").html(html); //在html页面id=test的标签里显示html内容
+				console.log(html)
+			},
+		})
+	})
 </script>
 </body>
 </html>

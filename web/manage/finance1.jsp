@@ -105,22 +105,11 @@
 		.nav-cta{
 			cursor: pointer;
 		}
-		#navigation_b{
-			display:none;
-			float:left;
-			position:relative;
-			margin 5%;
-			width:20%;
-			border-radius:20%;
-			border:2px solid green;
-			color:green;
-		}
-		.list_b{
-			cursor: pointer;
-			height:60%;
-			color:green;
-		}
 
+		.btn {
+			width: 8%;
+			margin: 0 8%;
+		}
 	</style>
 </head>
 <body>
@@ -130,7 +119,7 @@
 
 		<nav>
 			<ul id="navigation">
-				<li><a href="home.jsp">主页</a></li>
+				<li><a href="home.html">主页</a></li>
 				<li>
 					<a href="applicant.jsp">出差申请</a></li>
 				<li>
@@ -175,7 +164,7 @@
 		<label for="name" style="margin:15px 0">票据：</label>
 		<input class="fil" type="file" id="file" name="file" ><br/>
 		<%--<input class="sub" type="submit" value="申请">--%>
-		<button onclick="uploadFile()">提交</button>
+		<button id="but" type="button" class="btn  btn-success" onclick="uploadFile()">提交</button>
 		<%--</form>--%>
 	</div>
 </div>
